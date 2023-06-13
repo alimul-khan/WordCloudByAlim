@@ -5,7 +5,7 @@ This code generates word clouds based on input text data. It utilizes the `wordc
 ## Usage
 
 1. Clone the repository:
-git clone https://github.com/your-username/wordcloud-generator.git
+git clone https://github.com/alimul-khan/WordCloudByAlim.git
 
 
 2. Install the required dependencies:
