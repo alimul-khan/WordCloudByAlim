@@ -1,0 +1,52 @@
+# This is a AI generated Resume
+Adam Evan
+
+123 Main Street, Anytown, USA 12345
+Phone: (555) 123-4567
+Email: adam.evan@example.com
+
+Objective:
+To secure a challenging position in a dynamic organization where I can utilize my skills and experience to contribute to the company's success.
+
+Education:
+Bachelor of Science in Computer Science
+XYZ University, Anytown, USA
+Graduated: May 2021
+
+Skills:
+
+Proficient in programming languages such as Java, Python, and C++
+Experience with web development using HTML, CSS, and JavaScript
+Strong analytical and problem-solving skills
+Excellent communication and teamwork abilities
+Knowledge of database management systems, including SQL
+Familiarity with software development methodologies and practices
+Experience:
+Software Developer Intern
+ABC Company, Anytown, USA
+June 2020 - August 2020
+
+Collaborated with a team to develop and test software applications
+Assisted in troubleshooting and debugging code issues
+Participated in code reviews and provided constructive feedback
+Worked on front-end and back-end development tasks
+Assisted in documenting software requirements and specifications
+Projects:
+Online Bookstore Application
+
+Developed a web-based application using Java, HTML, CSS, and MySQL
+Implemented features such as user authentication, shopping cart functionality, and order management
+Utilized object-oriented programming principles for efficient code organization
+Conducted extensive testing to ensure application functionality and user-friendliness
+Personal Portfolio Website
+
+Created a responsive website using HTML, CSS, and JavaScript
+Designed an intuitive user interface to showcase personal projects and achievements
+Integrated social media links and contact form for seamless communication
+Optimized website for search engine visibility and fast loading times
+Certifications:
+
+Oracle Certified Java Programmer
+Certified ScrumMaster (CSM)
+References:
+Available upon request

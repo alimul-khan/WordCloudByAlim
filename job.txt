@@ -1,0 +1,26 @@
+We are seeking a highly skilled and motivated Software Developer to join our dynamic organization. The successful candidate will be responsible for developing and maintaining software applications, contributing to the company's success through their expertise and innovative solutions.
+
+Responsibilities:
+
+Collaborate with a team of developers to design, develop, and test software applications
+Write efficient, scalable, and well-documented code using programming languages such as Java, Python, and C++
+Participate in code reviews, providing constructive feedback and suggestions for improvement
+Troubleshoot and debug software applications, identifying and resolving any issues or bugs
+Work on both front-end and back-end development tasks, ensuring seamless integration and functionality
+Document software requirements, specifications, and user manuals for future reference
+Stay updated on emerging technologies and industry trends, incorporating them into software development practices
+Requirements:
+
+Bachelor's degree in Computer Science or a related field
+Strong proficiency in programming languages such as Java, Python, and C++
+Experience with web development using HTML, CSS, and JavaScript
+Solid understanding of software development methodologies and practices
+Knowledge of database management systems, including SQL
+Excellent analytical and problem-solving skills
+Strong communication and teamwork abilities, with the ability to work collaboratively in a team environment
+Demonstrated ability to deliver high-quality software solutions within deadlines
+Previous experience in software development or related internships is a plus
+Certifications:
+
+Oracle Certified Java Programmer
+Certified ScrumMaster (CSM)
