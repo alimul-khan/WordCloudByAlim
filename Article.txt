@@ -1,0 +1,590 @@
+5266 IEEEINTERNETOFTHINGSJOURNAL,VOL.9,NO.7,APRIL1,2022
+Bushfire Risk Detection Using Internet of Things:
+An Application Scenario
+Mohammad Reza Nosouhi , Member, IEEE, Keshav Sood , Neeraj Kumar , Senior Member, IEEE,
+Tricia Wevill, and Chandra Thapa , Member, IEEE
+Abstract—With rising temperatures and events contribut- and human–intervention related factors, such as weather,
+ing to climate change, the world is facing extreme weather natural phenomena, topography, carbon emissions, seasonal-
+patterns. Recently, Australia was hit hard by bushfires, the
+ity, etc. [1]. On one side, essentially, it is shaping the nature
+most devastating fires ever faced by the country. The eco-
+and planet naturally in a variety of ways, but, on the other
+nomicdamagereportedwasnearlyonebillionAustraliandollars
+and an estimated three billion native animals were killed or hand, the high frequency of occurrence of bushfire adversely
+adverselyaffected.Giventheextentandintensityofthisdamage, impacts flora and fauna, both human and animal life, damage
+researchersareseekingeffectivesolutionstoenabletheprediction to properties, creates health issues due to air pollution, post
+of fire before it starts to increase the time available for firefight-
+bushfire psychological problems, and high economic impacts.
+ers to protect lives and assets and prepare to mitigate the fires.
+ManyareasinAustraliaarepronetobushfireastheclimateis
+This motivated us to investigate an approach to address this
+critical problem. In this article, we propose a machine learning generally dry and hot in many states [2] and drought is com-
+(ML)-based approach that detects anomalies in spatiotemporal mon. For natural hazards and disasters, including bushfires,
+measurements of environmental parameters (e.g., temperature, GeoscienceAustraliaisresponsibleforpreparednessandman-
+relative humidity, etc.). In the proposed approach, an ML-based
+agementactivities.Ithasbeenreportedthatthebushfireseason
+modellearnsthenormalspatiotemporalbehavioroftheenviron-
+2019–2020wastheworstseasonrecordedinAustralia[3],[4].
+mentaldata(collectedoveraperiodofoneyear).Thisiscarried
+outduringaone-timetrainingphase.Then,duringthedetection Some devastating impacts reported in [3] and [5], caused by
+phase,anyspatiotemporalpatterninthereal-timedata(received the 2019–2020 bushfire season are listed as follows.
+from the field sensors) that is different than the normal pattern 1) More than one billion animals died and three billion
+will be identified by the model as anomaly which indicates a
+wereaffectedintotal,whichisthehighestrateofspecies
+possible bushfire situation. Following this, we propose a supple-
+loss in any area in the world [6].
+mentaryclassificationmodelbasedonMoran’sIindextoensure
+thatthedetectedanomaliesarenotduetoeitherasensorfailure 2) Theairpollutioncausedbyseverebushfiresin2020.The
+or a security attack (which are common in Internet of Things). Australian Capital Territory (ACT), Canberra measured
+WedevelopedthreedifferentMLmodelsforperformanceevalu- theworstairqualityindexofanymajorcityintheworld
+ation and comparison and used the Forest Fire data set to train
+inJanuarythesameyear.Thishasadverselyaffectedter-
+them.Theresultsofourexperimentsconfirmtheeffectivenessof
+ritory’s residents with severe health risks, including [7]
+the proposed approach in the early detection of fire symptoms.
+asthma, impaired vision, increased risk of heart attacks,
+IndexTerms—Agriculture4.0,artificialintelligence,Australian
+and the development of neurological conditions, etc.
+bushfire, edge computing, Internet of Things (IoT).
+3) This has significantly affected the farming and tourism
+industry. Severe economic damage was reported in
+I. INTRODUCTIONANDBACKGROUND
+2019–2020 due to the Australian bushfire, nearly one
+BUSHFIRE is commonly known as an unplanned vegeta- billion Australian dollars had been reported as insur-
+tion fire or wildfire (grass fires, forest fires, and scrub ancelossesasaresultofthebushfires,almost13million
+fires, etc.), at a large scale. This occurs due to both natural hectares of land was been burned. [8].
+4) Furthermore the total costs associated with extreme
+Manuscript received July 10, 2021; accepted August 22, 2021. Date of
+weather and climate change is difficult to quantify. The
+publication September 6, 2021; date of current version March 24, 2022.
+(Correspondingauthor:KeshavSood.) damage-relatedlossinpropertyvaluesfromclimatehaz-
+MohammadRezaNosouhiandKeshavSoodarewiththeCentreofCyber ards across Australia in 2030 is estimated at 571 billion
+Security Research Innovation, School of Information Technology, Deakin
+Australian dollars [3]. Overall, we note that the impact
+University,Geelong,VIC3220,Australia(e-mail:m.nosouhi@deakin.edu.au;
+keshav.sood@deakin.edu.au). of bushfire is devastating in Australia.
+Neeraj Kumar is with the Department of Computer Science and Towards this problem, it is critical to have effective and
+Engineering, Thapar University, Patiala 147004, India, also with the
+accurate forecasting systems to be in place to make better
+Department of Computer Science and Information Engineering, Asia
+University,TaichungCity413,Taiwan,andalsowiththeSchoolofComputer decisions for the mitigation of fire risks and hazards. Many
+Science,UniversityofPetroleumandEnergyStudies,Dehradun248007,India attempts have been made as briefly mentioned below.
+(e-mail:neeraj.kumar@thapar.edu).
+Satellites-Based Solutions: In [9]–[11] satellite images are
+Tricia Wevill is with the School of Life and Environmental
+Sciences, Deakin University, Geelong, VIC 3220, Australia (e-mail: analyzed to detect areas that are generating a high level of
+tricia.wevill@deakin.edu.au). infrared radiation (called hot spots). However, this approach
+ChandraThapaiswiththeDistributedSystemsSecurity,Data61,CSIRO,
+suffers from high latency between successive scans, i.e., res-
+Marsfield,NSW2122,Australia(e-mail:chandra.thapa@data61.csiro.au).
+DigitalObjectIdentifier10.1109/JIOT.2021.3110256 canning of the same area needs a significant amount of
+2327-4662(cid:2)c 2021IEEE.Personaluseispermitted,butrepublication/redistributionrequiresIEEEpermission.
+Seehttps://www.ieee.org/publications/rights/index.htmlformoreinformation.
+Authorized licensed use limited to: University of Saskatchewan. Downloaded on June 17,2023 at 23:04:19 UTC from IEEE Xplore. Restrictions apply.NOSOUHIetal.:BUSHFIRERISKDETECTIONUSINGINTERNETOFTHINGS:APPLICATIONSCENARIO 5267
+time[12].Inaddition,thedetectedhot-spotareadoesnotindi- theoriginofthedetectedanomalies,i.e.,earlysymptoms
+cate the exact location of a fire. It is also possible that clouds of a bushfire, sensor failures, or a security attack.
+orthesmokepreventthesystemtohaveanaccurateestimation 3) We implemented the proposed approach in an edge
+of the fire location. Thus, limited resolution and the lack of computing setting to furthermore reduce the detection
+real-time data generation make the satellite imagery approach latency.
+inefficient for continuous monitoring of a forest zone [12]. Our results confirm the accuracy and effectiveness of the
+Moreover,whentheheatsourceistoosmall(attheearlystages proposed approach. We present the related work in Section II.
+of a bushfire), the system may not consider that zone as a hot The proposed architecture and implementation details are
+spot [11]. given in Sections III and IV, respectively. Performance
+Unmanned Aerial Vehicles (UAVs)-Based Solutions: evaluation results and further discussion are given in
+Furthermore, UAVs have been used to take real-time Sections V and VI, respectively. We summarize this article in
+images of fire in the areas that are extremely dangerous Section VII.
+to access [12]–[14]. The images are analyzed to assess the
+situation and make operational decisions to prevent outbreaks
+of the fire. UAVs can also be equipped with thermal imaging
+II. RELATEDWORK
+cameras to enable firefighters to see through the smoke
+and search for the victims. This approach is effective in In [13], a comprehensive survey presents the current prob-
+post-fire situations but has very limited advantage in the early lemsofforestfirefightingandstate-of-the-artrobotictechnolo-
+detection of bushfire. In addition, UAVs need high-speed giesandsolutionsinfirefightingmissions.Akhloufietal.[12]
+communication links for the transmission of high-quality reviewed previous research and industry works done in bush-
+images that is a big issue in many regional forest areas. fire management using UAV applications. It considers differ-
+Section II covers more detail of the practical solutions being ent onboard sensor instruments, fire perception algorithms,
+used by Australian fire agencies. and coordination strategies. Below, we highlight the key
+Motivated from this, we propose to use the Internet of approaches being used by different Australian authorities in
+Things (IoT) technology and machine learning (ML) mod- the Bushfire context.
+els to identify early symptoms of a bushfire. Our proposal Australian Bureau of Meteorology (BOM) and Geoscience
+is based on spatial correlation theory. We first train the ML Australia: In Australia, weather forecasts are provided by the
+modelusingtheForestFirerealdatasetcollectedfromatarget BOM.Correspondingfireauthoritiesdeterminetheappropriate
+area over a period of one year [15]. Then, the real-time envi- firedangerrating(FDR)byconsideringthepredictedweather,
+ronmental data (collected from IoT network and tagged with includingtemperature,relativehumidity,windspeed,anddry-
+spatiotemporal information) is fed to the trained model for nessofvegetation.TheseFDRsoralerts(viaradio,TV,andthe
+the identification of possible anomalies. Note that the outliers Internet) help the government and communities to take essen-
+in sensor data can also be generated by nonbushfire events, tial appropriate actions to minimize the potential impact and
+such as sensor failures or security attacks. In other words, loss. Recently, Geoscience Australia has developed the (real-
+bushfire detection using an approach that is solely based on time) Sentinel bushfire monitoring system [5], Digital Earth
+outliers may result in high false positive rates. To address this Australia Hotspots, a national bushfire monitoring system.
+issue, we utilize the spatial correlation between sensor mea- This collects areas generating a high level of infrared radi-
+surements and develop a supplementary classification model ation (called Hotspots), via satellites at 10 min intervals, to
+to ensure that any detected anomaly has been created due to identify possible fire risks [10]. But it is unable to provide
+the early symptoms of a bushfire. The proposed model works real-time information; every hot-spot information is about 17
+based on Moran’s I index [16], [17] which is an effective min old. Furthermore, the hot-spot size does not indicate the
+tool for the measurement of spatial correlation in distributed exact fire zone. Also in cases where the heat source is too
+architectures. small to detect, the system does not consider that zone as a
+WeimplementedaProofofConcept(PoC)ofourapproach hot-spot leading to inaccurate hot-spot identification [11].
+in Python. We also performed a prototype implementation of MyFireWatch Project: This solution is based on an existing
+the approach in an edge computing setting to ensure its effec- DepartmentofFireandEmergencyServices(DFES)program,
+tiveness to generate fire alerts at the very early stage of a redeveloped by Landgate and Edith Cowan University (ECU),
+bushfire. Australia,forusebythegeneralpublic[18].Thissystemgives
+Our contributions in this article are as follows. aviewofsatelliteobservedhot-spotsbydetectingheatsources
+1) We propose an ML-based anomaly detection approach aboveacertaintemperaturelevel.Furthermore,thesehot-spots
+forearlydetectionofbushfire.Intheproposedapproach, update at 2–4 h intervals and do not fully indicate the exact
+the measurement and collection of spatiotemporal envi- level of severity. It does not provide the exact coordinates of
+ronmental data is performed using an IoT network. The potential fire zones, is unable to determine accurately beyond
+collectedreal-timedataisanalyzedbytheMLmodelto 2 km, hot-spots in the presence of smoke and cloud can-
+identify any spatiotemporal pattern that is different than not be detected. Besides the use of satellites, the Australian
+the normal pattern. firefighters also make use of UAVs as a tool for combating
+2) Toreducethenumberoffalsepositivedetections,asup- fire [14]. The UAVs (particularly drones) provide real-time
+plementary classification model is proposed to estimate pictures of fire zones that are extremely dangerous to access.
+Authorized licensed use limited to: University of Saskatchewan. Downloaded on June 17,2023 at 23:04:19 UTC from IEEE Xplore. Restrictions apply.5268 IEEEINTERNETOFTHINGSJOURNAL,VOL.9,NO.7,APRIL1,2022
+Thisapproachiseffectiveinpost-firesituationstoenablefire-
+fighterstomakeearlyassessmentsofdamagewhileenrouteto
+emergencies. The cost of UAVs and the requirement of high
+speed Internet connectivity are key hurdles in many regional
+areas or underdeveloped countries.
+Bushfire Attack Level Toolbox: Researchers also use
+modeling to analyze the potential impact of fire before it
+occurs. For example, to measure the impact of fires on build-
+ings, the Bushfire Attack Level Toolbox is developed which
+Fig.1. Proposedsystemarchitecture.
+provides access to ArcGIS geoprocessing scripts to calculate
+BushfireAttackLevelratings[19].Foracomprehensiveunder-
+standingofwhybushfiremonitoringsystemsdoesnotworkas
+intended, we encourage readers to follow [20] and references have used a natural physical phenomenon of data, i.e., the
+therein. Also, very recent recommendations provided by the readings of two nearby IoT units would be the same under
+Nature Conservation Society of South Australia (NCSSA) to normal conditions. For example, humidity and temperature
+the federal government to preparedness for, response to, and wouldnotchangedramaticallyovershortdistances.Therefore,
+recovery from bushfire disasters are listed in [21]. we assume that the sensor readings or data would be corre-
+FireCloud Project: In FireCloud, a recently done bushfire lated with its neighbors data, with very high probability. In
+detection project [22], the existing satellite-based fire detec- this case, there is no spatial correlation between the outliers
+tion systems are supplemented with ground-based IoT remote is detected. Contrary if the outlier detection module detects
+sensing devices to enhance the accuracy and speed of the any outlier then the data streams are forwarded to a spatial
+bushfire detection process. However, it is difficult to judge correlation-basedrecognitionmodulewhichisanintegralpart
+the effectiveness of this work since its results have not been of the computing module at the edge of the network.
+published (e.g., experimental results). Moreover, it lacks an Case 2 (Fire Danger Exists): As mentioned before that in
+effective approach to confront the possible incorrect mea- the presence of an outlier, the data is forwarded to a spatial
+surements sent by either faulty sensors or illegitimate IoT correlation module to accurately identify the potential risk of
+sensors/attacked sensors (in case of a cyber attack on the fire. If the readings are all in the same cluster (no outlier
+deployed IoT network). Indeed, any IoT-based approach for detected at this stage), as expected the framework would still
+bushfiredetection mustbeequipped withaneffective solution considerthisscenarioasnofiredanger.Inthecaseofhighfire
+toaddresssuchthreats(atleastpubliclyaccessibleforestareas probability, the level of temperature or humidity will increase
+should be protected). naturally which will be measured by sensors and forwarded
+SynthesisoftheExistingSolutions:Tothebestofourunder- to the computing module for analyses. In this case, an outlier
+standing,thecurrentexistingsolutionslacktheabilitytoreport would be generated. Using this approach of outlier detection,
+the exact location/coordinates of a potential fire area in real- the field or zone would be considered as “Fire Danger Zone".
+time before the fire occurs. In addition, the post-fire solutions However, this case is further divided into three parts.
+are not cost effective. Furthermore, we emphasize that due to Case2.1(FalseFireDangerZone):Thesensorsaremostly
+digitizationineverydomain,theriskofcyber-attackisanother deployed in harsh environments. It could be possible that
+factor that might compromise the existing techniques to gen- there is no fire but the sensor is giving faulty readings. The
+erate a false alert and false negative predictions. The existing system could produce outliers and the system may consider
+approaches do not integrally consider approaches to distin- thisscenarioasFireDangerZone,althoughitisfalse.Counter
+guishtrueandfalsebushfirealerts.Inourapproach,weutilize Argument.Usingthespatialcorrelationbetweenmeasurements
+a module which enables the network to distinguish legitimate of neighboring IoT sensors we note that in case of a sensor
+and compromised alerts. failure, the failed sensor will generate faulty data, and thus
+an outlier will be detected but with a very low probability its
+neighbor sensors also generate faulty measurements as well.
+III. OURPROPOSEDAPPROACH
+Thus,themeasurementsreceivedfromitsneighborsensorsare
+Inthissection,wepresentahighlevelviewofourproposed not classified as outliers as no significant spatial correlation
+approach for bushfire detection. between the measurements is detected.
+Case 1 (No Fire Danger): In the proposed approach, we Case 2.2 (Compromised Fire Danger Zone): It could also
+consider a land/zone where IoT devices or units are deployed be possible that the sensors are compromised and giving fake
+taking environmental readings, i.e., temperature and humid- readings. If there are more outliers, then it will be very chal-
+ity. The sensor streams continuously generated by IoT units lenging for the system to differentiate the faulty/false and
+areforwarded toacomputing device placed attheedge ofthe compromised behavior. Counter Argument. We note that in
+networkusingedgecomputingtechnology.Thesensorstreams caseofacyberattackontheIoTnetwork,severalneighboring
+collected from the IoT units (of a small forest land/zone) are sensors are targeted by the attacker. Therefore, neighbor sen-
+analysed to detect an outlier (see Fig. 1). In the absence of sors will also generate faulty measurements. In other words,
+any outlier detection, the system considers the zone as no fire with a very high probability, multiple sensors (located in the
+danger, which means no risk of fire is identified. Here, we neighborhood of the malicious node) will also be affected.
+Authorized licensed use limited to: University of Saskatchewan. Downloaded on June 17,2023 at 23:04:19 UTC from IEEE Xplore. Restrictions apply.NOSOUHIetal.:BUSHFIRERISKDETECTIONUSINGINTERNETOFTHINGS:APPLICATIONSCENARIO 5269
+Fig.2. Work-flowoftheproposedapproach.
+Thus, a significant spatial correlation between the measure- secondphase(outlierdetection),thereal-timesensormeasure-
+ments can be observed. In this case, the clustering decisions ments received from the IoT field network are analysed by an
+are made based on the possible spatial correlation between ML model to detect an outlier. In the absence of any outlier
+the measurements. In other words, measurements of all the detection, the system considers the IoT field network behav-
+compromised sensors change rapidly and do not follow a ior as normal or No Fire Danger. Alternatively, if the system
+location-based and smooth pattern while in case of a true fire, detects any outlier, then the data streams are forwarded to
+there is a smooth pattern in the change of readings received a spatial correlation-based recognition module. At this third
+from neighbor sensors over time, i.e., the outliers are origi- phase (spatial correlation-based classification), the spatial-
+nated from a particular location and gradually propagate to correlation data of these outliers are fed to a classifier in
+other sensor locations. order to accurately classify the detected outliers into one of
+Now, the next step is to exactly find the attacked sensors the above mentioned clusters, i.e., False Fire Danger Zone,
+andtheirlocation.Toeffectivelyexploitthespatialcorrelation Compromised Fire Danger Zone, and True Fire Danger Zone.
+betweensensormeasurements,weutilizeaspecialmechanism Primarily, we have used the spatial correlation between the
+thattakesthenetworkaddress(e.g.,IPaddress)ofsensorsand detected outlier and the measurements of its neighbor sensors
+returns their x and y coordinates. To do this, we consider a to decide on whether the outlier is due to a sensor failure or
+grid that covers the whole geographical area which is under a security attack. We assume that IoT humidity and tempera-
+protection. Then, every sensor is assigned with an appropriate ture wireless sensors have been already installed in the field
+x and y coordinate based on its physical location. We empha- that effectively covers a target area. The sensor measurements
+size that in the case of mobile IoT sensors this process can are collected by an edge system that is connected to the core
+be performed using a dynamic method since the location of system. Regarding the learning model, we have used three
+a sensor may change with respect to time. This can be easily ML classification algorithms, i.e., classification and regres-
+implementedsincemobilesensorsusuallysendtheirreal-time sion trees (CARTs), random forest (RF), and support vector
+location data too along with the data streams. machine (SVM) at the edge segment to detect outliers. In our
+Case2.3(TrueFireDanger Zone):Itcanbearguedthatall experiments, we have used the Forest Fire real data set [15].
+sensors in this case may generate the same readings and thus The data set has been created from the meteorological data
+a high level of spatial correlation will be detected. Counter gathered in the northeast region of Portugal over a period of
+Argument. We first accept that this is true, however, if we four years. In the next section, we present the mathematical
+increase the land/zone size then it is again highly likely that modeling of our approach.
+the readings of one zone from another will be different and
+the outlier will definitely be detected. We emphasize that the
+zone size in this case plays an essential role. Therefore, the A. Mathematical Modelling
+comparison of different zones or clusters of different zones As said previously, we utilize the spatial correlation
+with each other will also provide more accurate insights of between measurements from neighboring sensors to distin-
+potential risk. guish between a false fire danger detection and a true bushfire
+case.Todothis,wehaveutilizedtheMoran’sIindex[16],[17]
+whichisanindicatorofspatialcorrelationindistributedarchi-
+tectures. There are global and local versions of the Moran’s
+IV. IMPLEMENTATIONANDARCHITECTUREDETAILS
+I index available. The global version indicates the level of
+In Fig. 2 we have presented the work-flow of our approach
+spatial correlation over an entire region and is calculated as
+which is divided into three phases (particularly based on spa-
+follows:
+tialcorrelationbetweensensormeasurements).Thefirstphase
+(cid:2) (cid:2) (cid:3) (cid:4)
+is the preprocessing phase in which the data streams from
+S S S (cid:2) (m −m¯) m −m¯
+IoT sensors are collected and processed. This phase is per- MI= (cid:2)i=1 (cid:2)j=1 ij (cid:2)i j
+formed once only during the setup of the IoT network. In the S i=1 S j=1(cid:2) ij S i=1(m i−m¯)2
+Authorized licensed use limited to: University of Saskatchewan. Downloaded on June 17,2023 at 23:04:19 UTC from IEEE Xplore. Restrictions apply.5270 IEEEINTERNETOFTHINGSJOURNAL,VOL.9,NO.7,APRIL1,2022
+TABLEI
+DESCRIPTIONOFTHEFORESTFIREDATASET
+where S is the number of measuring units (sensors), m is resultsinhavingthemeasurementsofs anditsneighborsstill
+i i
+the value of the desired feature measured by sensor s, and spatially correlated.
+i
+m¯ is the mean value of feature m. We also need to determine
+what sensors are considered as neighbor. This is applied on V. PERFORMANCEEVALUATION
+the Moran’s I expression using the (cid:2) ij weights. For example, In this section, we discuss the test settings, experi-
+if s i and s j are neighbor, then (cid:2) ij = 1, otherwise, (cid:2) ij = 0. ments results, PoC implementation, and a comparison of our
+However, we have adopted a more conservative approach in approach with three related research works.
+which (cid:2) weights are obtained using r which is the physical
+ij ij
+distance between s i and s j, i.e., A. Test Settings
+1 WehavedevelopedaPoCusingPython3.7.4.Twotypesof
+(cid:2) = .
+ij r2 workstations were used for the experiments: 1) Intel Core i5–
+ij
+11600 2.80-GHz CPU with 8 GB of RAM and 2) Intel Core
+For the values of MI close to 0, it is concluded that there
+i7–7700K @4.20-GHz CPU with 64 GB of RAM. We also
+is no spatial correlation in the spatial data set. On the other
+used an Android mobile device LG G4–H818P equipped with
+hand, if the absolute value of MI is greater than 0, the global
+a Hexa–Core 1.8-GHz processor, 3 GB of RAM, and running
+correlation of the spatial data set is confirmed.
+Android OS 5.1, acting as an IoT device.
+The expected value of the MI index is calculated as
+Regarding the IoT network, we have used the Eclipse Paho
+(−1/S−1) [16], [17]. However, the standardized version of
+MQTT Python library [23]. The Python code enables the
+MI is generally used to determine the thresholds on which
+MQTTclientsandbrokerstopublishamessageandsubscribe
+the spatial correlation becomes significant in a data set. The
+toatopicandreceiveapublishedmessageaswell.Weusethe
+global Moran’s I index is standardized to G(MI) as follows:
+Forest Fire real data set [15] for performance evaluation. The
+MI−Exp(MI) data set has different features, including spatial data (x and
+G(MI)= (cid:5) .
+(cid:3) (cid:4) y coordinates) and meteorological features, such as tempera-
+Exp MI2 −(Exp(MI))2
+tureandrelativehumidity(seeTableIpresentsthefeaturesof
+For example, a spatial data set is correlated with a confi- the data set.). For the outlier detection phase, we have used
+dence level of 95%, if |G| is greater than 1.96. The global three ML algorithms, i.e., CARTs, RF, and SVM. To model
+Moran’s I index reflects the level of spatial correlation over the real fire danger scenario we have added Gaussian noise
+thewholedataset.Thus,weusethelocalversionoftheindex to the measurements of several randomly selected neighbor
+to determine the degree of correlation between neighbor sen- sensors.
+sors only. For a specific sensor s, the local version of the In addition, we define R as the percentage of sensors that
+i
+index is calculated as follows: send outlier measurements. We change R from 1% to 5%
+to see how it affects the accuracy of the proposed solution.
+(m i−m¯) (cid:6)S (cid:3) −m¯(cid:4)
+MI = (cid:2) m , where Furthermore, to evaluate the intensity of the outliers, we have
+i p2 ij j changed the level of the injected Gaussian noise by consid-
+i j=1,j(cid:3)=i
+(cid:2) ering its standard deviation (sigma) as a percentage of the
+S (cid:2)
+p2 = j=1 ij −m¯2. value of each measurement. For this reason, we have changed
+i S−1 sigma from 0.2T to 0.5T for temperature outliers and from
+Thus, after an outlier is detected by the outlier detection 0.2H to 0.5H for humidity outliers, where T and H are
+module for sensor s, the local Moran’s I index MI is calcu- the true measurements of temperature and humidity, respec-
+i i
+lated for s to obtain the degree of spatial correlation between tively. Naturally, lower levels of noise result in more difficult
+i
+s and its neighbors. If the index is close to 0, false fire dan- detection of the relevant outliers.
+i
+ger will be reported since in this case, there is no correlation
+B. Results
+between the measurements of s and its neighbors. In other
+i
+words, it indicates s is malfunctioning while other sensors Figs. 3 and 4 show the detection accuracy of the three
+i
+are working well. However, in case of real fire danger, all employedMLalgorithmsfortemperatureandhumidityparam-
+the neighbor sensors are generally affected by the event. This eters, respectively. As we see in the figures, a higher level of
+Authorized licensed use limited to: University of Saskatchewan. Downloaded on June 17,2023 at 23:04:19 UTC from IEEE Xplore. Restrictions apply.NOSOUHIetal.:BUSHFIRERISKDETECTIONUSINGINTERNETOFTHINGS:APPLICATIONSCENARIO 5271
+Fig. 3. Detection accuracy based on temperature measurements and the percentage of sensors who generate outlier measurements (a) CART, (b) RF, and
+(c)SVMalgorithms.
+Fig. 4. Detection accuracy based on humidity measurements and the percentage of sensors who generate outlier measurements (a) CART, (b) RF, and
+(c)SVMalgorithms.
+the added noise results in higher accuracy, as we expected.
+Thus, during the beginning of a bushfire and considering a
+fixed value of R, the detection accuracy increases over time
+because the new measurements are distancing from the nor-
+mal expected measurements. This behavior is seen for all
+the three algorithms. Moreover, having a larger value of R
+results in higher accuracy. This is because in this case the
+data set is more skewed, and therefore a new cluster can
+be created that convinces the classifier algorithms to label
+it as a separate cluster (i.e., anomaly). In addition, the fig- Fig.5. NetworkstructureofourPoCdesign.
+ures show that the CART and RF algorithms perform better
+than the SVM algorithm in terms of detection accuracy.
+They both give similar performance and can detect outliers server. Moreover, PRTG Network Monitor [25] was used to
+with the accuracy of as high as 99.4% when 5% of sen- monitor the latency between the IoT devices and the servers.
+sors generate outliers. However, the SVM algorithm gives the Regarding the latency between the IoT devices and servers,
+worst performance among the three algorithms. Specifically, as Fig. 6(a) and (b) show, the proposed approach performs
+in case of a lower number of sensors that generate outliers significantly faster in the first scenario in which the detection
+(i.e., R = 1% or R = 2%), SVM performance is poor process is done by the edge server. For example, considering
+in terms of detection accuracy. This may result in delayed the packet size of 32B, we obtained the average latency of
+detections if SVM is employed because it needs a higher 19 ms in this case while the average latency of 73 ms was
+number of sensors that generate outliers in order to detect a obtained in the second scenario in which the sensor measure-
+bushfire case. ments are sent to a cloud server by the IoT devices where the
+We have also performed the PoC implementation of our detection procedure is performed. Thus, the detection time of
+approachintwodifferentscenariostoevaluateitsperformance a bushfire can be effectively increased by employing several
+intermsoflatency.Fig.5showsthenetworkstructureusedin edge servers (each one covers a specific zone in the target
+our prototype implementation. First, we performed the detec- area) that collect IoT sensor measurements and perform the
+tionprocessusinganedgeserverthatwaslocatedclosetothe proposed detection approach. The detected events, logs, and
+IoT device (within the Wifi range). In the second scenario, performance of the edge servers can be monitored in the core
+the procedure was performed by a cloud server with a phys- segment of the network using a centralized server.
+ical distance of 280 km to the IoT field network. We used Wealsorecordedtheend–to–endlatencyinthedetectionof
+ZeroTier [24] to connect the IoT field network to the cloud bushfire symptoms. To emulate the behavior of environmental
+Authorized licensed use limited to: University of Saskatchewan. Downloaded on June 17,2023 at 23:04:19 UTC from IEEE Xplore. Restrictions apply.5272 IEEEINTERNETOFTHINGSJOURNAL,VOL.9,NO.7,APRIL1,2022
+TABLEII
+COMPARISONOFOURAPPROACHWITHTHREERESEARCHWORKSINTHEFIELDOFOUTLIERDETECTION
+Fig.7. Averageend–to–endlatency(changestepw.r.tsensornumbers),time
+intervalbetweensensorreadingswas10s.
+Fig.6. LatencyreportbetweentheIoTdeviceand(a)edgecomputingserver
+and(b)cloudserver.
+parameters at the early stage of a bushfire (e.g., when tem-
+perature and relative humidity are increasing and decreasing,
+respectively), we artificially changed the consecutive sensor
+readings by steps of 20%, 30%, and 50% (see Fig. 7). As we
+expected,thelowestdetectiontimewasrecordedatthechange Fig. 8. Average accuracy of attack detection based on the percentage of
+victimsensorsandtheMoran’sIindexthresholdθ 1.Intheexperiments,θ
+step of 50%. This indicates that the detection time adapts to 2
+hasbeensetto5.
+the spreading speed of fire at its early stage. Moreover, the
+detection latency heavily depends on the time gap between
+twosuccessivesensorreadings,i.e.,refreshtime(inourexper-
+system obtains a small MI for those sensors (close to 0). In
+iments, we used the refresh time of 10 s). In fact, to detect
+this case, the outlier is classified as either a sensor failure (if
+ananomaly,thereshouldbeaminimumdistancebetweentwo theobtainedMIislowerthanthefirstthresholdθ )orasecu-
+1
+consecutive readings. However, this distance may not be cre-
+rityattack(otherwise).However,whenasignificantnumberof
+ated at a single sensor reading (specifically, at low change
+sensors are affected by the attack, the system obtains a large
+steps, e.g., 15%). In other words, the ML-based anomaly
+MI because in this case, a large number of sensors are report-
+detection model may need to receive a few numbers of suc-
+ing outliers. In this case, the calculated MI is compared with
+cessive sensor readings before it can detect an anomaly. As
+the second level of threshold to classify the outlier as either a
+Fig. 7 shows, the highest level of latency was recorded at
+security attack (if the calculated MI is lower than the second
+the change step of 15% due to the small increase/decrease threshold θ ) or a bushfire (otherwise).
+2
+in the measured values. Furthermore, having a large number
+of sensors (S) imposes additional processing overhead on the
+C. Comparison
+system. This is mainly due to the calculation of MIs for a
+i
+large number of sensors. Table II shows the results of a comparison between our
+We performed some experiments to evaluate the system approachandthreeresearchworksinthefieldofoutlierdetec-
+performanceintermsofdistinguishingbetweenabushfirecase tion [26]–[28]. For the results of our work, we present the
+andasecurityattack(seeFig.8).Inthisregard,weusedthree average of accuracy and F-score metrics regarding the four
+different values for the number of victim sensors (those who resultsachieved usingthefourdifferentvaluesofsigmawhen
+have been successfully compromised by the attacker). This is R = 1%. In [26], an IoT outlier detection architecture is
+animportantfactorsincetheMoran’sIindexMIofeveryout- proposedtodetecttheoccurrenceofanomaliesinaforestenvi-
+lier depends on the number of victim sensors. In other words, ronment using four different learning algorithms, i.e., CART,
+if a limited number of sensors are affected by the attack, the RF,gradientboostingmachine(GBM),andlineardiscriminant
+Authorized licensed use limited to: University of Saskatchewan. Downloaded on June 17,2023 at 23:04:19 UTC from IEEE Xplore. Restrictions apply.NOSOUHIetal.:BUSHFIRERISKDETECTIONUSINGINTERNETOFTHINGS:APPLICATIONSCENARIO 5273
+analysis (LDA). We only present the best accuracy achieved solutions and identify cost-effective architectural solutions for
+in [26] (they have achieved a low accuracy of 78% using the effective collection of real-time environmental data from
+the LDA learning model). As seen in Table II, their models largeforestareas.However, afeasibleandmorecost-effective
+have never reached accuracies greater than 97.7% for temper- approachcouldbetodividetheforestareaintoseveralsmaller
+ature. For humidity, they have achieved the highest level of zones (i.e., cells). Then, every cell is covered by spreading
+99.3%. However, there is no information and discussion in low-cost sensors which form a single wireless sensor network
+the paper about the standard deviation (sigma) of the artificial (WSN)inthatcell.Infact,everyWSNrepresentsasmall-scale
+noise added to the data set for outlier generation. In fact, the cell that can be replicated in a larger scale to cover the entire
+accuracy will increase if we use a higher level of sigma as forest. Each WSN is connected to the main network through
+confirmed by Figs. 3 and 4. one or multiple IoT nodes that serve as wireless gateways.
+In [27], the ellipsoidal neighborhood outlier factor (ENOF) This would be a more economic architectural solution since
+mechanism [29] has been used to distinguish normal and the deployment of WSNs is much cheaper than deploying a
+anomaly measurements. ENOF is an outlier detection algo- large number of IoT nodes.
+rithm in which each data point receives an outlier score with We do agree that the above solution would stillnot be fully
+respect to the densities of its close neighborhood. Those data practical and cost-effective. Feasibility still remains an open
+points that are located in a dense group of data points receive issue. However, we argue that it would be good to identify
+a small score and vice versa. The ENOF model also needs to highfireriskareasfirst,andthenencouragelandowners(such
+calculate a threshold value using the standard deviation of the as, big farm land, forest zone under forest ministry, etc.), to
+ENOF scores. This threshold is then used to make anomaly allowtodeploythegivenapproach,athighlysubsidizedrates.
+decisions.Intheirwork,ISSNIP[30]andIBRL[31]datasets Residents living nearby potential zones, and emergency fire
+have been used for the experiments that include both temper- departmentswillreceiveanalertviaalocallydeployedsystem,
+atureandhumiditymeasurements.AlthoughtheENOFmodel respectively,togetprepareinadvance.Graduallydeployingthe
+offers a high level of accuracy, it is still outperformed by our approach from small scale to large scale zone will eventually
+approach(thevaluesofF-scoremetrichavenotbeenpresented strengthen the overall effectiveness of the complete bushfire
+in their work). prediction system without replacing the legacy system.
+Furthermore,in[28],amodularandhybridanomalydetection Towards the third concern, it is arguable to say that the
+systemisproposedforIoTapplications.Itusesacloudserver deployment of 5G technology and the network slicing con-
+for anomaly detection in both application and network layers cepts within that technology can potentially help to achieve
+and train a centralized learning model. The model weights multitenants heterogeneous service requirements [32], [33].
+obtained by the cloud server are then transferred to the IoT However, we are still far away with a complete roll out
+devices for local anomaly detection. Although it offers effi- of 5G networks. Thus, this is an open challenge, and we
+cientperformanceintermsofdetectionlatency,theirachieved need to be cautious with the deployment of the approach
+accuraciesarestilllowerthanourapproach.Thereasonisthat using legacy telecommunication providers until 5G reaches
+thereisadeviationbetweenthepredictionsmadebytheserver in regional areas. We welcome the research community to
+and the ones made locally at the IoT devices. Furthermore, it collaborate with us to address this critical and urgent issue.
+requires the local IoT devices to be frequently updated by the
+cloud server. This may increase the communication overhead
+VII. SUMMARYANDFUTUREWORK
+of the system and affects the accuracy.
+For early detection of bushfire dangers in almost real-time,
+anapproachbasedonMLandspatialcorrelationbetweensen-
+VI. FURTHERDISCUSSIONANDLIMITATIONS sor measurements is developed and validated at the edge of
+the network. The proposed mechanism also ensures that if
+The shown approach is simple and effective but there are
+an attacker successfully attacks the network (e.g., control sen-
+certain aspects that need to be rigorously explored such as:
+sorcommunications,manipulatetheirmeasurements,etc.),the
+1)Willtheproposedapproachtrulyreplacethelegacybushfire
+created outliers do not fool the system to generate a false fire
+detectionsystems?2)Doweneedtodeploythesensorsevery-
+alarm. This means the proposal accurately shows that either
+where in the forests to detect Bushfires? 3) How to deal with
+the fire alarm is due to a true bushfire danger rather than a
+two different verticals (tenants) partially using the same IoT
+sensorfailureoracyberattack.Theresultsofourexperiments
+deploymentsbutwithheterogeneousservicerequirements?We
+confirmed the merit of our approach. In the future, we intend
+observethatthefirsttwoconcernsareinterlinkedandtherefore
+to investigate the design of novel and cost-effective architec-
+we have to address them jointly.
+turalsolutionstoensurethefeasibilityofIoT-basedapproaches
+First, no solution is best fits in all scenarios therefore we
+in the early detection of bushfire, as discussed in the further
+need a holistic approach to understand the emergency of
+discussion section.
+the bushfire problem before we choose the right solution.
+Nevertheless, we do not argue that our approach will replace
+the existing solutions, rather we emphasize that it would be REFERENCES
+beneficial to use the proposed approach on top of the exist-
+[1] J.Russell-Smithetal.,“Bushfires‘downunder’:Patternsandimplica-
+ing approaches in an integrated way. In view of the second tions of contemporary australian landscape burning,” Int. J. Wildland
+Fire,vol.16,no.4,pp.361–377,2007.
+concern, we emphasize that further research is required to
+[2] Bushfires. Accessed: Nov. 10, 2020. [Online]. Available:
+investigate the modification of IoT-based forest monitoring https://www.ga.gov.au/scientific-topics/community-safety/bushfire
+Authorized licensed use limited to: University of Saskatchewan. Downloaded on June 17,2023 at 23:04:19 UTC from IEEE Xplore. Restrictions apply.5274 IEEEINTERNETOFTHINGSJOURNAL,VOL.9,NO.7,APRIL1,2022
+[3] Value of Insurance Losses from Major Weather Events in Australia [29] S.Rajasegarar et al. “Ellipsoidal neighbourhood outlier factor for dis-
+as of January 2020. Accessed: Nov. 11, 2020. [Online]. Available: tributed anomaly detection in resource constrained networks,” Pattern
+https://www.statista.com/statistics/1098529/australia-insurance-losses- Recognit.,vol.47,no.9,pp.2867–2879,2014.
+from-natural-disasters/ [30] V.K.Sachan,S.A.Imam,andM.T.Beg,“Energy-efficientcommuni-
+[4] 2019–20 Australian Bushfires—Frequently Asked Questions: A cation methods in wireless sensor networks: A critical review,” Int. J.
+Quick Guide. Accessed: Nov. 15, 2020. [Online]. Available: Comput.Appl.,vol.39,no.17,pp.35–48,2012.
+https://parlinfo.aph.gov.au/parlInfo/download/library/prspub/7234762/ [31] IBRLDataset. (2020). City of Melbourne Open Data Homepage.
+upload_binary/7234762.pdf [Online]. Available: https://data.melbourne.vic.gov.au/Environment/
+[5] Real-Time Bushfire Monitoring Satellite System to be Developed Sensor-readings-with-temperature-light-humidity-ev/ez6b-syvw
+by Geoscience Australia. Accessed: Nov. 11, 2020. [Online]. [32] G. Fortino et al., “Towards multi-layer interoperability of hetero-
+Available: https://www.abc.net.au/news/2015-08-11/real-time-bushfire- geneous IoT platforms: The INTER-IoT approach,” in Integration,
+monitoring-system-to-be-developed/6688510 Interconnection,andInteroperabilityofIoTSystems.Cham,Switzerland:
+[6] MorethanOneBillionAnimalsKilledinAustralianBushfires.Accessed: Springer,2018,pp.199–232.
+Nov. 11, 2020. [Online]. Available: https://www.sydney.edu.au/news- [33] L. Zanzi, F. Giust, and V. Sciancalepore, “M2 EC: A multi-tenant
+opinion/news/2020/01/08/australian-bushfires-more-than-one-billion- resourceorchestrationinmulti-accessedgecomputingsystems,”inProc.
+animals-impacted.html IEEEWirelessCommun.Netw.Conf.(WCNC),2018,pp.1–6.
+[7] P. Yu, R. Xu, M. J. Abramson, S. Li, and Y. Guo, “Bushfires in
+Australia: A serious health emergency under climate change,” Lancet Mohammad Reza Nosouhi (Member, IEEE)
+Planet.Health,vol.4,no.1,pp.e7–e8,2020. received the master’s degree from Isfahan
+[8] J. Alexandra and C. M. Finlayson, “Floods after bushfires: Rapid University of Technology, Isfahan, Iran, in 2006,
+responses for reducing impacts of sediment, ash, and nutrient slugs,” and the Ph.D. degree from the University of
+Aust.J.WaterResourc.,vol.24,no.1,pp.1–3,2020. Technology Sydney, Ultimo, NSW, Australia, in
+[9] T. Fukuhara, T. Kouyama, S. Kato, R. Nakamura, Y. Takahashi, and 2020.
+H. Akiyama, “Detection of small wildfire by thermal infrared camera HeiscurrentlyworkingasaResearchFellowwith
+withtheuncooledmicrobolometerarrayfor50-kgclasssatellite,”IEEE Keshav Sood with the Centre for Cyber Security
+Trans.Geosci.RemoteSens.,vol.55,no.8,pp.4314–4324,Aug.2017.
+Research and Innovation, Deakin University,
+[10] Bushfire Tracking with Sentinel Hotspots. Accessed: Nov. 11, 2020.
+Geelong,VIC,Australia.
+[Online].Available:https://www.csiro.au/en/Research/Astronomy/Earth-
+observation/Sentinel-hotspots
+[11] Digital Earth Australia Hotspots. Accessed: Nov. 15, 2020. [Online].
+Available:https://hotspots.dea.ga.gov.au#/ Keshav Sood received the B.Tech. degree in elec-
+[12] M. A. Akhloufi, A. Couturier, and N. A. Castro, “Unmanned aerial tronics engineering (Distinction) and the M.Tech.
+vehiclesforwildlandfires: Sensing,perception, cooperationandassis- degree in optical fiber engineering from Punjab
+tance,” Drones, vol. 5, no. 1, p. 15, 2021. [Online]. Available: Technical University, Jalandhar, India, in 2007
+https://www.mdpi.com/2504-446X/5/1/15 and 2012, respectively, and the Ph.D. degree in
+[13] J.J.Roldán-Gómez,E.González-Gironda,andA.Barrientos,“Asurvey information technology from Deakin University,
+on robotic technologies for forest firefighting: Applying drone swarms Geelong,VIC,Australia,in2018.
+toimprovefirefighters’efficiencyandsafety,”Appl.Sci.,vol.11,no.1, He worked as a Research Fellow with the
+p.363,2021.
+Advanced Cyber Security Engineering Research
+[14] Drones to Assist Firefighters in Emergencies. Accessed: Nov.
+Centre, The University of Newcastle, Callaghan,
+14, 2020. [Online]. Available: https://www.nsw.gov.au/news/drones-to-
+NSW,Australia.HeiscurrentlyaLecturerwiththe
+assist-firefighters-emergencies
+Centre for Cyber Security Research and Innovation, School of IT, Deakin
+[15] A. Asuncion and D. J. Newman. UCI Machine Learning Repository.
+University.
+Irvine, University of California, Department of Information and
+Computer Science. Accessed: Oct. 16, 2020. [Online]. Available:
+NeerajKumar(SeniorMember,IEEE)receivedthe
+https://archive.ics.uci.edu/ml/datasets/Forest+Fires
+Ph.D.degreeinCSEfromShriMataVaishnoDevi
+[16] M. Yan et al., “Outliers detection of cultivated land quality grade
+University,Katra,India,in2009.
+results based on spatial autocorrelation,” in Proc. 5th Int. Conf. Agro-
+Geoinformat.(Agro-Geoinformatics),2016,pp.1–5. He is currently a Full Professor with the
+[17] M.DasandS.K.Ghosh,“MeasuringMoran’siinacost-efficientman- Department of Computer Science and Engineering,
+nertodescribealand-coverchangepatterninlarge-scaleremotesensing Thapar University, Patiala, India. He is also
+imagery,” IEEE J. Sel. Topics Appl. Earth Observ. in Remote Sens., with the Department of Computer Science and
+vol.10,no.6,pp.2631–2639,Jun.2017. InformationEngineering,AsiaUniversity,Taichung
+[18] Myfirewatch. Accessed: Nov. 14, 2020. [Online]. Available: City, Taiwan, and with the School of Computer
+https://myfirewatch.landgate.wa.gov.au/map.html Science, University of Petroleum and Energy
+[19] T. Yang and W. C. Arthur. (2015). Bushfire Attack Level Toolbox. Studies,Dehradun,India.
+Accessed: Nov. 14, 2020. [Online]. Available: https://ecat.ga.gov.au/
+geonetwork/srv/eng/catalog.search#/metadata/83736 Tricia Wevill received the Bachelor of Science
+[20] J.Whittaker,M.Taylor,andC.Bearman,“Whydon’tbushfirewarnings (Hons.)andPh.D.degreesfromMonashUniversity,
+work as intended? Responses to official warnings during bushfires in Melbourne, VIC, Australia, in 1999 and 2009,
+new south wales, australia,” Int. J. Disaster Risk Reduction, vol. 45, respectively.
+May2020,Art.no.101476. SheisaLecturerofEnvironmentalScienceswith
+[21] N. de Preu. (2020). Submission to the Bushfires Royal Commission. Deakin University, Geelong, VIC, Australia. Her
+[Online]. Available: https://naturaldisaster.royalcommission.gov.au/ research interests include the study of vegetation
+submissions dynamicsatbothfine-scaleandlandscapelevels,in
+[22] Firecloud Project. Accessed: Feb. 1, 2021. [Online]. Available: response to altered environmental and disturbance
+https://hackerspace.govhack.org/projects/firecloud
+regimes. She is particularly interested in how eco-
+[23] Eclipse Foundation. Accessed: Feb. 18, 2021. [Online]. Available:
+logicaltheorycanbeusedtounderstandcommunity
+http://www.eclipse.org/paho
+developmentandtheapplicationofthisknowledgetolandmanagement.
+[24] Zerotier: Securly Connect Any Device, Anywhere. Accessed: Sep. 21,
+2020.[Online].Available:https://www.zerotier.com/download/
+[25] PRTGNetworkMonitor.Accessed:Sep.21,2020.[Online].Available:
+https://www.paessler.com Chandra Thapa (Member, IEEE) received the
+[26] N. Nesa, T. Ghosh, and I. Banerjee, “Outlier detection in sensed data Ph.D. degree from the University of Newcastle,
+using statistical learning models for IoT,” in Proc. IEEE Wireless Callaghan,NSW,Australia,in2018.
+Commun.Netw.Conf.(WCNC),2018,pp.1–6. He is a Postdoctoral Fellow with the Distributed
+[27] L. Lyu, J. Jin, S. Rajasegarar, X. He, and M. Palaniswami, “Fog- SystemsSecurity,Data61,CSIRO,Marsfield,NSW,
+empoweredanomalydetectioninIoTusinghyperellipsoidalclustering,” Australia.Hisworkingdomainisprivacy-preserving
+IEEEInternetThingsJ.,vol.4,no.5,pp.1174–1184,Oct.2017. distributedAI/machinelearning,security,andtrust.
+[28] A. Ayad, A. Zamani, A. Schmeink, and G. Dartmann, “Design and
+implementationofahybridanomalydetectionsystemforIoT,”inProc.
+6thInt.Conf.InternetThingsSyst.Manage.Security(IOTSMS),2019,
+pp.1–6.
+Authorized licensed use limited to: University of Saskatchewan. Downloaded on June 17,2023 at 23:04:19 UTC from IEEE Xplore. Restrictions apply.
