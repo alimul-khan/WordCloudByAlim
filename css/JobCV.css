@@ -1,0 +1,305 @@
+/* General styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+h1 {
+    text-align: center;
+    color: #4CAF50;
+    margin-top: 20px;
+}
+
+p {
+    text-align: center;
+    color: #666;
+}
+
+/* Main container */
+.container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* Input section */
+.input-section {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+textarea {
+    width: 50%;
+    height: 150px;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    resize: none;
+    outline: none;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+textarea:focus {
+    border-color: #4CAF50;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}
+
+/* Button styling */
+button {
+    display: block;
+    width: 100%;
+    margin: 20px 0;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Table styling */
+.table-container {
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    background: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    text-align: left;
+    padding: 12px;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #4CAF50;
+    color: #fff;
+    font-weight: bold;
+}
+
+td {
+    color: #555;
+    font-size: 14px;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .input-section {
+        flex-direction: column;
+    }
+
+    textarea {
+        width: 100%;
+    }
+}
+
+footer {
+    margin-top: 40px;
+    text-align: center;
+    font-size: 14px;
+    color: #888;
+}
+
+footer a {
+    color: #4CAF50;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+/* Skill Comparison Table Styling */
+.table-container {
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    background: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    text-align: left;
+    padding: 12px;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #4CAF50;
+    color: #fff;
+    font-weight: bold;
+}
+
+td {
+    color: #555;
+    font-size: 14px;
+    text-align: center;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Responsive table container */
+.table-container-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+.table-container {
+    flex: 1 1 30%; /* Each table takes up to 30% of the container width */
+    min-width: 300px; /* Minimum width for each table */
+    max-width: 100%; /* Maximum width adapts to screen size */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    background: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    text-align: center; /* Center-align content since they're small */
+    padding: 8px;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #4CAF50;
+    color: #fff;
+    font-weight: bold;
+}
+
+td {
+    color: #555;
+    font-size: 14px;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Responsive adjustments for small screens */
+@media (max-width: 768px) {
+    .table-container-wrapper {
+        flex-direction: column; /* Stacks tables top-to-bottom on smaller screens */
+    }
+}
+
+.input-section h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #4CAF50;
+    text-align: center;
+}
+
+/* Input Section Titles */
+.input-title {
+    text-align: left;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #4CAF50; /* Green title for consistency */
+}
+
+/* Input Section Styling */
+.input-section {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+textarea {
+    width: 100%;
+    height: 150px;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    resize: none;
+    outline: none;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+textarea:focus {
+    border-color: #4CAF50;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}
+
+/* Analyze Button Styling */
+button {
+    display: block;
+    width: 100%;
+    margin: 20px 0;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .input-section {
+        flex-direction: column;
+    }
+
+    .input-section > div {
+        width: 100%;
+        padding: 0;
+        margin-bottom: 20px;
+    }
+}

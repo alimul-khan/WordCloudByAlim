@@ -1,52 +1,77 @@
-# This is a AI generated Resume
-Adam Evan
+ALIMUL HAQUE KHAN
+Saskatoon, SK, Canada    +1-639-470-2886,    alimul.khan@usask.ca,   www.linkedin.com/in/ah-khan
 
-123 Main Street, Anytown, USA 12345
-Phone: (555) 123-4567
-Email: adam.evan@example.com
 
-Objective:
-To secure a challenging position in a dynamic organization where I can utilize my skills and experience to contribute to the company's success.
+EXPERTISE
+• Embedded System Design • IoT, IIoT, IoMT • Analog Circiut Design • Schematic and PCB • Design, develop, debug, troubleshooting • Sensor • Hardware, Firmware and Software
 
-Education:
-Bachelor of Science in Computer Science
-XYZ University, Anytown, USA
-Graduated: May 2021
+SKILLS
+• Programming and scripting tools: C, C++, Python, MATLAB, MS Excel
+• Web: HTML, CSS, SQL, PHP, NodeJS
+• Embedded Platform: Arduino, ESP, Raspberry Pi, STM32
+• Document Processing: MS Word, LaTeX, Mendeley
+• OS: Linux, Windows, MacOS
+• Version Control: Git, Github
 
-Skills:
+RELEVANT PROFESSIONAL EXPERIENCE
 
-Proficient in programming languages such as Java, Python, and C++
-Experience with web development using HTML, CSS, and JavaScript
-Strong analytical and problem-solving skills
-Excellent communication and teamwork abilities
-Knowledge of database management systems, including SQL
-Familiarity with software development methodologies and practices
-Experience:
-Software Developer Intern
-ABC Company, Anytown, USA
-June 2020 - August 2020
+Intern: Mitacs- Thermonalysis, University of Saskatchewan: July 2024 – December 2024 
+Project: Automatic Temperature Monitoring System 
+• Developing an automatic temperature monitoring system for restaurant kitchens using IoT and thermal 
+cameras for non-invasive, contactless temperature measurement. 
+• Integrating data transmission to a database via NestJS API for real-time monitoring. 
+• Conducting testbed setup, experimental runs, and raw data collection. 
+• Applying machine learning techniques for sensor calibration to enhance accuracy
 
-Collaborated with a team to develop and test software applications
-Assisted in troubleshooting and debugging code issues
-Participated in code reviews and provided constructive feedback
-Worked on front-end and back-end development tasks
-Assisted in documenting software requirements and specifications
-Projects:
-Online Bookstore Application
+Research Assistant:  University of Saskatchewan, SK, Canada January 2023 –
+• Conduct research and assist in the preparation and revision of scientific manuscripts for publication in reputable journals and conferences.
+• Utilize statistical software to analyze and interpret collected data, providing valuable insights and contributing to the research findings.
+• Collaborate with a multidisciplinary team to facilitate research projects, fostering effective communication and teamwork.
 
-Developed a web-based application using Java, HTML, CSS, and MySQL
-Implemented features such as user authentication, shopping cart functionality, and order management
-Utilized object-oriented programming principles for efficient code organization
-Conducted extensive testing to ensure application functionality and user-friendliness
-Personal Portfolio Website
+Research and Development Associate: WIoT Inc. SK, Canada Oct 2020—December 2022
+• Designed and developed Hardware for a Level Tracker sensor for hazardous environments in the mining and energy industry.
+• Successfully developed and deployed firmware for microcontrollers such as STM32, NodeMCU, and Arduino, resulting in improved product performance and reduced debugging time.
+• Created and tested multiple sensor test beds, conducting rigorous testing and validation of firmware and PCB designs to achieve compliance with industry standards and ensure high reliability.
+• Implemented remote sensor deployment strategies, resulting in efficient data collection and analysis.
+• Actively engaged with external vendors and suppliers for technical evaluations and recommendations.
 
-Created a responsive website using HTML, CSS, and JavaScript
-Designed an intuitive user interface to showcase personal projects and achievements
-Integrated social media links and contact form for seamless communication
-Optimized website for search engine visibility and fast loading times
-Certifications:
+Research Assistant: University of Saskatchewan, SK, Canada May 2016 – Apr 2018
+• Developed iSensor for capsule endoscopy using Arduino, Raspberry Pi, MATLAB, and Python. 
+• Collaborated with 3rDi Inc. to design a game controller for individuals with disabilities, controlled by 
+head movement and eye blinking. 
+• Prepared technical documents, journal articles, and funding applications. 
+• Demonstrated a solid understanding of analog and digital circuit design principles, ensuring reliable and 
+efficient hardware functionality. 
+• Published articles in conferences and journals, showcasing research findings and contributions
 
-Oracle Certified Java Programmer
-Certified ScrumMaster (CSM)
-References:
-Available upon request
+Lecturer: Bangladesh University, Dhaka, Bangladesh Jun 2010 - Apr 2016
+• Coordinated training courses on PCB design, MATLAB, and microcontroller programming, ensuring a strong focus on deliverables and the ability to plan work.
+• Supervised students' embedded system projects and provided technical support, further showcasing my understanding of interdisciplinary dependencies related to the discipline.
+• Fostered teamwork, critical thinking, and problem-solving skills among students.
+
+Technical Consultant: Advanced Micro Energy Inc., Dhaka, Bangladesh Oct 2012 - Aug 2013
+• Developed and installed rooftop solar systems, solar irrigation pumps, and smart building solutions, underlining my ability to review technical deliverables (specifications, datasheets, drawings, etc.).
+• Provided technical support to sales teams, vendors, and customers through email, phone, and on-site visits, demonstrating my excellent interpersonal and communication skills.
+• Conducted troubleshooting and resolved customer issues.
+• Developed project-specific engineering procedures to enhance the efficiency of project execution.
+
+Design Engineer: Pulser Semiconductor Device, Dhaka, Bangladesh Feb 2010 - Jun 2010
+• Designed circuits for various applications, including IPS, USP, solar charge controllers, and industrial status meters.
+• Provided application and design support for protection relays, leveraging knowledge of industrial power distribution and control systems.
+• Conducted product training presentations, created technical materials, and performed competitor analysis.
+• Gathered customer feedback and contributed to new product specifications.
+
+EDUCATION
+• MSc in Electrical Engineering, University of Saskatchewan, Saskatoon, SK, Canada, May 2018.
+• BSc in Electrical and Electronic Engineering, Bangladesh University of Engineering and Technology, Dhaka, Bangladesh, Mar 2009.
+MEMBERSHIP and TRAINING
+• APEGS • IEEE • IEB
+• Mental Health First Aid (MHFA) certificate • Safety Resource course • Laboratory Safety Course
+• Programming of PLC for Industrial Automation, Maintenance, and Troubleshooting
+• Embedded system design by FPGA and microcontroller • VFD Drives
+VOLUNTEERING and COMMUNITY INVOLVEMENT 
+• Currently serving as General Secretary of Bangladeshi Community Association Saskatchewan
+
+Embedded  Systems Engineer, photonics, laser systems, next-generation products, software, firmware, design, development, electronic controllers, touchscreens, sensors, actuators, engineering team, electrical, software, optomechanical, C++, Python, object-oriented principles, STM32 micro-controllers, timers, I2C/UART/SPI, DMA, ADC, peripherals, user interface design, desktop applications, embedded touchscreen applications, readable code, well-structured code, documentation, low-level coding tasks, whole-system abstraction, C#, .NET, desktop development, TCP socket programming, cloud services, Engineering, Computer Science, technical field, industry experience, firmware development, user interface software, instrumentation, spectrometers, analyzers, medical devices, automation, robotic systems.
+
+

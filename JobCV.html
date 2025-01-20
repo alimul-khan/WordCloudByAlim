@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Description and CV Skills Comparison</title>
+    <link rel="stylesheet" href="css/JobCV.css">
+</head>
+<body>
+    <h1>Job Description and CV Skills Comparison</h1>
+    <p>Analyze and compare word frequencies and skills between the Job Description and your CV.</p>
+
+    <div class="container">
+        <!-- Input Section with Titles -->
+        <div class="input-section">
+            <div style="width: 50%; padding-right: 10px;">
+                <h3 class="input-title">Job Description</h3>
+                <textarea id="jobDescriptionInput" placeholder="Paste the Job Description text here..."></textarea>
+            </div>
+            <div style="width: 50%; padding-left: 10px;">
+                <h3 class="input-title">CV/Resume</h3>
+                <textarea id="cvInput" placeholder="Paste your CV text here..."></textarea>
+            </div>
+        </div>
+
+        <!-- Analyze Button -->
+        <button onclick="processText()">Analyze</button>
+
+        <!-- Tables Section -->
+        <div class="table-container-wrapper">
+            <!-- Word Frequency Table -->
+            <div class="table-container">
+                <h3>Word Frequency Comparison</h3>
+                <div id="outputTable"></div>
+            </div>
+
+            <!-- Hard Skills Table -->
+            <div class="table-container">
+                <h3>Hard Skill Comparison</h3>
+                <div id="hardSkillsTable"></div>
+            </div>
+
+            <!-- Soft Skills Table -->
+            <div class="table-container">
+                <h3>Soft Skill Comparison</h3>
+                <div id="softSkillsTable"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Built with ❤️ by <a href="#">Alimul Haque Khan</a></p>
+    </footer>
+
+    <script src="js/JobCV.js"></script>
+</body>
+</html>

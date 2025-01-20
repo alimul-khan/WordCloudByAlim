@@ -42,8 +42,8 @@ cv_wc.generate(cv)
 job_wc.generate(job)
 
 # Saving the word clouds as .png files
-cv_output_file = os.path.join(current_dir, 'CV_WordCloud.png')
-job_output_file = os.path.join(current_dir, 'Job_WordCloud.png')
+cv_output_file = os.path.join(current_dir, 'WordCloud_CV.png')
+job_output_file = os.path.join(current_dir, 'WordCloud_Job.png')
 
 cv_wc.to_file(cv_output_file)
 job_wc.to_file(job_output_file)

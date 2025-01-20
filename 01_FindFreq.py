@@ -27,8 +27,12 @@ def print_word_frequency(input_file, output_file):
             print(f"{word}: {frequency}")
 
 # Provide the input file path and output file path
-input_file = "Article.txt"
-output_file = "WordFreq.txt"
+# input_file = "Article.txt"
+# output_file = "WordFreq.txt"
+
+input_file = "Embedded.txt"
+output_file = "EmbeddedWordFreq.txt"
+
 
 # Call the function
 print_word_frequency(input_file, output_file)

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Frequency Counter</title>
+    <style>
+        /* General styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        /* Container styles */
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+        }
+
+        p {
+            text-align: center;
+            color: #666;
+        }
+
+        /* Input area */
+        textarea {
+            width: 100%;
+            height: 200px;
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            resize: none;
+            outline: none;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        textarea:focus {
+            border-color: #4CAF50;
+            box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+        }
+
+        /* Button styles */
+        button {
+            display: block;
+            width: 100%;
+            margin: 20px 0;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #fff;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        /* Table styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        td {
+            color: #555;
+        }
+
+        /* Responsive table */
+        @media (max-width: 600px) {
+            table {
+                font-size: 14px;
+            }
+
+            textarea {
+                height: 150px;
+            }
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 14px;
+            color: #888;
+        }
+
+        footer a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Word Frequency Counter</h1>
+        <p>Analyze your text to find the most repeated words and their frequency.</p>
+        <textarea id="inputText" placeholder="Enter or paste your text here..."></textarea>
+        <button onclick="processText()">Analyze Text</button>
+        <div id="outputTable"></div>
+    </div>
+    <footer>
+        <p>Built with ❤️ by <a href="#">Alimul Haque Khan</a></p>
+    </footer>
+
+    <script>
+        const STOPWORDS = new Set([
+            "a", "about", "above", "after", "again", "against", "all", "am", "an", "and", "any", "are", "aren't", "as",
+            "at", "be", "because", "been", "before", "being", "below", "between", "both", "but", "by", "can", "can't",
+            "cannot", "could", "couldn't", "did", "didn't", "do", "does", "doesn't", "doing", "don't", "down", "during",
+            "each", "few", "for", "from", "further", "had", "hadn't", "has", "hasn't", "have", "haven't", "having", "he",
+            "he'd", "he'll", "he's", "her", "here", "here's", "hers", "herself", "him", "himself", "his", "how", "how's",
+            "i", "i'd", "i'll", "i'm", "i've", "if", "in", "into", "is", "isn't", "it", "it's", "its", "itself", "let's",
+            "me", "more", "most", "mustn't", "my", "myself", "no", "nor", "not", "of", "off", "on", "once", "only", "or",
+            "other", "ought", "our", "ours", "ourselves", "out", "over", "own", "same", "shan't", "she", "she'd", "she'll",
+            "she's", "should", "shouldn't", "so", "some", "such", "than", "that", "that's", "the", "their", "theirs",
+            "them", "themselves", "then", "there", "there's", "these", "they", "they'd", "they'll", "they're", "they've",
+            "this", "those", "through", "to", "too", "under", "until", "up", "very", "was", "wasn't", "we", "we'd", "we'll",
+            "we're", "we've", "were", "weren't", "what", "what's", "when", "when's", "where", "where's", "which", "while",
+            "who", "who's", "whom", "why", "why's", "with", "won't", "would", "wouldn't", "you", "you'd", "you'll", "you're",
+            "you've", "your", "yours", "yourself", "yourselves"
+        ]);
+
+        function processText() {
+            const inputText = document.getElementById("inputText").value;
+            const words = inputText.split(/\s+/)
+                .map(word => word.toLowerCase().replace(/[^\w]/g, ""))
+                .filter(word => word && !STOPWORDS.has(word));
+            
+            const wordCounts = {};
+            for (const word of words) {
+                wordCounts[word] = (wordCounts[word] || 0) + 1;
+            }
+
+            const repeatedWords = Object.entries(wordCounts)
+                .filter(([word, count]) => count > 1)
+                .sort((a, b) => b[1] - a[1]);
+
+            renderTable(repeatedWords);
+        }
+
+        function renderTable(data) {
+            const outputDiv = document.getElementById("outputTable");
+            if (data.length === 0) {
+                outputDiv.innerHTML = "<p>No repeated words found.</p>";
+                return;
+            }
+
+            let tableHTML = "<table><thead><tr><th>Word</th><th>Frequency</th></tr></thead><tbody>";
+            for (const [word, count] of data) {
+                tableHTML += `<tr><td>${word}</td><td>${count}</td></tr>`;
+            }
+            tableHTML += "</tbody></table>";
+
+            outputDiv.innerHTML = tableHTML;
+        }
+    </script>
+</body>
+</html>

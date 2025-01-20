@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Requirements vs Resume Analyzer</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+        }
+        .container {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            gap: 20px;
+        }
+        .textbox-container {
+            flex: 1;
+            padding: 20px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        textarea {
+            width: 100%;
+            height: 200px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            resize: none;
+            font-size: 14px;
+            font-family: 'Arial', sans-serif;
+        }
+        button {
+            display: block;
+            margin: 20px auto;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            gap: 20px;
+        }
+        .result-section {
+            flex: 1;
+            background-color: white;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .result-section h2 {
+            margin-top: 0;
+        }
+        img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Job Requirements vs Resume Analyzer</h1>
+    </header>
+    <div class="container">
+        <div class="textbox-container">
+            <h3>Job Requirements</h3>
+            <textarea name="job_text" form="analyzeForm" placeholder="Paste job requirements here..."></textarea>
+        </div>
+        <div class="textbox-container">
+            <h3>Resume</h3>
+            <textarea name="resume_text" form="analyzeForm" placeholder="Paste resume here..."></textarea>
+        </div>
+    </div>
+    <form method="POST" id="analyzeForm">
+        <button type="submit">Analyze</button>
+    </form>
+    {% if job_wordcloud and resume_wordcloud %}
+        <div class="result-container">
+            <div class="result-section">
+                <h2>Job Requirements Analysis</h2>
+                <img src="data:image/png;base64,{{ job_wordcloud }}" alt="Job Word Cloud">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Word</th>
+                            <th>Frequency</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for word, frequency in job_table %}
+                            <tr>
+                                <td>{{ word }}</td>
+                                <td>{{ frequency }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="result-section">
+                <h2>Resume Analysis</h2>
+                <img src="data:image/png;base64,{{ resume_wordcloud }}" alt="Resume Word Cloud">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Word</th>
+                            <th>Frequency</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for word, frequency in resume_table %}
+                            <tr>
+                                <td>{{ word }}</td>
+                                <td>{{ frequency }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% endif %}
+</body>
+</html>

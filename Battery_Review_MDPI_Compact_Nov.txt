@@ -1,0 +1,1435 @@
+Article
+A Comprehensive Review of Battery Storage Technology in
+Renewable Energy Technology
+energies
+AlimulKhan1∗ ,AliNewazBahar1∗ ,AsifIslam2 ,andKhanWahid1
+1 ElectricalandComputerEngineering,UniversityofSaskatchewan,SK,CA;
+2 ElectricalEngineering,KFUPM,Dhahran,KSA;
+* Correspondence:ali.bahar@usask.ca
+Abstract: Renewableenergyresources(RESs)arewidelyregardedasanessentialcomponentof 1
+modern energy grids; however, their inherent intermittency and variability result in significant 2
+challenges to maintaining grid stability and reliability. As the integration of RESs into energy 3
+systems continues to expand, managing energy surpluses and deficits has become increasingly 4
+complex,amplifyingissuessuchasgridstability,demand-sidemanagement,andlong-termsystem 5
+planning.Toaddressthesechallengeseffectively,innovativeapproachesareessential.Energystorage 6
+systems(ESS)offerapromisingsolution.Theyarecapableofbridgingthegapbetweenrenewable 7
+energygenerationandgriddemands. Thisstudythoroughlyexaminestheroleofbatteryenergy 8
+storagesystems(BESS)inmodernutilitygrids,emphasizingtheirapplicationsinenablingthelarge- 9
+scaleintegrationofRESs. ThestudyprovidesacomprehensiveanalysisofBESSfunctionalities, 10
+classifyingtheirapplicationsunderkeyareassuchaspeakshaving,loadshifting,backuppower, 11
+gridstabilization,andislandedoperation.ThisreviewsystematicallyevaluatestheimpactsofBESS 12
+inthesecontexts.Itaimstoprovidereaderswithanin-depthunderstandingofBESSapplications 13
+inrenewableenergysystems.Additionally,ithighlightsareasthatrequirefurtherinvestigationto 14
+optimizetheirimplementation. 15
+Keywords:RenewableEnergyIntermittency,Batterystoragetechnology,sustainableenergy. 16
+1. Introduction
+17
+Forthelastfewdecades,renewableenergyresources(RERs)suchashydroelectric
+18
+power, wind, and solar have become especially popular due to carbon reduction and
+19
+sustainableenergydevelopment[1]. However,theintegrationofRERsintopowergrids
+20
+cancausedifferentchallenges[2,3]. DuetotheintermittentandvariablenatureofRERs,
+21
+power generation often fluctuates. The fluctuating power causes sudden changes in
+22
+voltage and frequency, leading to grid instability. The instability of a grid affects the
+23
+Citation:Khan,A.;BaharAN.;Islam,
+qualityandreliabilityofthepowersystem. Tominimizetheeffectsofinstability,various
+A.;Wahid,K.Title.Energies2024,1,0. 24
+EnergyStorageSystems(ESS)havebeenusedandESSisapromisingsolutiontothose
+https://doi.org/ 25
+challenges[4]. ESScanalsohelptobalancethedemandandsupplyofpoweralongwith
+26
+Received: thenecessityofdrawingthedemandfromfossilfuel-basedpowergeneration[5,6]. Among
+27
+Revised: ESS,electrochemicalsolutions,battery-basedstorages,arethemostusefulandfeasible,
+28
+Accepted:
+providingmoreoftheeconomicbenefits[7]. Thisreviewisanelaboratestudyofbattery
+29
+Published:
+energystoragesystems(BESS),theircontributiontopowersystems,andtheirintegration
+30
+Copyright: © 2025 by the authors. withrenewableenergygeneration. Thedifferenttypesofbatteriesusedinenergystorage
+31
+SubmittedtoEnergiesforpossibleopen systemshavebeenbrieflyoutlinedherewiththeirbenefitsandtechnologicallimitations.
+32
+accesspublicationunderthetermsand This review also discusses the current status of BESS and how they help incorporate
+33
+conditionsoftheCreativeCommons renewableenergygenerationintothepowersystem.
+34
+Attri-bution(CCBY)license(https://
+Batteriesareessentialformanagingthevariabilityandintermittencyofgridpower.
+35
+creativecommons.org/licenses/by/
+Theystoreexcessenergyproducedduringtimesoflowdemand. Thisstoredenergythen
+36
+4.0/).
+VersionJanuary19,2025submittedtoEnergies https://www.mdpi.com/journal/energiesVersionJanuary19,2025submittedtoEnergies 2of24
+canbesuppliedduringhigherdemandorwhenrenewableenergysourcesareproducing
+37
+insufficientpower. Oneapproachistodeploylarge-scalebatterystoragesystemsstrate-
+38
+gically throughout the grid. These systems help to mitigate fluctuations in supply and
+39
+demand,ensuringgridfrequencystability[8,9].
+40
+Additionally,batterysystemscanbecombinedwithcleanenergyoptionslikesolar
+41
+PVandwindgenerators. Theystoreextraenergyproducedwhengenerationsurpasses
+42
+demand. This ensures a steady electricity supply, regardless of weather or time of day
+43
+[10]. Moreover,advancedbatterymanagementtechnologiesenableefficientchargingand
+44
+dischargingprocesses,optimizingtheuseofstoredenergyandenhancinggridreliability
+45
+[11]. Thisstudyexamineshowbatteriesandhydrogenstoragecanprovide100%renewable
+46
+energy. Thereference[12]examineshowtimeseriesclusteringaffectsmulti-yearplanning
+47
+andcomparescarbon-freeenergysystemtopologies. Hydrogen-basedsolutionsprevent
+48
+batteryandwindturbineoversizing,makingthemessentialfor100%renewableenergy
+49
+systems. Only-batterydesignscost155%morethanhydrogen-basedones. Alarge-scale
+50
+BESSsetupforChina’snationalrenewablegeneratingdemonstrationproject,including
+51
+a wind farm and solar PV power station is developed in [13]. The authors explore the
+52
+technicaladvantagesofaBESSinmanagingpowerfluctuationsandintermittency. They
+53
+alsohighlightitsroleinimprovingtransmissiongridperformancethroughcasestudies
+54
+focusingonkeytechnologiesforcontrol,management,andoperation.
+55
+Table1.Recentrelatedreviewsandgapsanalyses
+Reference Contributions ResearchGaps
+[14] AcomprehensivereviewisproposedontheintegrationofBESS FurtherinvestigationintooptimalintegrationstrategiesforBESS
+intopowergrids,emphasizingtheirpotentialtoaddresschal- inpowergridsandtheexplorationofalternativeBESStechnolo-
+lengesposedbyincreasingpenetrationofintermittentrenewable giesbeyondlithiumandflowbatteriestoenhanceflexibilityand
+energysources,suchassolarandwind,andproposingincen- scalabilityinrenewableenergyintegrationeffortsareneeded.
+tivizationstrategiestopromotetheiradoption.
+[15] Thisreviewmainlysummarizesdirectedsearch-based,probabilis- Asummaryofcontrolbatterytechniquesaswellashybridization
+tic,andrule-basedoptimizationmethodsforBESSintegrationin ofothermajorenergystoragedevicesaremissing.
+renewableenergysystems.
+[16] Athoroughreviewofenergystoragesystems(ESS)forrenewable ChallengesinimplementingESStechnologies,suchasenviron-
+sourcegridintegration,coveringvariousESStechnologiesand mentalimpact,storagecapacity,andcost-effectiveness,stillre-
+theirapplicationsforgridstabilityandreliability. quiresignificantresearch.Additionally,thereisaneedforaholis-
+ticapproachtoselectingandintegratingESSbasedonspecific
+gridrequirements.
+[17] Acomprehensivereviewofbatteryenergystoragesystems(BESS) Thereisaneedforfurtherresearchonthelong-termreliability
+focusingontheirintegrationwithrenewableenergysources,high- andsustainabilityofBESS,especiallyinthecontextofemerging
+lightingboththepotentialbenefitsandthechallengesofusing alternativebatterytechnologiesandtheirenvironmentalimpact.
+BESSinvariousgridconfigurations. Additionally,thereviewcallsformoredetailedstudiesonthe
+economicfeasibilityoflarge-scaleBESSdeployment.
+[18] ThisreviewprovidesadetailedanalysisofHybridEnergyStorage Thereviewemphasizestheneedforfurtherresearchonthecontrol
+Systems(HESS)integratedwithrenewablepowergeneration.It andoptimizationmethodsforHESSinrenewableenergysystems.
+discussestheconfiguration,controlstrategies,andapplications Italsoidentifieschallengesinimprovingthecost-effectiveness,
+ofHESS,highlightingtheirpotentialtoenhancethestabilityand efficiency,andsustainabilityofHESStechnologies.
+reliabilityofpowergrids.
+[19] ThisreviewprovidesacomprehensiveanalysisofHybridRe- Thereviewidentifiestheneedformoreadvancedoptimization
+newableEnergySystems(HRES),focusingontheirarchitectures, algorithmstailoredforHRESandtheintegrationofnewerbattery
+batterysystems,andoptimizationtechniques.Itcoversvarious technologies.Italsohighlightsthechallengeofsynchronization
+configurationssuchasDC,AC,andhybridAC/DCmicrogrids, inACmicrogridsandthenecessityofdevelopingbettercontrol
+highlightingtheiradvantagesandchallenges. strategiesforhybridconfigurations.
+[20] Thisreviewprovidesacriticaloverviewofthelatestadvance- ThereviewhighlightsthechallengesinoptimizingHESSforeffi-
+mentsinHybridEnergyStorageSystems(HESS)forrenewable cientintegrationwithrenewablesources,emphasizingtheneed
+energy-to-gridintegration,discussingcomponents,controlstrate- forimprovedcontrolsystemsandadvancedenergymanagement
+gies,andcasestudiesofsuccessfulimplementations. strategiestoaddressissueslikesynchronizationandthermalman-
+agement.ItalsosuggestsfurtherresearchintoAI-basedoptimiza-
+tiontechniquesforbettersystemperformance.
+[21] Thiscomprehensivereviewcoversrecentadvancesinenergy Thereviewidentifiestheneedforfurtherresearchonoptimizing
+storagesystems(ESS)forrenewablesourcegridintegration.It ESStechnologies,particularlyinimprovingtheirenvironmental
+discussesthetypesofstoragetechnologies,theirapplications,and impactandintegratingadvancedcontrolsystemstobetterhandle
+thechallengesfaced,suchasstoragecapacity,efficiency,andcost. thevariabilityofrenewableenergysources.
+[22] Thisreviewfocusesontheintegrationofhybridrenewableenergy Thereviewidentifiestheneedforfurtherresearchintooptimiz-
+systems(HRES)withenergystorage,analyzingtheimpactofPV- ingstoragesolutionsspecificallytailoredtohybridsystemsand
+windvariabilityonstoragerequirements.Itemphasizestherole developingadvancedalgorithmstobetterpredictandmanage
+ofenergystorageinmanagingtheunpredictabilityofrenewable energyfluctuationsinhighlyvariableenvironments.
+sourcesandoptimizinggridstability.
+[23] Thisreviewexaminesrenewablehydrogenhybridenergysystems, Thereviewidentifieskeychallengesinoptimizingsystemdesign
+focusingontheirroleinasustainableenergyvaluechain. It andsizingmethods,particularlytheneedforimprovedmodeling
+exploressystemtopographies,componentintegration,andthe andintegrationofhydrogentechnologieswithrenewableenergy
+challengesassociatedwithhydrogengeneration,storage,and sources.Furtherresearchisrequiredtoenhancesystemefficiency
+conversioninhybridsystems. andcost-effectiveness.
+Table1highlightsrecentreviewsonenergystoragesystems,discussingtheircontri-
+56
+butionsandresearchgaps. Keythemesincludeintegrationstrategiesforbatteryenergy
+57
+storagesystems(BESS)intopowergrids[14–17],hybridenergystoragesystems(HESS)con-
+58
+figurationsandoptimizationtechniques[18–20],andbroaderenergystoragetechnologies
+59VersionJanuary19,2025submittedtoEnergies 3of24
+addressinggridstabilityandenvironmentalchallenges[21–23]. Researchgapsemphasize
+60
+theneedforadvancedoptimizationmethods,bettersynchronizationinhybridsystems,
+61
+scalabilityoftechnologieslikelithiumandflowbatteries,andstrategiestoreduceenviron-
+62
+mentalimpactandcosts. Thesestudiesunderscorethenecessityforholisticapproaches
+63
+to improving system efficiency, scalability, and sustainability across renewable energy
+64
+integrations.
+Table2.ComparisonofIntermittentRenewableEnergyvs.ConventionalFuel-BasedPowerPlants[24]
+Criteria IntermittentRenewableEnergy FossilFuel-BasedPlant
+AverageCapacityFactor 15-40%(varieswithresource) 50-90%(higherstability)
+OperationalFlexibility High(subjecttoenvironmentalconditions) Limited(steadyoutput)
+EmissionLevels LowtoZero(nodirectemissions) High(CO2andotherpollutants)
+FuelCostVariability Low(nofuelcosts) High(subjecttomarketprices)
+InstallationCost Highinitialcost,lowoperationalcost Moderate initial, higher operational
+cost
+Lifespan Varies(20-25yearsforsolar,longerforwind) 30-50years(dependsonplanttype)
+MaintenanceRequirements Relativelylow(especiallyforsolar) Higher(moremechanicalparts)
+EnergySourceDependability Variable(dependsonweather,time) Consistent(notweatherdependent)
+65
+2. Intermittency
+66
+Renewableenergiesplayanimportantroleinmeetingglobalenergyneeds. Theim-
+67
+portancebecomesgreaterwhenconsideringthereductionofglobalwarmingandreducing
+68
+carbonemissions[25–27]. Thesesourcesareenvironmentallyfriendlyandsustainable,as
+69
+theyarereplenishednaturallyovertime. However,someoftheresourcessuchassolar
+70
+andwindaremorepronetofluctuatingoutput[28]. UIncontrasttofossilfuelsthatcan
+71
+be utilized continuously, production of renewable energy sources depends on weather
+72
+conditionsandthetimeofday. Forexample,solarpanelsonlyproduceenergyduringthe
+73
+daytimewhenthesunisshining,whilewindturbinesrequireaminimumwindspeedto
+74
+generateelectricity[29]. Acomparisonofintermittentrenewableenergyandconventional
+75
+fuel-basedpowerplantsisprovidedinTable2.
+76
+Solarenergyproductionisinherentlylimitedtodaylighthours. Thisdiurnalpattern
+77
+meansthatenergygenerationceasesduringthenight,whichrequiresalternativeenergy
+78
+sources or storage solutions to meet demand at night. Furthermore, cloud cover and
+79
+weather variations significantly affect solar energy output [30]. Even the intensity of
+80
+sunlightcanchangeduringdaylighthours,leadingtoavariationinthepowerofsolar
+81
+panels[31,32]. Topofthat,snowfallcancoverthepanelwhichsignificantlyreducesthe
+82
+outputpowergenerationforarelativelylongerperiod[33]. Highertemperaturecouldbe
+83
+anotherfactorthatcanreducetheoutputofsolarpanel[34]. Figure1illustratesthenatural
+84
+factorsaffectingsolarpowergeneration,includingseasonalvariations,weathervariability,
+85
+temperatureeffects,daylightlimitations,andobstructions,whichcontributetosolarPV
+86
+intermittency.
+87
+Windenergyisdependentonwindavailability,whichcanbehighlyunpredictable.
+88
+Windturbinesrequireaminimumwindspeedtostartgeneratingelectricityandamaximum
+89
+thresholdtopreventdamage,leadingtooperationalvariability[35]. Windfarmproduction
+90
+is highly dependent on wind characteristics at the installation site. Areas with stable
+91
+wind speeds, the output power tends to be more consistent. Variable wind speeds in
+92
+a location create more challenges in generating reliable energy. However, other RERs,
+93
+suchashydroelectric,geothermal,andbiomassenergy,arenotmuchaffectedbyexternal
+94
+environmentalconditions. Hencetheycanprovideamoreconsistentoutputthanthatof
+95
+solarorwind. Figure2highlightsthenaturalfactorsinfluencingwindenergygeneration,
+96
+suchaswindavailability,airdensityeffects,highwindspeeds,geographicalvariations,
+97
+andminimumwindspeedrequirements,whichcontributetointermittencyinwindpower
+98
+generation.
+99VersionJanuary19,2025submittedtoEnergies 4of24
+Figure1.SolarPVandPossibleCausesofIntermittency
+Figure2.WindPowerandPossibleCausesofIntermittency
+Weatheraffectsrenewableenergy,leadingtomorevariableandlessreliablepower
+100
+comparedtotraditionalsources[36]. Traditionalpowergridsarecontrollableanddesigned
+101
+for steady output power. However, the intermittency of RERs creates low energy and
+102
+sometimesextraenergy[37]. Abruptchangesinenergyfromsourcescanmaketheelec-
+103
+tricitygridunstablebecausetheycancauseunpredictablechangesinpowerlevels[38].
+104
+InconsistentRERsalsoleadtochangesinelectricitypricingandmarketdynamics[38]. The
+105
+inconsistencyofrenewableenergyismanagedwithnaturalgasorbatterybackups[39].
+106
+At times, renewable sources might produce more energy than needed [36]. Renewable
+107
+plantshavelowercapacityfactorsthanregularplantsduetointermittency. Theimpacts
+108
+of grid intermittency, such as increased operational costs, supply-demand mismatches,
+109
+gridinstability,pricefluctuations,andenergyoverproduction,aredepictedinFigure3. it
+110
+shouldbe’impactsofintermittency’,gridshouldberemoved
+111
+Thecapacityfactorofapowerplantisanimportantmetricthatcomparestheactual
+112
+outputofaplantoveraperiodoftimetoitspotentialoutputifitwereoperatingatfull
+113
+capacityallthetime. Becausewindandsolardependondaylightandweather,theydon’t
+114
+generateasmuch,resultinginlowercapacityfactorscomparedtotraditionalpowerplants.
+115
+Theaveragecapacityfactorforsolarpowerisoftenintherangeof15-25%,whilewind
+116
+powercanvarywidely,withaveragesbetween20-40%.Incontrast,conventionalfuel-based
+117
+powerplants,suchasCoalandnaturalgasplantsoftenhavestablecapacityfactorsabove
+118
+50-60%. Theseplantscanoperatecontinuouslyandarenotdirectlyaffectedbychanges
+119VersionJanuary19,2025submittedtoEnergies 5of24
+Figure3.IntermittencyandEffects
+Figure4.ComparisoninCapacityfactorsofdifferenttypeofpowerplant
+inweatherortimeofday. Nuclearpowerplants,knownfortheirsteadyoutput,typically
+120
+have some of the highest capacity factors, often around 90% [40]. Figure 4 provides a
+121
+comparativeanalysisofthecapacityfactorsofdifferenttypesofpowerplantintheUnited
+122
+States.
+123
+CapacityfactoroftheRERbasedpowerplantcanalsobeincreasedbyusingenergy
+124
+storage. Itisverycommontostoretheexcessenergytouseattheperiodoflowenergy
+125
+generationforeconomicoperationfortheplant.Renewablesystemscanovercomeintermit-
+126
+tencybycouplingwithstoragesolutionstostoreanddistributeenergywhennecessary[41].
+127
+Thesesolutionscanstoresurplusenergyandreleaseitondemand,ensuringthatrenewable
+128
+energysourcesareavailableevenduringunfavorableweatherconditions.
+129
+Usingstoragesystemswithrenewableenergymakespowerplantsrunbetter,cheaper,
+130
+andcleaner,cuttingdownonfossilfueluse,andminimizingtheircarbonfootprint[42,43].
+131
+IntegratingenergystorageintotheenergymarketallowsfornewopportunitiesP2Penergy
+132
+tradingandstorageservices. Theycanoffervalue-addedservicessuchastwowayenergy
+133VersionJanuary19,2025submittedtoEnergies 6of24
+Figure5.EnergyStorageasaSolutiontoIntermittencyChallenges
+trading,peakshaving,frequencyregulation,anddemandresponse[44]. Thebenefitsof
+134
+energystoragesystems,includingenhancedgridreliability,energypricingconsistency,
+135
+andreducedfossilfuelusage,areillustratedinFigure5.
+136
+Figure6.Classificationofenergystoragetechnology
+3. EnergyStorageTechnology
+137
+Energystoragesystemscapturesurplusenergywhenproductionexceedsdemand
+138
+anddischargeitduringperiodsofhighdemandorlowrenewableenergygeneration. This
+139
+helpsbalancethegridandmaintainastableelectricitysupply. Theexcessenergycanbe
+140
+storedasmechanicalenergy,chemicalenergy,thermalenergy,electricalenergyoreven
+141
+potentialenergy. Inthissection,thevariousenergystoragetechnologiesaredescribedthat
+142
+arecommonlyusedinrenewableenergyapplications. Insomecases,itistoughtodrawa
+143VersionJanuary19,2025submittedtoEnergies 7of24
+hardlinebetweenthecategories. Someauthorsmightcategorizethemdifferently. Figure6
+144
+showsasimpleclassificationofavailableenergystoragetechnologies[45]. Table3provides
+145
+anoverviewofthecharacteristicsofchosenenergystoragetechnologies. Thechoiceof
+146
+BESStechnologyisinfluencedbyenergydensity,cost,lifetime,andspecificapplications.
+147
+Table3.ComparisonofKeyCharacteristicsforCommonEnergyStorageTechnologies[46,47]
+StorageTechnology EnergyDensity Efficiency Max Power Typical Discharge Estimated
+(Wh/L) (%) Output(MW) Time Lifespan or
+CycleCount
+Hydrogen 600(at200bar) 25–45 100 Minutes-1week 5–30years
+Li-ionBattery 200–400 85–95 100 1minute- 1,000–10,000
+8hours cycles
+Thermal(MoltenSalt) 70–210 80–90 150 Hours 30years
+Lead-acidBattery 50–80 80–90 100 1minute- 6–40years
+8hours
+Flywheel 20–80 70–95 20 Seconds-minutes 20,000–100,000
+cycles
+FlowBattery 20–70 60–85 100 Hours 12,000–14,000
+cycles
+CompressedAir 2–6 40–70 1,000 2–30hours 20–40years
+PumpedHydro 0.2–2 70–85 3,000 4-16hours 30–60years
+3.1. ElectrochemicalEnergyStorage
+148
+Electrochemical energy storage is the most widely technologies that found from
+149
+portableelectronicstolarge-scalegridstorage. Theyconvertelectricalenergyintochemical
+150
+energy,andviceversa,enablingenergystorageandrelease. Batteryenergystoragesystems
+151
+(BESS)areanessentialelementasanelectrochemicalstorageforrenewableintegration,
+152
+gridstabilization,andemergencypower.
+153
+AmongBESS,Lithium-ionbatteriesstandoutfortheirexcellentenergystorageca-
+154
+pacityandextendedlifespan. Thesequalitiesmakethemidealforvariousapplications,
+155
+includingportableelectronics,electricvehicles,andgridstorage. Theyareespeciallysuited
+156
+forrenewableenergysystems,offeringefficienthigh-densityenergystorage,afacthigh-
+157
+lightedbytheHornsdalePowerReserveinSouthAustralia[48]. Sodium-Sulfurbatteries,
+158
+operatingathightemperatureswithsignificantenergydensity,aremainlyutilizedingrid
+159
+storage,asshownbyNGKInsulators’projectsinJapan[49,50].
+160
+Flowbatteries,likeVanadiumRedoxones,providescalabilityandlonglife,perfect
+161
+forbigenergystorageandrenewableenergyintegration. TheDalianRongkePowerplant
+162
+inChinausesthesebatteriesforrenewableenergystorage[51]. Lead-acidbatteriesarestill
+163
+popularfortheirreliabilityandaffordability,especiallyinsolarsystemsforruralelectrifica-
+164
+tion,despitetheirlowerenergydensity[52]. Continuousadvancementsinelectrochemical
+165
+energystoragearemakingthemmoreefficientandapplicable. Especiallyforrenewable
+166
+energyapplications,eachofferstailoredbenefits.
+167
+3.2. MechanicalEnergyStorage
+168
+Mechanicalenergystoragesystemsarevitalintheenergysectorduetotheircapability
+169
+to effectively retain substantial amounts of energy. These systems transform electrical
+170
+energyintomechanicalorpotentialenergy,whichthencanberetainedandlaterconverted
+171
+back to electrical energy as needed. Key technologies in this domain include pumped
+172
+hydroelectricstorage,compressedairenergystorage(CAES),flywheelsystems,gravity
+173
+energystorage,inertialenergystorage,andmechanicalsprings.
+174
+Pumped hydroelectric storage, such as the Bath County Pumped Storage Station
+175
+in Virginia, and CAES systems, exemplified by the Huntorf CAES plant in Germany,
+176
+areprominentfortheirlarge-scaleenergystoragecapabilities[53,54]. Flywheelsystems,
+177VersionJanuary19,2025submittedtoEnergies 8of24
+suchasthosedevelopedbyBeaconPowerintheUSA,andgravitationalenergystorage,
+178
+demonstratedbytheARESprojectinNevada,offeruniqueapproachestostoringenergy
+179
+throughrotationalmotionandelevationofmaterials,respectively[55–57].
+180
+Smaller-scalemechanicalstoragesolutionssuchasinertialenergystorageandme-
+181
+chanicalspringshaveapplicationsinhigh-power,short-durationscenariosandeveryday
+182
+devices. Differenttechnologiesshowcasetheflexibilityofmechanicalenergystoragefor
+183
+both large and small projects. They are crucial in updating energy management and
+184
+includingmorerenewableenergy[58].
+185
+3.3. ThermalEnergyStorage
+186
+Thermalenergystoragesystemsareessentialinthemanagementofheatproduction
+187
+and consumption. They help greatly in improving energy efficiency and integrating
+188
+renewable energy. These systems store thermal energy by heating or cooling a storage
+189
+mediumandthenusethisstoredenergyforheating,cooling,orpowergenerationatalater
+190
+time. TheprimarytechnologiesinthisdomainincludeSensibleHeatStorage,LatentHeat
+191
+Storage,Thermo-chemicalStorage,UndergroundThermalEnergyStorage,IceStorageAir
+192
+Conditioning,andMoltenSaltStorage[59].
+193
+Sensible Heat Storage systems, which store energy by changing the temperature
+194
+of a solid or liquid medium. Latent Heat Storage systems store energy by changing a
+195
+material’s state, like melting or freezing, and are widely used in homes and industries.
+196
+Thermochemicalstorage,whichinvolveschemicalreactionstostoreandreleaseheat,offers
+197
+high energy density and long-term storage capabilities. Underground Thermal Energy
+198
+Storageutilizestheground’sheatcapacityforseasonalenergystorage,whichisincreasingly
+199
+popularindistrictheatingandcooling[60].
+200
+Ice Storage Air Conditioning, which makes ice during off-peak hours for cooling
+201
+duringpeakdemandperiods,isapracticalapplicationincommercialbuildingsforload
+202
+levelingandpeakshaving. MoltenSaltStorage,typicallyusedinconcentratedsolarpower
+203
+plants, stores high-temperature heat that can be converted to electricity. This process
+204
+isdemonstratedbySpain’sAndasolSolarPowerStation, whichutilizesmoltensaltfor
+205
+thermalenergystorage[61].
+206
+Thermal storage offers multiple ways to better manage energy, making renewable
+207
+energy more reliable and steady. They separate energy production from consumption,
+208
+providingflexibilityandreliabilitytoenergysystems.
+209
+3.4. ChemicalEnergyStorage
+210
+Itplaysasignificantroleinimprovingtheefficiencyandadaptabilityofrenewable
+211
+energy systems. Important CES technologies include hydrogen storage, liquid air or
+212
+nitrogen,syntheticnaturalgas,metalhydroides,biofuels,andchemicalheatstorage[62].
+213
+HydrogenStorageisgainingattentionforitsroleinrenewableenergy,wheresurplus
+214
+electricityisbeingusedtoproducehydrogenthroughelectrolysisproces. Thishydrogen
+215
+canthenbestoredandlaterconvertedbacktoelectricityviafuelcells[63]. Projectslikethe
+216
+HydrogenEnergySupplyChain(HESC)inAustraliademonstratethepracticalapplication
+217
+ofhydrogenasaversatileenergycarrier[64]. Biofuelsareanotherformofchemicalenergy
+218
+storagewhichisderivedfrombiologicalsources[65]. Theyarebeingusedincreasinglyas
+219
+sustainablealternativestofossilfuelsinpowergenerationandtransportation.
+220
+Synthetic Natural Gas (SNG) is a fuel gas that can be produced from fossil biofu-
+221
+els, fossil fuels, or electricity using power-to-gas systems [66,67]. SNG produced from
+222
+renewable sources creates a way to store excess energy and utilize existing natural gas
+223
+infrastructure. LiquidAirEnergyStorage(LAES)usesexcesselectricitytoliquefyair. The
+224
+storedliquidairisthenusedtodriveaturbineandgenerateelectricityduringperiodsof
+225
+highdemand. AprominentexampleofthiscanbetheHighviewPowerplantintheUK[68].
+226
+MetalHydridesandChemicalHeatStoragearethelatestintechforstoringhydrogenand
+227
+wasteheat,makinguseofthemlater[69]. Chemicalenergystoragetechnologiesarecrucial
+228VersionJanuary19,2025submittedtoEnergies 9of24
+foradvancingasustainableandrenewableenergyfuture. Theyofferflexibleandefficient
+229
+methodsforstoringandutilizingenergyindifferentforms.
+230
+3.5. ElectricalEnergyStorage
+231
+Electricalenergystoragedirectlycapturesandretainsenergyinanelectricalform. It
+232
+is essential for diverse applications, ranging from powering small electronic devices to
+233
+managinglarge-scalepowergrids. Thistypeofstorageisimportantforbalancingpower
+234
+supplyanddemand,improvingthereliability,andintegratingRERs. Capacitors,Induc-
+235
+tive Storage, Dielectric Elastomers, Superconducting Magnetic Energy Storage (SMES),
+236
+Piezoelectric Energy Storage, and Nanostructured Energy Storage are some of notable
+237
+technologiesinElectricalEnergyStorage.
+238
+Capacitors,knownfortheirabilitytoquicklychargeanddischarge,arewidelyused
+239
+inelectroniccircuits, powerconditioningsystems, andforprovidingshort-termpower
+240
+backup. SuperconductingMagneticEnergyStorage(SMES)systemsstoreenergyinthe
+241
+magneticfieldgeneratedbytheflowofdirectcurrentinasuperconductingcoil. Theyare
+242
+primarilyusedforpowerqualitymanagementandgridstabilization. Anexampleofthisis
+243
+theSMESsystematBrookhavenNationalLaboratoryintheUSA,showcasingitspower
+244
+qualityimprovement[70].
+245
+Dielectric elastomers (DEs) are electromechanical transducers that convert electri-
+246
+cal energy into mechanical energy [71]. Piezoelectric (PE) devices converts mechanical
+247
+stresstoelectricity. BothDEandPEareusedinvarioussensingandenergyharvesting
+248
+applications. Inductivestorageworksbyutilizingelectromagneticfieldsintheinductors.
+249
+Nanostructuredenergystorageusesnanomaterialstoenhancestoragecapabilities. They
+250
+arecutting-edgeadvancementsinelectricalenergystorage.
+251
+3.6. VirtualEnergystorage
+252
+Virtual energy storage , an innovative concept, shifts electricity use from peak to
+253
+off-peak times, eliminating the need for physical storage. This technique increase grid
+254
+reliabilityandcutsdownontheuseelectricityduringpeak-hour.Bysmoothingoutdemand
+255
+fluctuations,virtualenergystoragepresentsacost-effectivesolutionformanagingenergy
+256
+resourcesmoreefficiently. Virtualenergystoragehelpssmoothingoutthefluctuations,
+257
+makingitanefficientandeconomicwaytoprovidepower[72].
+258
+Alltheenergystoragetechnologyaredifferentintermsofusability,cost,size,lifetime,
+259
+andtechnology. Thedifferentenergydensitiesmakethemperfectfordifferenttypesof
+260
+applications. Thesystempowerratings,showninFig. 6,illustratethemodulesizeand
+261
+thecorrespondingdischargetimesatratedpower[73]. Table1presentsacomprehensive
+262
+comparisonofESStechnologiesintermsoftheirmaximumpowerrating,typicaldischarge
+263
+time,lifetime,energydensity,andefficiency[74]. Itprovidesvaluableinformationthat
+264
+can aid in the selection of the most suitable ESS technology for a specific application.
+265
+For instance, flywheels can release their stored energy quickly, making them great for
+266
+immediateneeds, whereaslithium-ionbatteriespackalotofenergyintoasmallspace,
+267
+offeringlongeruse.Similarly,therearetechnologiesthatstandoutduetotheirlongevityor
+268
+higherefficiencylevels,suitingthemtocertainroles.
+269
+4. BESSandCategories
+270
+Amongallenergystoragetechnologies,batteryenergystoragesystems(BESS)area
+271
+keypartofrenewableenergysystems. Theystoreexcessenergyforuseduringperiodsof
+272
+highdemandorlowproduction.Batteriescanbeclassifiedbasedontheirdesign,chemistry,
+273
+andapplication,withseveraldifferenttypesofbatteriesavailableforuseinenergystorage
+274
+systems. Thefollowingaresomeofthemostcommontypesofbatteriesusedinenergy
+275
+storagesystems. CommonbatterytypesforenergystorageincludethoselistedinTable4,
+276
+whichcomparestheirapplications,benefits,andlimitations.
+277VersionJanuary19,2025submittedtoEnergies 10of24
+Table4.ComparisonofBatteryTypesforDifferentApplications
+BatteryType Applications Pros Cons
+Lithium-ion(Li- Portable electronics, electric ve- Highenergydensity,long Relativelyexpensive,safetyand
+ion)batteries hicles,stationaryenergystorage cycle life, low mainte- environmentalconcerns
+systems nance
+Lead-acid bat- Backuppowersystems,off-grid Lowcost,provenreliabil- Limited cycle life, high mainte-
+teries solar systems, telecommunica- ity,highsurgecurrent nance,lowenergydensity
+tionsapplications
+Flowbatteries Grid-scale energy storage, re- Scalable, long cycle life, Relativelyexpensive,heavyand
+newableenergyintegration,mi- highefficiency bulky,limitedcommercialavail-
+crogrids,off-gridsystems ability
+Sodium-sulfur Grid-scale energy storage sys- Highenergydensity,long Expensive, high operating tem-
+(NaS)batteries tems, wind farms, microgrids, cyclelife,highpowerout- perature,safetyconcerns
+off-gridsystems put
+Solid-state bat- Electric vehicles, portable elec- Highenergydensity, fast Currently more expensive, lim-
+teries tronics, stationary energy stor- charging,improvedsafety ited scalability, technical chal-
+agesystems lenges
+4.1. Lithium-ion(Li-ion)batteries
+278
+Lithium-ion(Li-ion)batteriesareawidelyusedrechargeablebatterytechnologythat
+279
+hastransformedenergystorageacrossvariousapplications. Thesebatteriesutilizelithium
+280
+ionsthatmovefromthenegativeelectrodetothepositiveelectrodeduringdischargeand
+281
+back when charging. The movement of ions allows for efficient energy storage which
+282
+makesLi-ionbatterieshighlyeffectiveforawiderangeofapplications.
+283
+In a Li-ion battery, during discharge, lithium ions move from the anode, typically
+284
+madeofgraphite,throughanelectrolyte,tothecathode,typicallymadeofalithiummetal
+285
+oxide. Duringcharging, theprocessisreversed, andthelithiumionsmovebacktothe
+286
+anodewhicharebyEquation1andEquation2. Thisprocessisfacilitatedbytheelectrolyte,
+287
+alithiumsaltsolution,whichallowsthemovementofionswhilepreventingtheflowof
+288
+electronsinsidethebattery[75].
+289
+Anode: C+xLi++xe− ←→ Li C (1)
+x 6
+Cathode: LiCoO
+2
+←→ Li 1−xCoO 2+xLi++xe− (2)
+Li-ionbatteriesarecommonlyusedinportableelectronicslikesmartphones,laptops,
+290
+anddigitalcameras.Theirpopularityisduetotheirlightweightdesign,highenergydensity,
+291
+andlonglifespan,allowingforhundredsofrechargecycleswithminimalperformanceloss.
+292
+Theyarealsoincreasinglybeingusedinelectricvehicles(EVs),wheretheyofferlong-range
+293
+andfastchargingcapabilities. Inaddition,Li-ionbatteriesareemployedinpowertools
+294
+andmedicaldevices,demonstratingtheirversatilityacrossvarioussectors[76].
+295
+Li-ion batteriesare essential forenergy storage solutions, particularlyin solarand
+296
+windenergysystems. Theystoresurplusenergyproducedduringpeaksunlightorwind
+297
+conditions and release it when solar or wind activity is low, helping maintain a steady
+298
+energysupply.
+299
+AsignificantexampleofLi-ionbatteriesinrenewableenergyistheTeslaPowerwall,a
+300
+residentialenergystorageunitthatallowshomeownerstostoresolarenergyforuseduring
+301
+power outages or periods of high electricity demand. On a larger scale, the Hornsdale
+302
+PowerReserveinSouthAustralia,equippedwithTesla’sPowerpacks,isanotableinstance.
+303
+Theyareimportantinthefieldofrenewableenergyforgridstability,energystorage,and
+304
+reducingcosts.
+305
+Li-ion batteries bring advantages but also face challenges. Their high cost limits
+306
+widespread use, especially in large-scale settings. There are safety concerns, including
+307VersionJanuary19,2025submittedtoEnergies 11of24
+theriskofthermalrunaway. EnvironmentalproblemsfromproducingLi-ionbatteries,
+308
+particularlymining,requireustorecycleandsourceresponsibly.
+309
+Overall,Li-ionbatteriesplayacrucialroleinenergystoragesolutions.Theyboasthigh
+310
+efficiencyandalengthycyclelife. Thesebatteriesareusedineverythingfromconsumer
+311
+electronicstoextensiverenewableenergysystems. [77].
+312
+4.2. Lead-acidbatteries
+313
+Lead-acid batteries are among the oldest and most well-established rechargeable
+314
+batterytypes,valuedfortheirdurabilityandaffordability. Thesebatteriesfunctionthrough
+315
+achemicalreactionbetweenlead,leaddioxide,andsulfuricacid,whichcreatesaflowof
+316
+electronsandgenerateselectricalpower.
+317
+Inalead-acidbattery,thepositiveelectrode(cathode)ismadeofleaddioxide,and
+318
+thenegativeelectrode(anode)ismadeofspongelead,withbothimmersedinasulfuric
+319
+acidelectrolyte. Duringdischarge,theleadandleaddioxidereactwiththesulfuricacid
+320
+toproduceleadsulfateandwater,releasingelectricalenergy. Whencharged,theprocess
+321
+reversesandleadsulfateandwaterareconvertedbacktolead,leaddioxide,andsulfuric
+322
+acid. Thecompletebidirectionalequationofthereactionsareshowninequations 3.
+323
+2PbSO (s)+2H O(l) PbO (s)+Pb(s)+2H SO (aq) (3)
+4 2 2 2 4
+Thesebatteriesarewidelyusedinautomotiveapplications,particularlyforstarting,
+324
+lighting,andignition(SLI)invehiclesbecauseoftheirabilitytoprovidehighsurgecurrents.
+325
+Theyarealsoemployedinbackuppowersystemsforemergencylighting,alarmsystems,
+326
+anduninterruptiblepowersupplies(UPS),wheretheirreliabilityiscrucial. Additionally,
+327
+lead-acidbatteriesareusedinforklifts,golfcarts,andinmarineapplications[78].
+328
+Inthefieldofrenewableenergy,lead-acidbatteriesarecommonlyusedinsmall-scale
+329
+solarinstallations,particularlyinresidentialandremoteareapowersystems(RAPS).They
+330
+storeexcesssolarenergyduringthedayforuseatnightorduringcloudyperiods. Their
+331
+economicadvantagemakesthemsuitableforoff-gridsolarsystemsindevelopingareas
+332
+wherecostmattersmost.
+333
+Anotableexampleofleadacidbatteriesinrenewableenergyistheiruseinruralsolar
+334
+electrificationprojects,wheretheyprovideessentialenergystoragetoenableaconsistent
+335
+powersupply. Theyarealsousedinlarge-scalesolarfarmsaspartoftheenergystorage
+336
+solutiontobalancethegridandprovidebackuppower.
+337
+Despitetheirwidespreaduse,lead-acidbatterieshavecertainlimitations. Thelow
+338
+energydensitymakesthembulkyandheavyrelativetotheirenergystorage,problematic
+339
+in areas with limited space. They also have a limited cycle life and are less suited for
+340
+applicationsrequiringfrequentdeepdischargecycles. Regularmaintenance,particularly
+341
+for flooded lead-acid batteries, is necessary to ensure longevity and performance. The
+342
+leadandsulfuricacidinthesebatteriesposeenvironmentalhazardsandrequireproper
+343
+recyclingtoavoidcontamination.
+344
+However,thelowcostoflead-acidbatteries,combinedwiththeirprovenreliability
+345
+andestablishedrecyclingprocesses,continuestomakethemapopularchoiceinavariety
+346
+ofapplications,includingcertainareasofrenewableenergy[79].
+347
+4.3. Flowbatteries
+348
+Flowbatteries,alsoknownasredoxflowbatteries,areauniquetypeofenergystorage
+349
+devicethatstoreselectricalenergyinliquidchemicalsolutions. Theirdesignisunique,
+350
+separatingstorageandgeneration,allowingmoreversatileandexpandableenergystorage
+351
+methods.
+352
+Flowbatteriesconsistoftwotanksofliquidelectrolytes,onewithapositivelycharged
+353
+solutionandtheotherwithanegativelychargedsolution. Theseelectrolytesarepumped
+354
+throughacellstackwheretheyareseparatedbyamembrane. Duringdischarging,ions
+355
+flowthroughthemembrane,andachemicalreactionoccursthatgenerateselectricity.When
+356
+charged,anexternalpowersourcereversesthechemicalreaction,restoringtheelectrolytes
+357VersionJanuary19,2025submittedtoEnergies 12of24
+totheiroriginalstates. ThecompleteprocessissummarizedinEquation 4. Thepower
+358
+outputofflowbatteriesisdeterminedbythesizeofthecellstack,whiletheenergycapacity
+359
+isdeterminedbythevolumeoftheelectrolytesinthetanks.
+360
+VO++V2+ VO2++V3+ (4)
+2
+Flowbatteriesareprimarilyusedforgridenergystorage, includingpeakshaving,
+361
+loadleveling, andfrequencyregulation. Theyarealsoemployedinmicrogridsandfor
+362
+backuppowersystemsincriticalapplicationssuchashospitalsanddatacenters. Dueto
+363
+theirscalabilityandlongdischargedurations,theyarewell-suitedforusesthatdemand
+364
+significantenergystorageoverprolongeddurations[80].
+365
+Renewableenergysystemsareusingflowbatteriesmorefrequentlytostorethesurplus
+366
+energygeneratedbysolarandwind.Theyhelpsmoothoutfluctuationsinrenewableenergy
+367
+sources,providingastableandreliableelectricitysupply. Theirabilitytodischargefor
+368
+longermakesthemidealforusecasesthatdemandenergysupplyoverextendeddurations,
+369
+suchasduringlowwindorsunlightconditions[81,82].
+370
+TheGillsOnionsfacilityinCaliforniausesaVanadiumRedoxFlowBattery.ThisVRFB
+371
+systemmanagesenergyneedsandcostsefficiently. Itstoresandsuppliesrenewableenergy
+372
+effectively. InHokkaido,Japan,alargeflowbatterysystemisutilized. Itiscombinedwith
+373
+solarandwindenergysources[83].
+374
+Despitetheirbenefits,flowbatterieshavehigherupfrontcostsandneedlargerspaces.
+375
+Theyalsonecessitatealargerareafortanksandpumps[84]. However,theirlongcyclelife
+376
+andminimalmaintenancerequirementsarepositives. Theenvironmentalsafetythatthey
+377
+offer,beingnon-flammableandnontoxic,isadvantageous. Thismakesthempromisingfor
+378
+large-scaleenergystorage,especiallywithrenewableenergy[85,86].
+379
+4.4. Sodium-sulfur(NaS)batteries
+380
+Sodium-sulfur(NaS)batteriesareatypeofhigh-temperaturebatterytechnologythat
+381
+standsoutforitshighenergydensityandefficiency. Thesebatteriesaremainlyutilizedin
+382
+largeenergystorageprojects,recognizedfortheirdistinctivemakeupandthewaythey
+383
+work.
+384
+TheprimaryelementsofaNaSbatteryincludemoltensodium(Na)fortheanode
+385
+andsulfur(S)forthecathode. Thesecomponentsareseparatedbyasolidbetaalumina
+386
+ceramicelectrolytethatonlyallowsthepassageofsodiumions. Thebatteryoperatesat
+387
+temperaturesaround300to350°C,atwhichbothsodiumandsulfurareinthemoltenstate.
+388
+Duringthedischargeprocess,sodiumionsmovethroughtheelectrolytetothesulfurside,
+389
+releasingenergyintheformofelectrons. Duringcharging,theprocessisreversed,andthe
+390
+sodiumionsmovebacktothesodiumsidewhichisshownin 5.
+391
+2Na+S Na S (5)
+2
+NaSbatteriesareprimarilyusedforgridenergystorage,includingloadleveling,peak
+392
+shaving,andprovidingemergencypowersupply. Theyarealsobeingusedinindustrial
+393
+andcommercialapplicationswherelarge-scale,high-capacityenergystorageisrequired.
+394
+Inthecontextofrenewableenergy,NaSbatteriesstandoutastheidealfuelstorage
+395
+medium to balance the variability of sources such as wind and solar power. They are
+396
+capableofprovidinglong-durationenergystorage,whichiscrucialformaintainingastable
+397
+andreliableenergysupplywhenrenewableenergygenerationislow.
+398
+AnexampleofNaSbatteryusageinrenewableenergyistheirapplicationinwind
+399
+farmsandsolarpowerplantsinJapan.TheBuzenSubstationinJapanutilizesNaSbatteries
+400
+forstoringsolarenergy,demonstratingtheireffectivenessinlarge-scalerenewableenergy
+401
+integration[87,88]. NaSbatteriesarerecognizedfortheirexcellentenergydensityandhigh
+402
+efficiency. However,theycomewithlimitationsandchallenges. Onemajorconcernistheir
+403
+highoperatingtemperature. Thisnecessitatesspecializedthermalmanagementsystems.
+404
+Additionally,themoltensodiuminthesebatteriescanbehazardous. Propercontainment
+405VersionJanuary19,2025submittedtoEnergies 13of24
+isthusessential. Moreover,thehighcostandcomplexmanagementsystemslimittheir
+406
+widespreadadoption[89].
+407
+The distinctive characteristics of NaS batteries are their long cycle life. They have
+408
+an impressive discharge capacity. Their quick adaptability to energy requirements is
+409
+exceptional. Consequently,theyarefavoredforbroadenergystoragesolutions. Thisistrue
+410
+especiallyinrenewableenergysettings[90].
+411
+4.5. Solid-statebatteries
+412
+Theadventofsolid-statebatteriesrepresentsasignificantstepforwardintheevolution
+413
+ofbatterytechnology. Optingforasolidoveraliquidelectrolyte,theyredefinetraditional
+414
+battery design. This transformation opens the door to numerous advantages. Hence,
+415
+solid-state batteries are recognized as a promising alternative for energy storage in the
+416
+future.
+417
+Solid-state batteries operate on the same basic principle as traditional batteries –
+418
+movingionsbetweenelectrodesduringcharginganddischarging. However,insteadofa
+419
+liquidelectrolyte,thesebatteriesuseasolidelectrolyte,whichcanbemadefromvarious
+420
+materials,includingceramicsorsolidpolymers. Thissolidelectrolytecarriesionswhile
+421
+alsoseparatingtheanodeandcathodetoavoidshortcircuits. Thedesignmitigatesrisksof
+422
+leakageandflammabilitylinkedtoliquidelectrolytes,increasingbatterysafety[91].
+423
+Althoughstillunderdevelopment,solid-statebatteriesareexpectedtorevolutionize
+424
+sectorsthatfocusonsafety,highenergydensity,andweightconsiderations. Solid-state
+425
+batteriesareprojectedtotransformtheelectricvehicleindustry,offeringtheadvantagesof
+426
+extendedrange,rapidcharging,andimprovedsafety. Thehighenergydensityandstability
+427
+ofthesebatteriesalsomakethemsuitablefordevicessuchassmartphonesandlaptops
+428
+[92,93].
+429
+Thismakesthemwell-suitedforcapturingrenewableenergyfromsourceslikesolar
+430
+andwind. Thesafetyfeaturesmakethemsuitableforresidentialapplications,wherespace
+431
+andsafetyaremostimportant.
+432
+Whilesolid-statebatterieshavenotyetbeenwidelycommercialized,severalcompa-
+433
+niesandresearchinstitutionsareactivelydevelopingthistechnology. Notableexamples
+434
+includeprototypesandresearchprojectsbymajorautomotivemanufacturersaimingto
+435
+incorporatesolid-statebatteriesintofutureelectricvehicles. Theseeffortsunderscorethe
+436
+industry’sbeliefinthepotentialofsolid-statetechnologytorevolutionizeenergystorage
+437
+inthecomingyears[94].
+438
+Solid-statebatteriesoffermanyadvantages,however,technicalissuesmustbesur-
+439
+mountedforthemtobecomewidelyused. Theissuesincludeensuringthestabilityand
+440
+robustnessofthesolidelectrolyte,scalingupproductiontechniques,andcuttingdownon
+441
+expenses. Researchersarealsoworkinghardtosolveproblemsatthespotwherethesolid
+442
+electrolytemeetstheelectrodes,whichisveryimportantforthebatterytoworkwell.
+443
+Theprogressofsolid-statebatteriesisunderintensescrutinyfromvariousindustries.
+444
+Theyarerecognizedfortheirsafety,efficiency,andsuperiorcapacity. Thismakesthem
+445
+crucialforsectorssuchasautomotiveandrenewableenergy[95].
+446
+The discussed battery types have the common goal of energy storage for diverse
+447
+applications. Eachtypeisrechargeableandhasdistinctfeaturesandlimitations,making
+448
+itappropriateforparticularapplications. Althoughbatteriessharesimilarities,thereare
+449
+severalkeydifferencesamongthefivetypesofbatteries. Selectingtherightenergystorage
+450
+system(ESS)isimportantforincorporatingrenewableenergysourcesintotheelectricity
+451
+network. TheFigure7showsthestoragecapacityversusdischargetimefortypicalESS,
+452
+coveringawiderangeofsystempowerratingsandapplications. Whenmakingadecision,
+453
+itisessentialtoevaluatefactorslikepowerrating, dischargeduration, lifespan, energy
+454
+density,andefficiency.
+455VersionJanuary19,2025submittedtoEnergies 14of24
+Figure7.StorageCapacityvsDischargetimefortypicalESS
+5. ApplicationofBESSinRenewableEnergyIntegration
+456
+Battery Energy Storage Systems (BESS) play a key role in integrating renewable
+457
+energy,enhancingenergysystemefficiencyandreliability. BESSmitigatestheimpactof
+458
+theintermittentnatureofrenewablesourcesandoptimizespowergridoperations. The
+459
+detaileddiscussionsofvariousapplicationsofBESSinrenewableenergyaregivenbelow.
+460
+5.1. Peakshaving
+461
+Peakshaving,animportantuseofBESS,aimstolessentheloadontheelectricalgrid
+462
+during times of highest demand. This procedure is essential in reducing the necessity
+463
+forexpensivepeakpowerplants,activatedchieflyinmomentsofintensedemand. BESS
+464
+storesenergyduringoff-peakhourswhenthedemandandelectricitypricesarelow. When
+465
+demandincreases,insteadofdrawingmorepowerfromthegrid,thestoredenergyinthe
+466
+BESSisused. Thisstrategyhelpstodecreasethecostofusingpowerwhendemandishigh
+467
+andalsoreducestheloadonthepowergrid. ABESSforpeakshavingmusthaveahigh
+468
+energydensitytostoresufficientenergy,thecapabilitytorapidlychargeanddischargeto
+469
+respondtopeakdemandsswiftly,andalongcyclelifetoensureitsviabilityovermany
+470
+years. Thesystemrequiresabsolutesafetyandreliabilitytofunctionproperlyinavariety
+471
+ofenvironmentalcircumstances. AnexampleofapeakshavingusingBESScanbeseen
+472
+inindustrialfacilitieswheretheenergydemandvariessignificantlythroughouttheday.
+473
+FacilitiesuseBESStoreducethepeakoftheirenergyuse,thusreducingtheirenergycosts
+474
+anddependencyonthegridduringpeaktimes[96–99].
+475
+5.2. Loadshifting
+476
+This strategy is essential for maintaining grid stability, particularly as renewable
+477
+energysourcesbecomemoreintegratedintoexistingpowersystems. BESSchargesduring
+478
+periodsoflowenergydemandanddischargesduringhighdemandperiods. Bydoingso,it
+479
+reducestherelianceontraditional,oftenfossilfuel-based,peakingpowerplants,leadingto
+480
+amoresustainableenergymix. Batteriesusedforloadshiftingneedtohaveahighenergy
+481
+densityforsubstantialenergystorage,rapidchargeanddischargecapabilitiestorespond
+482
+togriddemandspromptly,andalongcyclelifeforlong-termoperation. Theymustalso
+483
+becapableofoperatingwithhighefficiency,ensuringminimalenergyloss. Inresidential
+484
+areaswithsolarpanelinstallations, BESSisusedtostoreexcesssolarpowergenerated
+485VersionJanuary19,2025submittedtoEnergies 15of24
+duringtheday. Thisenergyisthenusedduringtheevening,reducingthedemandonthe
+486
+gridduringpeakhours[100–102].
+487
+5.3. Backuppower
+488
+ProvidingbackuppowerisacrucialapplicationofBESS,especiallyinensuringthe
+489
+reliabilityofcriticalsystemsduringpoweroutages. Intheeventofagridfailure,BESS
+490
+canprovideinstantaneouspower,ensuringthecontinuousoperationofessentialsystems.
+491
+Thisholdssignificantimportanceinplacespronetoelectricityoutagesorincrucialestab-
+492
+lishments like hospitals and data centers. A BESS used for backup power must have a
+493
+highenergydensitytoprovideprolongedpowersupport,theabilitytosustainaconsistent
+494
+poweroutputovertime,andalongcyclelife. Thequickresponsetopoweroutagesand
+495
+theeaseoftransitionfromgridpowertobatterypowerareessentialfeatures. Hospitals
+496
+oftenuseBESSasabackuppowersolution. Duringapoweroutage,BESSguaranteesthe
+497
+uninterruptedoperationoflife-savingequipmentandessentialsystems[103,104].
+498
+5.4. Gridstabilization
+499
+Grid stabilization is a significant application of BESS, involving services such as
+500
+frequency regulation, voltage control, and reactive power support. BESS can quickly
+501
+respondtofluctuationsinpowerdemandandgeneration,helpingtomaintainthereliability
+502
+andstabilityofthegrid. Forgridstabilization,BESSmustprovidehighpoweroutputand
+503
+rapidresponsetimes,alongwiththeabilitytochargeanddischargequickly. Longcyclelife
+504
+andminimalmaintenancearealsocrucialforensuringlong-termreliability. Large-scale
+505
+BESSprojects,likethoseintegratedwithwindfarms,havebeenimplementedtoprovide
+506
+gridstabilizationservices[99,105].
+507
+5.5. Islandedoperation
+508
+Islandedoperationinvolvesbatteryenergystoragesystemsincreatingisolatedmi-
+509
+crogridsthathavetheabilitytooperateontheirown,awayfromthecentralpowergrid.
+510
+This application is important for improving the resilience and reliability of the power
+511
+supply in remote or isolated areas. In an island-based microgrid, BESS and renewable
+512
+energy sources like solar and wind collaborate to deliver consistent power, even when
+513
+disconnectedfromthemaingrid.Batteriesforislandedoperationmustpossesshighenergy
+514
+density,quickcharginganddischargingcapabilities,andlongcyclelife. Theyshouldbe
+515
+robust,requiringminimalmaintenance,andcapableofprovidinghighpoweroutputto
+516
+supportthemicrogrid’sneeds. Remoteislandsorruralcommunitiesoftenrelyonislands
+517
+withBESS.Theseframewordsassureastableandsustainablepowergrid,intrigratinglocal
+518
+renewableenergysources[106,107].
+519
+6. BenefitsandLimitationsofBESS
+520
+Batterystoragetechnologyaidsinintegratingrenewableenergy,butattentionmust
+521
+bepaidtoitslimitationsandnegativeaspects. Batterystoragesystemsplayakeyrolein
+522
+keepingthepowergridstable. Theydothisbyimprovingfrequencyregulation,voltage
+523
+control,andreactivepowersupport. Thismakesthepowergridmorereliable,evenwhen
+524
+using energy sources that don’t always provide power steadily. These systems offer a
+525
+waytosaveonenergycostsbycleverlyshiftingwhentouseelectricity—fromhigh-cost
+526
+timestolower-costtimes—andbyprovidingcrucialbackuppowerduringtimesofpeak
+527
+demand[108]. BESShelpsincreasetheutilizationofrenewableenergysourcesbystoring
+528
+excessenergygeneratedduringperiodsofhighrenewableenergyproductionandmaking
+529
+itavailableduringperiodsoflowrenewableenergyproduction[109]. Itprovidesbackup
+530
+powerduringgridfailures,ensuringcriticalsystemsremainoperational[110].
+531
+However,BESScanbeexpensive,particularlyforlarge-scaleapplications,andmay
+532
+not be economically viable in all situations [111,112]. The process of creating batteries
+533
+and disposing of them can damage the environment, especially certain types [113,114].
+534
+Theprocessofminingandrefiningspecificmaterialsforbatteriesalsohasenvironmental
+535VersionJanuary19,2025submittedtoEnergies 16of24
+andsocialimpacts[115]. Insomecases, BESSofferslowerenergydensityandcapacity
+536
+comparedtootherenergystoragemethods,likepumpedhydroorcompressedairenergy
+537
+storage.
+538
+Moreover,BESShasalimitedlifespanandmayneedtobereplacedafterseveralyears
+539
+ofuse,whichcanaddtothecostofthesystem[116,117]. Batterystoragetechnologyhas
+540
+lotsofbenefitsforaddingrenewableenergysources,morethanitslimitations. However,
+541
+it’snecessarytothinkcarefullyaboutthesystem’sspecificrequirements. Thisensuresthat
+542
+batterystorageasasolutionthat’sbothaffordableandgoodfortheplanet.
+543
+7. ChallengesforBESS
+544
+Batterystoragecouldplayabigroleinrenewableenergy,butseveralchallengesneed
+545
+tobetackledtoachieveitsfullpotential. Thechallengesfacedinbatterystoragetechnology
+546
+are the foundation of innovation and making things better. The major challenges are
+547
+discussedinthissection.
+548
+7.1. EconomicViability
+549
+Thehighcostofbatterystoragetechnologyforlarge-scaleapplicationsisstllamajor
+550
+issue. Thecapitalexpensesforbatteryproduction,alongwiththecostsassociatedwith
+551
+installation,maintenance,andend-of-lifemanagement,impacttheoveralleconomicfeasi-
+552
+bility. Advancesinbatterymanufacturingprocesses,materialscience,andeconomiesof
+553
+scalehavethepotentialtoreducecosts. Creativefinancialmodelandbusinessstrategies
+554
+canlowerthecostofBatteryEnergyStorageSystems,makingthemeasiertogetanduse
+555
+[118–120].
+556
+7.2. ScalabilityandGridIntegration
+557
+ScalingupBESSinvolvescomplexchallengesforintegrationoflarge-scaleRERsinto
+558
+existinggrid. Ensuringcompatibility,efficiency,andreliabilityofBESSatalargerscaleisa
+559
+non-trivialtask. Technologicaladvancementsingridmanagementsystemscanfacilitate
+560
+betterintegration. StudiesincreatingBESSdesignsthatarebothmodularandflexiblecan
+561
+helpmakethemeasiertoscaleup[121–124].
+562
+7.3. DurabilityandReliability
+563
+BESSneedstobedurableandreliabletoprovidetheexpectedbenefitsfortheintegra-
+564
+tionofrenewableenergy. Thisincludesthechallengesofensuringconsistentperformance
+565
+duringtheirusefullifeandresilienceagainstextremeenvironmentalconditions. Improv-
+566
+ingthechemicalcompositionanddesignofbatteries,theirlifespanscanbesignificantly
+567
+extended. Predictivemaintenancestrategiescanmakethingsmorereliable[125,126].
+568
+7.4. EnvironmentalSustainability
+569
+For a balanced and sustainable relationship between technology and nature, it is
+570
+important to develop battery storage systems that are good for the environment. The
+571
+processofextractingrawmaterials,theenergyusedinmanufacturing,andthedisposal
+572
+of products at the end of their life cycle impact the environment. Improving recycling
+573
+technologiesandexploringlessharmfulmaterialscanreducethedeadlyimpacts. Policies
+574
+andregulationsthatsupportcarefulselectionandreuseofmaterialscanhelpreduceharm
+575
+totheenvironment[127,128].
+576
+7.5. SafetyandStandardsCompliance
+577
+ItisimportanttoensurethesafetyofBatteryEnergyStorageSystems(BESS)regarding
+578
+firerisksandchemicalhazards. Compliancewithnewsafetystandardsandregulations
+579
+isalsoessentialforbetterBESS.Continuouseffortsaremadetofindbettermaterialsfor
+580
+batteriesandtodesignBESSwithadvancedsafetyfeatures. Strengtheningcertification
+581
+processesandwillalsoimprovethesafetycompliance[129,130].
+582VersionJanuary19,2025submittedtoEnergies 17of24
+7.6. EnergyDensityandEfficiency
+583
+Improvingtheenergydensityandefficiencyofbatteriesisessentialtoimprovestorage
+584
+capabilitiesandminimizespacerequirements,especiallyinspace-constrainedapplications.
+585
+Researchersareexploringsolid-statebatteriesandotherinnovativetechnologiestoincrease
+586
+theamountofenergybatteriescancontain. Improvingthestructureofbatteriesandthe
+587
+typesofmaterialsusedinelectrodescanleadtohigherefficiency[131,132].
+588
+7.7. LifecycleManagement
+589
+Effectivelifecyclemanagementofbatteries,includingmanufacturing,usage,anddis-
+590
+posal,isessentialforsustainableoperations. Thisincludeschallengesintherecyclingand
+591
+reusingofbatterymaterials. Developmentofsustainablelifecyclemanagementpractices
+592
+andcirculareconomymodelsforbatteriescanoptimizeresourceuse.Advancesinrecycling
+593
+technologiesandsecond-lifeapplicationsforusedbatteriescanalsocontributetolifecycle
+594
+management[133,134].
+595
+8. FutureProspectandEmergingTrends
+596
+Asthedemandforrenewableenergyexpands,theimportanceofcost-effectiveand
+597
+dependableenergystoragesolutionsgrowssignificantly. Thissectionexplorestheemerg-
+598
+ingtrendsandfutureprospectsforbatterystoragetechnology,highlightingtechnological
+599
+advancements,integrationstrategies,policydevelopments,economicfactors,andenviron-
+600
+mentalconsiderations.
+601
+8.1. AdvancementsinBatteryTechnology
+602
+Emergingbatterytechnologieslikesolid-statebatteries,lithium-sulfur,andadvanced
+603
+flow batteries are at the forefront of research. Developments in nanotechnology and
+604
+electrodematerialsarepoisedtosignificantlyimproveenergydensityandbatterylife.Solid-
+605
+statebatteriesofferhigherenergydensityandimprovedsafetycomparedtotraditional
+606
+lithium-ionbatteries. Thesetechnologiesalsopromisefasterchargingtimesandlonger
+607
+cyclelives,whicharevitalforapplicationsinelectricvehiclesandgridstorage[135–137].
+608
+Recentresearchinlithium-airbatteriesalsoshowspotentialforevenhigherenergydensities,
+609
+althoughchallengesinlifecycleandsafetyremaintobeaddressed[138].
+610
+8.2. IntegrationofEnergyStorageSystems
+611
+Integratingenergystoragewithrenewablesourcesiskeytostabilizingthegridand
+612
+enhancingenergysecurity. ProjectsliketheHornsdalePowerReserveinAustraliademon-
+613
+stratesuccessfullarge-scalebatterydeploymentalongsidewindenergy.Combiningvarious
+614
+storageforms,likebatteriesandpumpedhydro,canprovidemoreconsistentandreliable
+615
+power. Advanced management systems using digital twin technology are now being
+616
+developedtooptimizetheseintegratedstoragesystems[48,139]. Thefutureofenergystor-
+617
+ageintegrationalsoincludesvehicle-to-gridtechnologies,whereelectricvehiclesprovide
+618
+storagecapacitytothegrid[140].
+619
+8.3. ArtificialIntelligenceandMachineLearning
+620
+AIandmachinelearningarerevolutionizingenergystoragemanagement. Predictive
+621
+analytics for battery health, intelligent charge/discharge algorithms, and demand fore-
+622
+castingareareaswhereAIismakingsignificantimpacts. Machinelearningmodelscan
+623
+optimizebatteryusageandextenditsusefullife,reducingoperationalcosts. TheuseofAI
+624
+ingridmanagementalsohelpsinintegratingrenewablesourcesmoreefficiently,adapting
+625
+toreal-time changesinsupplyanddemand[141,142]. AI-drivenautomationinbattery
+626
+manufacturingcanfurtherreducecostsandimprovebatteryquality[143].
+627
+8.4. PolicyandRegulatoryDevelopments
+628
+Governmentpoliciesplayacrucialroleinspeedinguptheadoptionofenergystorage
+629
+systems. Initiatives such as the Investment Tax Credit (ITC) in the United States have
+630VersionJanuary19,2025submittedtoEnergies 18of24
+beenextendedtoincludeenergystorage,providingfinancialincentivesfordeployment.
+631
+TheEuropeanUnion’sGreenDealisanotherexample,promotingrenewableenergyand
+632
+storage to achieve carbon neutrality. The growth in microgrid and community energy
+633
+storageprojectsisalsobeingsupportedbylocalpoliciesandincentives[144–146].
+634
+8.5. EconomicViabilityandMarketDynamics
+635
+The declining cost of battery technologies and the increasing demand for electric
+636
+vehiclesandstationarystoragearedrivingmarketgrowth.Theeconomiesofscaleachieved
+637
+bycompanieslikeTeslahavesignificantlyreducedthecostofbatteries. Marketdynamics
+638
+indicateagrowingtrendtowardsrenewableenergystorageintegration. Withtheriseof
+639
+distributedenergyresources,themarketforresidentialandcommercialbatterysystemsis
+640
+alsoexpandingrapidly[147,148].
+641
+8.6. EnvironmentalImpactandSustainability
+642
+Theenvironmentalimpactofbatteryproductionanddisposalisagrowingconcern.
+643
+Researchintosustainablematerialsandrecyclingmethodsisessentialforreducingthe
+644
+ecologicalfootprintofbatteries.Effortstoimprovethesustainabilityoftheentirebatterylife
+645
+cycleareunderway. Thedevelopmentofbio-basedandrecyclablebatteriesisaburgeoning
+646
+field,aimingtomitigatetheenvironmentalconcernsassociatedwithconventionalbatteries
+647
+[149–151].
+648
+These emerging trends and developments paint a dynamic future for battery stor-
+649
+age technology in renewable energy systems, offering opportunities for technological
+650
+innovation,economicgrowth,andenvironmentalsustainability.
+651
+9. Conclusion
+652
+Batterystoragetechnologyisapotentialsolutiontomitigatethechallengesofintegrat-
+653
+ingRERsintotheexistingpowergrids. Itsabilitytostoreanddeliverenergywhenenergy
+654
+isneededmosthasmadeBESSanintegralpartofmodernenergysystems. Batterystorage
+655
+technology provides a more economical choice compared to fossil fuel-based peaking
+656
+plants. Through BESS, the expansion of renewable energy becomes more feasible. The
+657
+technologyprovidesanopportunitytodecreasefossilfuelconsumption,therebyreducing
+658
+greenhousegasemissionsandpavingthewayforacleaner,moresustainableenergyfuture.
+659
+Asasteptowardafuturethatissustainableinenergy,thevitalroleofbatterystorageoffers
+660
+abrightandinnovativepathforward. Itscontinueddevelopmentanddeploymentwillbe
+661
+crucialinensuringareliable,efficient,andcleanenergysupplyforgenerationstocome.
+662

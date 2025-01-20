@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV and Job Description Word Frequency</title>
+    <link rel="stylesheet" href="css/JobCV.css">
+</head>
+<body>
+    <h1>CV and Job Description Word Frequency</h1>
+    <p>Analyze the word frequency of both CV and Job Description text.</p>
+
+    <div class="container">
+        <div class="input-section">
+            <textarea id="cvInput" placeholder="Paste your CV text here..."></textarea>
+            <textarea id="jobDescriptionInput" placeholder="Paste the Job Description here..."></textarea>
+        </div>
+        <button onclick="processText()">Analyze</button>
+
+        <div class="table-container">
+            <div class="table-box">
+                <h3>CV Word Frequency</h3>
+                <div id="cvOutput"></div>
+            </div>
+            <div class="table-box">
+                <h3>Job Description Word Frequency</h3>
+                <div id="jobDescriptionOutput"></div>
+            </div>
+            <div class="table-box">
+                <h3>CV Words Not in Job Description</h3>
+                <div id="cvUniqueWordsOutput"></div>
+            </div>
+            <div class="table-box">
+                <h3>Job Description Words Not in CV</h3>
+                <div id="jobDescriptionUniqueWordsOutput"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Built with ❤️ by <a href="#">Your Name</a></p>
+    </footer>
+
+    <script src="js/JobCV.js"></script>
+</body>
+</html>

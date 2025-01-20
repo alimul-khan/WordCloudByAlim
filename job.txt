@@ -1,26 +1,15 @@
-We are seeking a highly skilled and motivated Software Developer to join our dynamic organization. The successful candidate will be responsible for developing and maintaining software applications, contributing to the company's success through their expertise and innovative solutions.
-
 Responsibilities:
 
-Collaborate with a team of developers to design, develop, and test software applications
-Write efficient, scalable, and well-documented code using programming languages such as Java, Python, and C++
-Participate in code reviews, providing constructive feedback and suggestions for improvement
-Troubleshoot and debug software applications, identifying and resolving any issues or bugs
-Work on both front-end and back-end development tasks, ensuring seamless integration and functionality
-Document software requirements, specifications, and user manuals for future reference
-Stay updated on emerging technologies and industry trends, incorporating them into software development practices
+Use C++ and/or Python to develop software that addresses some of the world's most challenging problems.
+Work with an outstanding technical team, here in Saskatoon and around the world, to ensure our leading electronic design automation products evolve to meet the changing expectations of our customers.
+Collaborate directly with technology experts at major semiconductor companies to define, develop, and deliver new products and product features.
 Requirements:
 
-Bachelor's degree in Computer Science or a related field
-Strong proficiency in programming languages such as Java, Python, and C++
-Experience with web development using HTML, CSS, and JavaScript
-Solid understanding of software development methodologies and practices
-Knowledge of database management systems, including SQL
-Excellent analytical and problem-solving skills
-Strong communication and teamwork abilities, with the ability to work collaboratively in a team environment
-Demonstrated ability to deliver high-quality software solutions within deadlines
-Previous experience in software development or related internships is a plus
-Certifications:
-
-Oracle Certified Java Programmer
-Certified ScrumMaster (CSM)
+Demonstrated ability to effectively develop high-quality software in a collaborative environment (school or work).
+Demonstrated expertise in some or all the following: object-oriented programming (Python and/or C++), Linux, testing, source control (Git), debugging, profiling, GUI design (Qt), memory optimization, high-performance data structures and algorithms, multithreaded programming.
+Excellent written and verbal communication skills; demonstrated through software documentation (commit messages, docstrings, etc), collecting customer requirements, and communicating with team members.
+A team player; an ability to provide and be receptive of constructive feedback (through code reviews, design iteration, and the verification process); mentor and teach others on the team.
+Customer-focused; can prioritize tasks based on customer experience and ROI.
+Willingness to learn and interested in new challenges.
+Nice-to-have expertise: Statistics (Monte Carlo analysis), test automation, transistor-level circuit design, EDA CAD tools, SQL, numerical analysis, machine learning, operating systems, compiler design & computer architecture, and release management.
+Must be available to work from our Saskatoon facility.

@@ -1,590 +1,780 @@
-5266 IEEEINTERNETOFTHINGSJOURNAL,VOL.9,NO.7,APRIL1,2022
-Bushfire Risk Detection Using Internet of Things:
-An Application Scenario
-Mohammad Reza Nosouhi , Member, IEEE, Keshav Sood , Neeraj Kumar , Senior Member, IEEE,
-Tricia Wevill, and Chandra Thapa , Member, IEEE
-Abstract—With rising temperatures and events contribut- and human–intervention related factors, such as weather,
-ing to climate change, the world is facing extreme weather natural phenomena, topography, carbon emissions, seasonal-
-patterns. Recently, Australia was hit hard by bushfires, the
-ity, etc. [1]. On one side, essentially, it is shaping the nature
-most devastating fires ever faced by the country. The eco-
-and planet naturally in a variety of ways, but, on the other
-nomicdamagereportedwasnearlyonebillionAustraliandollars
-and an estimated three billion native animals were killed or hand, the high frequency of occurrence of bushfire adversely
-adverselyaffected.Giventheextentandintensityofthisdamage, impacts flora and fauna, both human and animal life, damage
-researchersareseekingeffectivesolutionstoenabletheprediction to properties, creates health issues due to air pollution, post
-of fire before it starts to increase the time available for firefight-
-bushfire psychological problems, and high economic impacts.
-ers to protect lives and assets and prepare to mitigate the fires.
-ManyareasinAustraliaarepronetobushfireastheclimateis
-This motivated us to investigate an approach to address this
-critical problem. In this article, we propose a machine learning generally dry and hot in many states [2] and drought is com-
-(ML)-based approach that detects anomalies in spatiotemporal mon. For natural hazards and disasters, including bushfires,
-measurements of environmental parameters (e.g., temperature, GeoscienceAustraliaisresponsibleforpreparednessandman-
-relative humidity, etc.). In the proposed approach, an ML-based
-agementactivities.Ithasbeenreportedthatthebushfireseason
-modellearnsthenormalspatiotemporalbehavioroftheenviron-
-2019–2020wastheworstseasonrecordedinAustralia[3],[4].
-mentaldata(collectedoveraperiodofoneyear).Thisiscarried
-outduringaone-timetrainingphase.Then,duringthedetection Some devastating impacts reported in [3] and [5], caused by
-phase,anyspatiotemporalpatterninthereal-timedata(received the 2019–2020 bushfire season are listed as follows.
-from the field sensors) that is different than the normal pattern 1) More than one billion animals died and three billion
-will be identified by the model as anomaly which indicates a
-wereaffectedintotal,whichisthehighestrateofspecies
-possible bushfire situation. Following this, we propose a supple-
-loss in any area in the world [6].
-mentaryclassificationmodelbasedonMoran’sIindextoensure
-thatthedetectedanomaliesarenotduetoeitherasensorfailure 2) Theairpollutioncausedbyseverebushfiresin2020.The
-or a security attack (which are common in Internet of Things). Australian Capital Territory (ACT), Canberra measured
-WedevelopedthreedifferentMLmodelsforperformanceevalu- theworstairqualityindexofanymajorcityintheworld
-ation and comparison and used the Forest Fire data set to train
-inJanuarythesameyear.Thishasadverselyaffectedter-
-them.Theresultsofourexperimentsconfirmtheeffectivenessof
-ritory’s residents with severe health risks, including [7]
-the proposed approach in the early detection of fire symptoms.
-asthma, impaired vision, increased risk of heart attacks,
-IndexTerms—Agriculture4.0,artificialintelligence,Australian
-and the development of neurological conditions, etc.
-bushfire, edge computing, Internet of Things (IoT).
-3) This has significantly affected the farming and tourism
-industry. Severe economic damage was reported in
-I. INTRODUCTIONANDBACKGROUND
-2019–2020 due to the Australian bushfire, nearly one
-BUSHFIRE is commonly known as an unplanned vegeta- billion Australian dollars had been reported as insur-
-tion fire or wildfire (grass fires, forest fires, and scrub ancelossesasaresultofthebushfires,almost13million
-fires, etc.), at a large scale. This occurs due to both natural hectares of land was been burned. [8].
-4) Furthermore the total costs associated with extreme
-Manuscript received July 10, 2021; accepted August 22, 2021. Date of
-weather and climate change is difficult to quantify. The
-publication September 6, 2021; date of current version March 24, 2022.
-(Correspondingauthor:KeshavSood.) damage-relatedlossinpropertyvaluesfromclimatehaz-
-MohammadRezaNosouhiandKeshavSoodarewiththeCentreofCyber ards across Australia in 2030 is estimated at 571 billion
-Security Research Innovation, School of Information Technology, Deakin
-Australian dollars [3]. Overall, we note that the impact
-University,Geelong,VIC3220,Australia(e-mail:m.nosouhi@deakin.edu.au;
-keshav.sood@deakin.edu.au). of bushfire is devastating in Australia.
-Neeraj Kumar is with the Department of Computer Science and Towards this problem, it is critical to have effective and
-Engineering, Thapar University, Patiala 147004, India, also with the
-accurate forecasting systems to be in place to make better
-Department of Computer Science and Information Engineering, Asia
-University,TaichungCity413,Taiwan,andalsowiththeSchoolofComputer decisions for the mitigation of fire risks and hazards. Many
-Science,UniversityofPetroleumandEnergyStudies,Dehradun248007,India attempts have been made as briefly mentioned below.
-(e-mail:neeraj.kumar@thapar.edu).
-Satellites-Based Solutions: In [9]–[11] satellite images are
-Tricia Wevill is with the School of Life and Environmental
-Sciences, Deakin University, Geelong, VIC 3220, Australia (e-mail: analyzed to detect areas that are generating a high level of
-tricia.wevill@deakin.edu.au). infrared radiation (called hot spots). However, this approach
-ChandraThapaiswiththeDistributedSystemsSecurity,Data61,CSIRO,
-suffers from high latency between successive scans, i.e., res-
-Marsfield,NSW2122,Australia(e-mail:chandra.thapa@data61.csiro.au).
-DigitalObjectIdentifier10.1109/JIOT.2021.3110256 canning of the same area needs a significant amount of
-2327-4662(cid:2)c 2021IEEE.Personaluseispermitted,butrepublication/redistributionrequiresIEEEpermission.
-Seehttps://www.ieee.org/publications/rights/index.htmlformoreinformation.
-Authorized licensed use limited to: University of Saskatchewan. Downloaded on June 17,2023 at 23:04:19 UTC from IEEE Xplore. Restrictions apply.NOSOUHIetal.:BUSHFIRERISKDETECTIONUSINGINTERNETOFTHINGS:APPLICATIONSCENARIO 5267
-time[12].Inaddition,thedetectedhot-spotareadoesnotindi- theoriginofthedetectedanomalies,i.e.,earlysymptoms
-cate the exact location of a fire. It is also possible that clouds of a bushfire, sensor failures, or a security attack.
-orthesmokepreventthesystemtohaveanaccurateestimation 3) We implemented the proposed approach in an edge
-of the fire location. Thus, limited resolution and the lack of computing setting to furthermore reduce the detection
-real-time data generation make the satellite imagery approach latency.
-inefficient for continuous monitoring of a forest zone [12]. Our results confirm the accuracy and effectiveness of the
-Moreover,whentheheatsourceistoosmall(attheearlystages proposed approach. We present the related work in Section II.
-of a bushfire), the system may not consider that zone as a hot The proposed architecture and implementation details are
-spot [11]. given in Sections III and IV, respectively. Performance
-Unmanned Aerial Vehicles (UAVs)-Based Solutions: evaluation results and further discussion are given in
-Furthermore, UAVs have been used to take real-time Sections V and VI, respectively. We summarize this article in
-images of fire in the areas that are extremely dangerous Section VII.
-to access [12]–[14]. The images are analyzed to assess the
-situation and make operational decisions to prevent outbreaks
-of the fire. UAVs can also be equipped with thermal imaging
-II. RELATEDWORK
-cameras to enable firefighters to see through the smoke
-and search for the victims. This approach is effective in In [13], a comprehensive survey presents the current prob-
-post-fire situations but has very limited advantage in the early lemsofforestfirefightingandstate-of-the-artrobotictechnolo-
-detection of bushfire. In addition, UAVs need high-speed giesandsolutionsinfirefightingmissions.Akhloufietal.[12]
-communication links for the transmission of high-quality reviewed previous research and industry works done in bush-
-images that is a big issue in many regional forest areas. fire management using UAV applications. It considers differ-
-Section II covers more detail of the practical solutions being ent onboard sensor instruments, fire perception algorithms,
-used by Australian fire agencies. and coordination strategies. Below, we highlight the key
-Motivated from this, we propose to use the Internet of approaches being used by different Australian authorities in
-Things (IoT) technology and machine learning (ML) mod- the Bushfire context.
-els to identify early symptoms of a bushfire. Our proposal Australian Bureau of Meteorology (BOM) and Geoscience
-is based on spatial correlation theory. We first train the ML Australia: In Australia, weather forecasts are provided by the
-modelusingtheForestFirerealdatasetcollectedfromatarget BOM.Correspondingfireauthoritiesdeterminetheappropriate
-area over a period of one year [15]. Then, the real-time envi- firedangerrating(FDR)byconsideringthepredictedweather,
-ronmental data (collected from IoT network and tagged with includingtemperature,relativehumidity,windspeed,anddry-
-spatiotemporal information) is fed to the trained model for nessofvegetation.TheseFDRsoralerts(viaradio,TV,andthe
-the identification of possible anomalies. Note that the outliers Internet) help the government and communities to take essen-
-in sensor data can also be generated by nonbushfire events, tial appropriate actions to minimize the potential impact and
-such as sensor failures or security attacks. In other words, loss. Recently, Geoscience Australia has developed the (real-
-bushfire detection using an approach that is solely based on time) Sentinel bushfire monitoring system [5], Digital Earth
-outliers may result in high false positive rates. To address this Australia Hotspots, a national bushfire monitoring system.
-issue, we utilize the spatial correlation between sensor mea- This collects areas generating a high level of infrared radi-
-surements and develop a supplementary classification model ation (called Hotspots), via satellites at 10 min intervals, to
-to ensure that any detected anomaly has been created due to identify possible fire risks [10]. But it is unable to provide
-the early symptoms of a bushfire. The proposed model works real-time information; every hot-spot information is about 17
-based on Moran’s I index [16], [17] which is an effective min old. Furthermore, the hot-spot size does not indicate the
-tool for the measurement of spatial correlation in distributed exact fire zone. Also in cases where the heat source is too
-architectures. small to detect, the system does not consider that zone as a
-WeimplementedaProofofConcept(PoC)ofourapproach hot-spot leading to inaccurate hot-spot identification [11].
-in Python. We also performed a prototype implementation of MyFireWatch Project: This solution is based on an existing
-the approach in an edge computing setting to ensure its effec- DepartmentofFireandEmergencyServices(DFES)program,
-tiveness to generate fire alerts at the very early stage of a redeveloped by Landgate and Edith Cowan University (ECU),
-bushfire. Australia,forusebythegeneralpublic[18].Thissystemgives
-Our contributions in this article are as follows. aviewofsatelliteobservedhot-spotsbydetectingheatsources
-1) We propose an ML-based anomaly detection approach aboveacertaintemperaturelevel.Furthermore,thesehot-spots
-forearlydetectionofbushfire.Intheproposedapproach, update at 2–4 h intervals and do not fully indicate the exact
-the measurement and collection of spatiotemporal envi- level of severity. It does not provide the exact coordinates of
-ronmental data is performed using an IoT network. The potential fire zones, is unable to determine accurately beyond
-collectedreal-timedataisanalyzedbytheMLmodelto 2 km, hot-spots in the presence of smoke and cloud can-
-identify any spatiotemporal pattern that is different than not be detected. Besides the use of satellites, the Australian
-the normal pattern. firefighters also make use of UAVs as a tool for combating
-2) Toreducethenumberoffalsepositivedetections,asup- fire [14]. The UAVs (particularly drones) provide real-time
-plementary classification model is proposed to estimate pictures of fire zones that are extremely dangerous to access.
-Authorized licensed use limited to: University of Saskatchewan. Downloaded on June 17,2023 at 23:04:19 UTC from IEEE Xplore. Restrictions apply.5268 IEEEINTERNETOFTHINGSJOURNAL,VOL.9,NO.7,APRIL1,2022
-Thisapproachiseffectiveinpost-firesituationstoenablefire-
-fighterstomakeearlyassessmentsofdamagewhileenrouteto
-emergencies. The cost of UAVs and the requirement of high
-speed Internet connectivity are key hurdles in many regional
-areas or underdeveloped countries.
-Bushfire Attack Level Toolbox: Researchers also use
-modeling to analyze the potential impact of fire before it
-occurs. For example, to measure the impact of fires on build-
-ings, the Bushfire Attack Level Toolbox is developed which
-Fig.1. Proposedsystemarchitecture.
-provides access to ArcGIS geoprocessing scripts to calculate
-BushfireAttackLevelratings[19].Foracomprehensiveunder-
-standingofwhybushfiremonitoringsystemsdoesnotworkas
-intended, we encourage readers to follow [20] and references have used a natural physical phenomenon of data, i.e., the
-therein. Also, very recent recommendations provided by the readings of two nearby IoT units would be the same under
-Nature Conservation Society of South Australia (NCSSA) to normal conditions. For example, humidity and temperature
-the federal government to preparedness for, response to, and wouldnotchangedramaticallyovershortdistances.Therefore,
-recovery from bushfire disasters are listed in [21]. we assume that the sensor readings or data would be corre-
-FireCloud Project: In FireCloud, a recently done bushfire lated with its neighbors data, with very high probability. In
-detection project [22], the existing satellite-based fire detec- this case, there is no spatial correlation between the outliers
-tion systems are supplemented with ground-based IoT remote is detected. Contrary if the outlier detection module detects
-sensing devices to enhance the accuracy and speed of the any outlier then the data streams are forwarded to a spatial
-bushfire detection process. However, it is difficult to judge correlation-basedrecognitionmodulewhichisanintegralpart
-the effectiveness of this work since its results have not been of the computing module at the edge of the network.
-published (e.g., experimental results). Moreover, it lacks an Case 2 (Fire Danger Exists): As mentioned before that in
-effective approach to confront the possible incorrect mea- the presence of an outlier, the data is forwarded to a spatial
-surements sent by either faulty sensors or illegitimate IoT correlation module to accurately identify the potential risk of
-sensors/attacked sensors (in case of a cyber attack on the fire. If the readings are all in the same cluster (no outlier
-deployed IoT network). Indeed, any IoT-based approach for detected at this stage), as expected the framework would still
-bushfiredetection mustbeequipped withaneffective solution considerthisscenarioasnofiredanger.Inthecaseofhighfire
-toaddresssuchthreats(atleastpubliclyaccessibleforestareas probability, the level of temperature or humidity will increase
-should be protected). naturally which will be measured by sensors and forwarded
-SynthesisoftheExistingSolutions:Tothebestofourunder- to the computing module for analyses. In this case, an outlier
-standing,thecurrentexistingsolutionslacktheabilitytoreport would be generated. Using this approach of outlier detection,
-the exact location/coordinates of a potential fire area in real- the field or zone would be considered as “Fire Danger Zone".
-time before the fire occurs. In addition, the post-fire solutions However, this case is further divided into three parts.
-are not cost effective. Furthermore, we emphasize that due to Case2.1(FalseFireDangerZone):Thesensorsaremostly
-digitizationineverydomain,theriskofcyber-attackisanother deployed in harsh environments. It could be possible that
-factor that might compromise the existing techniques to gen- there is no fire but the sensor is giving faulty readings. The
-erate a false alert and false negative predictions. The existing system could produce outliers and the system may consider
-approaches do not integrally consider approaches to distin- thisscenarioasFireDangerZone,althoughitisfalse.Counter
-guishtrueandfalsebushfirealerts.Inourapproach,weutilize Argument.Usingthespatialcorrelationbetweenmeasurements
-a module which enables the network to distinguish legitimate of neighboring IoT sensors we note that in case of a sensor
-and compromised alerts. failure, the failed sensor will generate faulty data, and thus
-an outlier will be detected but with a very low probability its
-neighbor sensors also generate faulty measurements as well.
-III. OURPROPOSEDAPPROACH
-Thus,themeasurementsreceivedfromitsneighborsensorsare
-Inthissection,wepresentahighlevelviewofourproposed not classified as outliers as no significant spatial correlation
-approach for bushfire detection. between the measurements is detected.
-Case 1 (No Fire Danger): In the proposed approach, we Case 2.2 (Compromised Fire Danger Zone): It could also
-consider a land/zone where IoT devices or units are deployed be possible that the sensors are compromised and giving fake
-taking environmental readings, i.e., temperature and humid- readings. If there are more outliers, then it will be very chal-
-ity. The sensor streams continuously generated by IoT units lenging for the system to differentiate the faulty/false and
-areforwarded toacomputing device placed attheedge ofthe compromised behavior. Counter Argument. We note that in
-networkusingedgecomputingtechnology.Thesensorstreams caseofacyberattackontheIoTnetwork,severalneighboring
-collected from the IoT units (of a small forest land/zone) are sensors are targeted by the attacker. Therefore, neighbor sen-
-analysed to detect an outlier (see Fig. 1). In the absence of sors will also generate faulty measurements. In other words,
-any outlier detection, the system considers the zone as no fire with a very high probability, multiple sensors (located in the
-danger, which means no risk of fire is identified. Here, we neighborhood of the malicious node) will also be affected.
-Authorized licensed use limited to: University of Saskatchewan. Downloaded on June 17,2023 at 23:04:19 UTC from IEEE Xplore. Restrictions apply.NOSOUHIetal.:BUSHFIRERISKDETECTIONUSINGINTERNETOFTHINGS:APPLICATIONSCENARIO 5269
-Fig.2. Work-flowoftheproposedapproach.
-Thus, a significant spatial correlation between the measure- secondphase(outlierdetection),thereal-timesensormeasure-
-ments can be observed. In this case, the clustering decisions ments received from the IoT field network are analysed by an
-are made based on the possible spatial correlation between ML model to detect an outlier. In the absence of any outlier
-the measurements. In other words, measurements of all the detection, the system considers the IoT field network behav-
-compromised sensors change rapidly and do not follow a ior as normal or No Fire Danger. Alternatively, if the system
-location-based and smooth pattern while in case of a true fire, detects any outlier, then the data streams are forwarded to
-there is a smooth pattern in the change of readings received a spatial correlation-based recognition module. At this third
-from neighbor sensors over time, i.e., the outliers are origi- phase (spatial correlation-based classification), the spatial-
-nated from a particular location and gradually propagate to correlation data of these outliers are fed to a classifier in
-other sensor locations. order to accurately classify the detected outliers into one of
-Now, the next step is to exactly find the attacked sensors the above mentioned clusters, i.e., False Fire Danger Zone,
-andtheirlocation.Toeffectivelyexploitthespatialcorrelation Compromised Fire Danger Zone, and True Fire Danger Zone.
-betweensensormeasurements,weutilizeaspecialmechanism Primarily, we have used the spatial correlation between the
-thattakesthenetworkaddress(e.g.,IPaddress)ofsensorsand detected outlier and the measurements of its neighbor sensors
-returns their x and y coordinates. To do this, we consider a to decide on whether the outlier is due to a sensor failure or
-grid that covers the whole geographical area which is under a security attack. We assume that IoT humidity and tempera-
-protection. Then, every sensor is assigned with an appropriate ture wireless sensors have been already installed in the field
-x and y coordinate based on its physical location. We empha- that effectively covers a target area. The sensor measurements
-size that in the case of mobile IoT sensors this process can are collected by an edge system that is connected to the core
-be performed using a dynamic method since the location of system. Regarding the learning model, we have used three
-a sensor may change with respect to time. This can be easily ML classification algorithms, i.e., classification and regres-
-implementedsincemobilesensorsusuallysendtheirreal-time sion trees (CARTs), random forest (RF), and support vector
-location data too along with the data streams. machine (SVM) at the edge segment to detect outliers. In our
-Case2.3(TrueFireDanger Zone):Itcanbearguedthatall experiments, we have used the Forest Fire real data set [15].
-sensors in this case may generate the same readings and thus The data set has been created from the meteorological data
-a high level of spatial correlation will be detected. Counter gathered in the northeast region of Portugal over a period of
-Argument. We first accept that this is true, however, if we four years. In the next section, we present the mathematical
-increase the land/zone size then it is again highly likely that modeling of our approach.
-the readings of one zone from another will be different and
-the outlier will definitely be detected. We emphasize that the
-zone size in this case plays an essential role. Therefore, the A. Mathematical Modelling
-comparison of different zones or clusters of different zones As said previously, we utilize the spatial correlation
-with each other will also provide more accurate insights of between measurements from neighboring sensors to distin-
-potential risk. guish between a false fire danger detection and a true bushfire
-case.Todothis,wehaveutilizedtheMoran’sIindex[16],[17]
-whichisanindicatorofspatialcorrelationindistributedarchi-
-tectures. There are global and local versions of the Moran’s
-IV. IMPLEMENTATIONANDARCHITECTUREDETAILS
-I index available. The global version indicates the level of
-In Fig. 2 we have presented the work-flow of our approach
-spatial correlation over an entire region and is calculated as
-which is divided into three phases (particularly based on spa-
-follows:
-tialcorrelationbetweensensormeasurements).Thefirstphase
-(cid:2) (cid:2) (cid:3) (cid:4)
-is the preprocessing phase in which the data streams from
-S S S (cid:2) (m −m¯) m −m¯
-IoT sensors are collected and processed. This phase is per- MI= (cid:2)i=1 (cid:2)j=1 ij (cid:2)i j
-formed once only during the setup of the IoT network. In the S i=1 S j=1(cid:2) ij S i=1(m i−m¯)2
-Authorized licensed use limited to: University of Saskatchewan. Downloaded on June 17,2023 at 23:04:19 UTC from IEEE Xplore. Restrictions apply.5270 IEEEINTERNETOFTHINGSJOURNAL,VOL.9,NO.7,APRIL1,2022
-TABLEI
-DESCRIPTIONOFTHEFORESTFIREDATASET
-where S is the number of measuring units (sensors), m is resultsinhavingthemeasurementsofs anditsneighborsstill
-i i
-the value of the desired feature measured by sensor s, and spatially correlated.
-i
-m¯ is the mean value of feature m. We also need to determine
-what sensors are considered as neighbor. This is applied on V. PERFORMANCEEVALUATION
-the Moran’s I expression using the (cid:2) ij weights. For example, In this section, we discuss the test settings, experi-
-if s i and s j are neighbor, then (cid:2) ij = 1, otherwise, (cid:2) ij = 0. ments results, PoC implementation, and a comparison of our
-However, we have adopted a more conservative approach in approach with three related research works.
-which (cid:2) weights are obtained using r which is the physical
-ij ij
-distance between s i and s j, i.e., A. Test Settings
-1 WehavedevelopedaPoCusingPython3.7.4.Twotypesof
-(cid:2) = .
-ij r2 workstations were used for the experiments: 1) Intel Core i5–
-ij
-11600 2.80-GHz CPU with 8 GB of RAM and 2) Intel Core
-For the values of MI close to 0, it is concluded that there
-i7–7700K @4.20-GHz CPU with 64 GB of RAM. We also
-is no spatial correlation in the spatial data set. On the other
-used an Android mobile device LG G4–H818P equipped with
-hand, if the absolute value of MI is greater than 0, the global
-a Hexa–Core 1.8-GHz processor, 3 GB of RAM, and running
-correlation of the spatial data set is confirmed.
-Android OS 5.1, acting as an IoT device.
-The expected value of the MI index is calculated as
-Regarding the IoT network, we have used the Eclipse Paho
-(−1/S−1) [16], [17]. However, the standardized version of
-MQTT Python library [23]. The Python code enables the
-MI is generally used to determine the thresholds on which
-MQTTclientsandbrokerstopublishamessageandsubscribe
-the spatial correlation becomes significant in a data set. The
-toatopicandreceiveapublishedmessageaswell.Weusethe
-global Moran’s I index is standardized to G(MI) as follows:
-Forest Fire real data set [15] for performance evaluation. The
-MI−Exp(MI) data set has different features, including spatial data (x and
-G(MI)= (cid:5) .
-(cid:3) (cid:4) y coordinates) and meteorological features, such as tempera-
-Exp MI2 −(Exp(MI))2
-tureandrelativehumidity(seeTableIpresentsthefeaturesof
-For example, a spatial data set is correlated with a confi- the data set.). For the outlier detection phase, we have used
-dence level of 95%, if |G| is greater than 1.96. The global three ML algorithms, i.e., CARTs, RF, and SVM. To model
-Moran’s I index reflects the level of spatial correlation over the real fire danger scenario we have added Gaussian noise
-thewholedataset.Thus,weusethelocalversionoftheindex to the measurements of several randomly selected neighbor
-to determine the degree of correlation between neighbor sen- sensors.
-sors only. For a specific sensor s, the local version of the In addition, we define R as the percentage of sensors that
-i
-index is calculated as follows: send outlier measurements. We change R from 1% to 5%
-to see how it affects the accuracy of the proposed solution.
-(m i−m¯) (cid:6)S (cid:3) −m¯(cid:4)
-MI = (cid:2) m , where Furthermore, to evaluate the intensity of the outliers, we have
-i p2 ij j changed the level of the injected Gaussian noise by consid-
-i j=1,j(cid:3)=i
-(cid:2) ering its standard deviation (sigma) as a percentage of the
-S (cid:2)
-p2 = j=1 ij −m¯2. value of each measurement. For this reason, we have changed
-i S−1 sigma from 0.2T to 0.5T for temperature outliers and from
-Thus, after an outlier is detected by the outlier detection 0.2H to 0.5H for humidity outliers, where T and H are
-module for sensor s, the local Moran’s I index MI is calcu- the true measurements of temperature and humidity, respec-
-i i
-lated for s to obtain the degree of spatial correlation between tively. Naturally, lower levels of noise result in more difficult
-i
-s and its neighbors. If the index is close to 0, false fire dan- detection of the relevant outliers.
-i
-ger will be reported since in this case, there is no correlation
-B. Results
-between the measurements of s and its neighbors. In other
-i
-words, it indicates s is malfunctioning while other sensors Figs. 3 and 4 show the detection accuracy of the three
-i
-are working well. However, in case of real fire danger, all employedMLalgorithmsfortemperatureandhumidityparam-
-the neighbor sensors are generally affected by the event. This eters, respectively. As we see in the figures, a higher level of
-Authorized licensed use limited to: University of Saskatchewan. Downloaded on June 17,2023 at 23:04:19 UTC from IEEE Xplore. Restrictions apply.NOSOUHIetal.:BUSHFIRERISKDETECTIONUSINGINTERNETOFTHINGS:APPLICATIONSCENARIO 5271
-Fig. 3. Detection accuracy based on temperature measurements and the percentage of sensors who generate outlier measurements (a) CART, (b) RF, and
-(c)SVMalgorithms.
-Fig. 4. Detection accuracy based on humidity measurements and the percentage of sensors who generate outlier measurements (a) CART, (b) RF, and
-(c)SVMalgorithms.
-the added noise results in higher accuracy, as we expected.
-Thus, during the beginning of a bushfire and considering a
-fixed value of R, the detection accuracy increases over time
-because the new measurements are distancing from the nor-
-mal expected measurements. This behavior is seen for all
-the three algorithms. Moreover, having a larger value of R
-results in higher accuracy. This is because in this case the
-data set is more skewed, and therefore a new cluster can
-be created that convinces the classifier algorithms to label
-it as a separate cluster (i.e., anomaly). In addition, the fig- Fig.5. NetworkstructureofourPoCdesign.
-ures show that the CART and RF algorithms perform better
-than the SVM algorithm in terms of detection accuracy.
-They both give similar performance and can detect outliers server. Moreover, PRTG Network Monitor [25] was used to
-with the accuracy of as high as 99.4% when 5% of sen- monitor the latency between the IoT devices and the servers.
-sors generate outliers. However, the SVM algorithm gives the Regarding the latency between the IoT devices and servers,
-worst performance among the three algorithms. Specifically, as Fig. 6(a) and (b) show, the proposed approach performs
-in case of a lower number of sensors that generate outliers significantly faster in the first scenario in which the detection
-(i.e., R = 1% or R = 2%), SVM performance is poor process is done by the edge server. For example, considering
-in terms of detection accuracy. This may result in delayed the packet size of 32B, we obtained the average latency of
-detections if SVM is employed because it needs a higher 19 ms in this case while the average latency of 73 ms was
-number of sensors that generate outliers in order to detect a obtained in the second scenario in which the sensor measure-
-bushfire case. ments are sent to a cloud server by the IoT devices where the
-We have also performed the PoC implementation of our detection procedure is performed. Thus, the detection time of
-approachintwodifferentscenariostoevaluateitsperformance a bushfire can be effectively increased by employing several
-intermsoflatency.Fig.5showsthenetworkstructureusedin edge servers (each one covers a specific zone in the target
-our prototype implementation. First, we performed the detec- area) that collect IoT sensor measurements and perform the
-tionprocessusinganedgeserverthatwaslocatedclosetothe proposed detection approach. The detected events, logs, and
-IoT device (within the Wifi range). In the second scenario, performance of the edge servers can be monitored in the core
-the procedure was performed by a cloud server with a phys- segment of the network using a centralized server.
-ical distance of 280 km to the IoT field network. We used Wealsorecordedtheend–to–endlatencyinthedetectionof
-ZeroTier [24] to connect the IoT field network to the cloud bushfire symptoms. To emulate the behavior of environmental
-Authorized licensed use limited to: University of Saskatchewan. Downloaded on June 17,2023 at 23:04:19 UTC from IEEE Xplore. Restrictions apply.5272 IEEEINTERNETOFTHINGSJOURNAL,VOL.9,NO.7,APRIL1,2022
-TABLEII
-COMPARISONOFOURAPPROACHWITHTHREERESEARCHWORKSINTHEFIELDOFOUTLIERDETECTION
-Fig.7. Averageend–to–endlatency(changestepw.r.tsensornumbers),time
-intervalbetweensensorreadingswas10s.
-Fig.6. LatencyreportbetweentheIoTdeviceand(a)edgecomputingserver
-and(b)cloudserver.
-parameters at the early stage of a bushfire (e.g., when tem-
-perature and relative humidity are increasing and decreasing,
-respectively), we artificially changed the consecutive sensor
-readings by steps of 20%, 30%, and 50% (see Fig. 7). As we
-expected,thelowestdetectiontimewasrecordedatthechange Fig. 8. Average accuracy of attack detection based on the percentage of
-victimsensorsandtheMoran’sIindexthresholdθ 1.Intheexperiments,θ
-step of 50%. This indicates that the detection time adapts to 2
-hasbeensetto5.
-the spreading speed of fire at its early stage. Moreover, the
-detection latency heavily depends on the time gap between
-twosuccessivesensorreadings,i.e.,refreshtime(inourexper-
-system obtains a small MI for those sensors (close to 0). In
-iments, we used the refresh time of 10 s). In fact, to detect
-this case, the outlier is classified as either a sensor failure (if
-ananomaly,thereshouldbeaminimumdistancebetweentwo theobtainedMIislowerthanthefirstthresholdθ )orasecu-
-1
-consecutive readings. However, this distance may not be cre-
-rityattack(otherwise).However,whenasignificantnumberof
-ated at a single sensor reading (specifically, at low change
-sensors are affected by the attack, the system obtains a large
-steps, e.g., 15%). In other words, the ML-based anomaly
-MI because in this case, a large number of sensors are report-
-detection model may need to receive a few numbers of suc-
-ing outliers. In this case, the calculated MI is compared with
-cessive sensor readings before it can detect an anomaly. As
-the second level of threshold to classify the outlier as either a
-Fig. 7 shows, the highest level of latency was recorded at
-security attack (if the calculated MI is lower than the second
-the change step of 15% due to the small increase/decrease threshold θ ) or a bushfire (otherwise).
-2
-in the measured values. Furthermore, having a large number
-of sensors (S) imposes additional processing overhead on the
-C. Comparison
-system. This is mainly due to the calculation of MIs for a
-i
-large number of sensors. Table II shows the results of a comparison between our
-We performed some experiments to evaluate the system approachandthreeresearchworksinthefieldofoutlierdetec-
-performanceintermsofdistinguishingbetweenabushfirecase tion [26]–[28]. For the results of our work, we present the
-andasecurityattack(seeFig.8).Inthisregard,weusedthree average of accuracy and F-score metrics regarding the four
-different values for the number of victim sensors (those who resultsachieved usingthefourdifferentvaluesofsigmawhen
-have been successfully compromised by the attacker). This is R = 1%. In [26], an IoT outlier detection architecture is
-animportantfactorsincetheMoran’sIindexMIofeveryout- proposedtodetecttheoccurrenceofanomaliesinaforestenvi-
-lier depends on the number of victim sensors. In other words, ronment using four different learning algorithms, i.e., CART,
-if a limited number of sensors are affected by the attack, the RF,gradientboostingmachine(GBM),andlineardiscriminant
-Authorized licensed use limited to: University of Saskatchewan. Downloaded on June 17,2023 at 23:04:19 UTC from IEEE Xplore. Restrictions apply.NOSOUHIetal.:BUSHFIRERISKDETECTIONUSINGINTERNETOFTHINGS:APPLICATIONSCENARIO 5273
-analysis (LDA). We only present the best accuracy achieved solutions and identify cost-effective architectural solutions for
-in [26] (they have achieved a low accuracy of 78% using the effective collection of real-time environmental data from
-the LDA learning model). As seen in Table II, their models largeforestareas.However, afeasibleandmorecost-effective
-have never reached accuracies greater than 97.7% for temper- approachcouldbetodividetheforestareaintoseveralsmaller
-ature. For humidity, they have achieved the highest level of zones (i.e., cells). Then, every cell is covered by spreading
-99.3%. However, there is no information and discussion in low-cost sensors which form a single wireless sensor network
-the paper about the standard deviation (sigma) of the artificial (WSN)inthatcell.Infact,everyWSNrepresentsasmall-scale
-noise added to the data set for outlier generation. In fact, the cell that can be replicated in a larger scale to cover the entire
-accuracy will increase if we use a higher level of sigma as forest. Each WSN is connected to the main network through
-confirmed by Figs. 3 and 4. one or multiple IoT nodes that serve as wireless gateways.
-In [27], the ellipsoidal neighborhood outlier factor (ENOF) This would be a more economic architectural solution since
-mechanism [29] has been used to distinguish normal and the deployment of WSNs is much cheaper than deploying a
-anomaly measurements. ENOF is an outlier detection algo- large number of IoT nodes.
-rithm in which each data point receives an outlier score with We do agree that the above solution would stillnot be fully
-respect to the densities of its close neighborhood. Those data practical and cost-effective. Feasibility still remains an open
-points that are located in a dense group of data points receive issue. However, we argue that it would be good to identify
-a small score and vice versa. The ENOF model also needs to highfireriskareasfirst,andthenencouragelandowners(such
-calculate a threshold value using the standard deviation of the as, big farm land, forest zone under forest ministry, etc.), to
-ENOF scores. This threshold is then used to make anomaly allowtodeploythegivenapproach,athighlysubsidizedrates.
-decisions.Intheirwork,ISSNIP[30]andIBRL[31]datasets Residents living nearby potential zones, and emergency fire
-have been used for the experiments that include both temper- departmentswillreceiveanalertviaalocallydeployedsystem,
-atureandhumiditymeasurements.AlthoughtheENOFmodel respectively,togetprepareinadvance.Graduallydeployingthe
-offers a high level of accuracy, it is still outperformed by our approach from small scale to large scale zone will eventually
-approach(thevaluesofF-scoremetrichavenotbeenpresented strengthen the overall effectiveness of the complete bushfire
-in their work). prediction system without replacing the legacy system.
-Furthermore,in[28],amodularandhybridanomalydetection Towards the third concern, it is arguable to say that the
-systemisproposedforIoTapplications.Itusesacloudserver deployment of 5G technology and the network slicing con-
-for anomaly detection in both application and network layers cepts within that technology can potentially help to achieve
-and train a centralized learning model. The model weights multitenants heterogeneous service requirements [32], [33].
-obtained by the cloud server are then transferred to the IoT However, we are still far away with a complete roll out
-devices for local anomaly detection. Although it offers effi- of 5G networks. Thus, this is an open challenge, and we
-cientperformanceintermsofdetectionlatency,theirachieved need to be cautious with the deployment of the approach
-accuraciesarestilllowerthanourapproach.Thereasonisthat using legacy telecommunication providers until 5G reaches
-thereisadeviationbetweenthepredictionsmadebytheserver in regional areas. We welcome the research community to
-and the ones made locally at the IoT devices. Furthermore, it collaborate with us to address this critical and urgent issue.
-requires the local IoT devices to be frequently updated by the
-cloud server. This may increase the communication overhead
-VII. SUMMARYANDFUTUREWORK
-of the system and affects the accuracy.
-For early detection of bushfire dangers in almost real-time,
-anapproachbasedonMLandspatialcorrelationbetweensen-
-VI. FURTHERDISCUSSIONANDLIMITATIONS sor measurements is developed and validated at the edge of
-the network. The proposed mechanism also ensures that if
-The shown approach is simple and effective but there are
-an attacker successfully attacks the network (e.g., control sen-
-certain aspects that need to be rigorously explored such as:
-sorcommunications,manipulatetheirmeasurements,etc.),the
-1)Willtheproposedapproachtrulyreplacethelegacybushfire
-created outliers do not fool the system to generate a false fire
-detectionsystems?2)Doweneedtodeploythesensorsevery-
-alarm. This means the proposal accurately shows that either
-where in the forests to detect Bushfires? 3) How to deal with
-the fire alarm is due to a true bushfire danger rather than a
-two different verticals (tenants) partially using the same IoT
-sensorfailureoracyberattack.Theresultsofourexperiments
-deploymentsbutwithheterogeneousservicerequirements?We
-confirmed the merit of our approach. In the future, we intend
-observethatthefirsttwoconcernsareinterlinkedandtherefore
-to investigate the design of novel and cost-effective architec-
-we have to address them jointly.
-turalsolutionstoensurethefeasibilityofIoT-basedapproaches
-First, no solution is best fits in all scenarios therefore we
-in the early detection of bushfire, as discussed in the further
-need a holistic approach to understand the emergency of
-discussion section.
-the bushfire problem before we choose the right solution.
-Nevertheless, we do not argue that our approach will replace
-the existing solutions, rather we emphasize that it would be REFERENCES
-beneficial to use the proposed approach on top of the exist-
-[1] J.Russell-Smithetal.,“Bushfires‘downunder’:Patternsandimplica-
-ing approaches in an integrated way. In view of the second tions of contemporary australian landscape burning,” Int. J. Wildland
-Fire,vol.16,no.4,pp.361–377,2007.
-concern, we emphasize that further research is required to
-[2] Bushfires. Accessed: Nov. 10, 2020. [Online]. Available:
-investigate the modification of IoT-based forest monitoring https://www.ga.gov.au/scientific-topics/community-safety/bushfire
-Authorized licensed use limited to: University of Saskatchewan. Downloaded on June 17,2023 at 23:04:19 UTC from IEEE Xplore. Restrictions apply.5274 IEEEINTERNETOFTHINGSJOURNAL,VOL.9,NO.7,APRIL1,2022
-[3] Value of Insurance Losses from Major Weather Events in Australia [29] S.Rajasegarar et al. “Ellipsoidal neighbourhood outlier factor for dis-
-as of January 2020. Accessed: Nov. 11, 2020. [Online]. Available: tributed anomaly detection in resource constrained networks,” Pattern
-https://www.statista.com/statistics/1098529/australia-insurance-losses- Recognit.,vol.47,no.9,pp.2867–2879,2014.
-from-natural-disasters/ [30] V.K.Sachan,S.A.Imam,andM.T.Beg,“Energy-efficientcommuni-
-[4] 2019–20 Australian Bushfires—Frequently Asked Questions: A cation methods in wireless sensor networks: A critical review,” Int. J.
-Quick Guide. Accessed: Nov. 15, 2020. [Online]. Available: Comput.Appl.,vol.39,no.17,pp.35–48,2012.
-https://parlinfo.aph.gov.au/parlInfo/download/library/prspub/7234762/ [31] IBRLDataset. (2020). City of Melbourne Open Data Homepage.
-upload_binary/7234762.pdf [Online]. Available: https://data.melbourne.vic.gov.au/Environment/
-[5] Real-Time Bushfire Monitoring Satellite System to be Developed Sensor-readings-with-temperature-light-humidity-ev/ez6b-syvw
-by Geoscience Australia. Accessed: Nov. 11, 2020. [Online]. [32] G. Fortino et al., “Towards multi-layer interoperability of hetero-
-Available: https://www.abc.net.au/news/2015-08-11/real-time-bushfire- geneous IoT platforms: The INTER-IoT approach,” in Integration,
-monitoring-system-to-be-developed/6688510 Interconnection,andInteroperabilityofIoTSystems.Cham,Switzerland:
-[6] MorethanOneBillionAnimalsKilledinAustralianBushfires.Accessed: Springer,2018,pp.199–232.
-Nov. 11, 2020. [Online]. Available: https://www.sydney.edu.au/news- [33] L. Zanzi, F. Giust, and V. Sciancalepore, “M2 EC: A multi-tenant
-opinion/news/2020/01/08/australian-bushfires-more-than-one-billion- resourceorchestrationinmulti-accessedgecomputingsystems,”inProc.
-animals-impacted.html IEEEWirelessCommun.Netw.Conf.(WCNC),2018,pp.1–6.
-[7] P. Yu, R. Xu, M. J. Abramson, S. Li, and Y. Guo, “Bushfires in
-Australia: A serious health emergency under climate change,” Lancet Mohammad Reza Nosouhi (Member, IEEE)
-Planet.Health,vol.4,no.1,pp.e7–e8,2020. received the master’s degree from Isfahan
-[8] J. Alexandra and C. M. Finlayson, “Floods after bushfires: Rapid University of Technology, Isfahan, Iran, in 2006,
-responses for reducing impacts of sediment, ash, and nutrient slugs,” and the Ph.D. degree from the University of
-Aust.J.WaterResourc.,vol.24,no.1,pp.1–3,2020. Technology Sydney, Ultimo, NSW, Australia, in
-[9] T. Fukuhara, T. Kouyama, S. Kato, R. Nakamura, Y. Takahashi, and 2020.
-H. Akiyama, “Detection of small wildfire by thermal infrared camera HeiscurrentlyworkingasaResearchFellowwith
-withtheuncooledmicrobolometerarrayfor50-kgclasssatellite,”IEEE Keshav Sood with the Centre for Cyber Security
-Trans.Geosci.RemoteSens.,vol.55,no.8,pp.4314–4324,Aug.2017.
-Research and Innovation, Deakin University,
-[10] Bushfire Tracking with Sentinel Hotspots. Accessed: Nov. 11, 2020.
-Geelong,VIC,Australia.
-[Online].Available:https://www.csiro.au/en/Research/Astronomy/Earth-
-observation/Sentinel-hotspots
-[11] Digital Earth Australia Hotspots. Accessed: Nov. 15, 2020. [Online].
-Available:https://hotspots.dea.ga.gov.au#/ Keshav Sood received the B.Tech. degree in elec-
-[12] M. A. Akhloufi, A. Couturier, and N. A. Castro, “Unmanned aerial tronics engineering (Distinction) and the M.Tech.
-vehiclesforwildlandfires: Sensing,perception, cooperationandassis- degree in optical fiber engineering from Punjab
-tance,” Drones, vol. 5, no. 1, p. 15, 2021. [Online]. Available: Technical University, Jalandhar, India, in 2007
-https://www.mdpi.com/2504-446X/5/1/15 and 2012, respectively, and the Ph.D. degree in
-[13] J.J.Roldán-Gómez,E.González-Gironda,andA.Barrientos,“Asurvey information technology from Deakin University,
-on robotic technologies for forest firefighting: Applying drone swarms Geelong,VIC,Australia,in2018.
-toimprovefirefighters’efficiencyandsafety,”Appl.Sci.,vol.11,no.1, He worked as a Research Fellow with the
-p.363,2021.
-Advanced Cyber Security Engineering Research
-[14] Drones to Assist Firefighters in Emergencies. Accessed: Nov.
-Centre, The University of Newcastle, Callaghan,
-14, 2020. [Online]. Available: https://www.nsw.gov.au/news/drones-to-
-NSW,Australia.HeiscurrentlyaLecturerwiththe
-assist-firefighters-emergencies
-Centre for Cyber Security Research and Innovation, School of IT, Deakin
-[15] A. Asuncion and D. J. Newman. UCI Machine Learning Repository.
-University.
-Irvine, University of California, Department of Information and
-Computer Science. Accessed: Oct. 16, 2020. [Online]. Available:
-NeerajKumar(SeniorMember,IEEE)receivedthe
-https://archive.ics.uci.edu/ml/datasets/Forest+Fires
-Ph.D.degreeinCSEfromShriMataVaishnoDevi
-[16] M. Yan et al., “Outliers detection of cultivated land quality grade
-University,Katra,India,in2009.
-results based on spatial autocorrelation,” in Proc. 5th Int. Conf. Agro-
-Geoinformat.(Agro-Geoinformatics),2016,pp.1–5. He is currently a Full Professor with the
-[17] M.DasandS.K.Ghosh,“MeasuringMoran’siinacost-efficientman- Department of Computer Science and Engineering,
-nertodescribealand-coverchangepatterninlarge-scaleremotesensing Thapar University, Patiala, India. He is also
-imagery,” IEEE J. Sel. Topics Appl. Earth Observ. in Remote Sens., with the Department of Computer Science and
-vol.10,no.6,pp.2631–2639,Jun.2017. InformationEngineering,AsiaUniversity,Taichung
-[18] Myfirewatch. Accessed: Nov. 14, 2020. [Online]. Available: City, Taiwan, and with the School of Computer
-https://myfirewatch.landgate.wa.gov.au/map.html Science, University of Petroleum and Energy
-[19] T. Yang and W. C. Arthur. (2015). Bushfire Attack Level Toolbox. Studies,Dehradun,India.
-Accessed: Nov. 14, 2020. [Online]. Available: https://ecat.ga.gov.au/
-geonetwork/srv/eng/catalog.search#/metadata/83736 Tricia Wevill received the Bachelor of Science
-[20] J.Whittaker,M.Taylor,andC.Bearman,“Whydon’tbushfirewarnings (Hons.)andPh.D.degreesfromMonashUniversity,
-work as intended? Responses to official warnings during bushfires in Melbourne, VIC, Australia, in 1999 and 2009,
-new south wales, australia,” Int. J. Disaster Risk Reduction, vol. 45, respectively.
-May2020,Art.no.101476. SheisaLecturerofEnvironmentalScienceswith
-[21] N. de Preu. (2020). Submission to the Bushfires Royal Commission. Deakin University, Geelong, VIC, Australia. Her
-[Online]. Available: https://naturaldisaster.royalcommission.gov.au/ research interests include the study of vegetation
-submissions dynamicsatbothfine-scaleandlandscapelevels,in
-[22] Firecloud Project. Accessed: Feb. 1, 2021. [Online]. Available: response to altered environmental and disturbance
-https://hackerspace.govhack.org/projects/firecloud
-regimes. She is particularly interested in how eco-
-[23] Eclipse Foundation. Accessed: Feb. 18, 2021. [Online]. Available:
-logicaltheorycanbeusedtounderstandcommunity
-http://www.eclipse.org/paho
-developmentandtheapplicationofthisknowledgetolandmanagement.
-[24] Zerotier: Securly Connect Any Device, Anywhere. Accessed: Sep. 21,
-2020.[Online].Available:https://www.zerotier.com/download/
-[25] PRTGNetworkMonitor.Accessed:Sep.21,2020.[Online].Available:
-https://www.paessler.com Chandra Thapa (Member, IEEE) received the
-[26] N. Nesa, T. Ghosh, and I. Banerjee, “Outlier detection in sensed data Ph.D. degree from the University of Newcastle,
-using statistical learning models for IoT,” in Proc. IEEE Wireless Callaghan,NSW,Australia,in2018.
-Commun.Netw.Conf.(WCNC),2018,pp.1–6. He is a Postdoctoral Fellow with the Distributed
-[27] L. Lyu, J. Jin, S. Rajasegarar, X. He, and M. Palaniswami, “Fog- SystemsSecurity,Data61,CSIRO,Marsfield,NSW,
-empoweredanomalydetectioninIoTusinghyperellipsoidalclustering,” Australia.Hisworkingdomainisprivacy-preserving
-IEEEInternetThingsJ.,vol.4,no.5,pp.1174–1184,Oct.2017. distributedAI/machinelearning,security,andtrust.
-[28] A. Ayad, A. Zamani, A. Schmeink, and G. Dartmann, “Design and
-implementationofahybridanomalydetectionsystemforIoT,”inProc.
-6thInt.Conf.InternetThingsSyst.Manage.Security(IOTSMS),2019,
-pp.1–6.
-Authorized licensed use limited to: University of Saskatchewan. Downloaded on June 17,2023 at 23:04:19 UTC from IEEE Xplore. Restrictions apply.
+ComputersandElectronicsinAgriculture142(2017)283–297
+ContentslistsavailableatScienceDirect
+Computers and Electronics in Agriculture
+journal homepage: www.elsevier.com/locate/compag
+Review
+Review of IoT applications in agro-industrial and environmental fields
+Jesús Martín Talaveraa, Luis Eduardo Tobónb, Jairo Alejandro Gómezb,⇑ , María Alejandra Culmana,
+Juan Manuel Arandac, Diana Teresa Parraa, Luis Alfredo Quirozb, Adolfo Hoyosb, Luis Ernesto Garretab
+aUniversidadAutónomadeBucaramanga,Avenida42No.48-11,Bucaramanga,Colombia
+bPontificiaUniversidadJaveriana,Calle18No.118-250,Cali,Colombia
+cPontificiaUniversidadJaveriana,Carrera7No.40-62,BogotáD.C,Colombia
+a r t i c l e i n f o a b s t r a c t
+Articlehistory: Thispaperreviewsagro-industrialandenvironmentalapplicationsthatareusingInternetofThings(IoT).
+Received28March2017 Itismotivatedbytheneedtoidentifyapplicationareas,trends,architecturesandopenchallengesin
+Receivedinrevisedform26July2017 thesetwofields.Theunderlyingsurveywasdevelopedfollowingasystematicliteraturereviewusing
+Accepted9September2017
+academic documents written in English and published in peer-reviewed venues from 2006 to 2016.
+Availableonline18September2017
+Selectedreferenceswereclusteredintofourapplicationdomainscorrespondingto:monitoring,control,
+logistics,andprediction.Implementation-specificdetailsfromeachselectedreferencewerecompiledto
+Keywords:
+createusagedistributionsofsensors,actuators,powersources,edgecomputingmodules,communication
+Internetofthings
+technologies, storage solutions, and visualization strategies. Finally, the results from the review were
+IoT
+compiledintoanIoTarchitecturethatrepresentsawiderangeofcurrentsolutionsinagro-industrial
+Agro-industry
+Environmentalmonitoring andenvironmentalfields.
+Systematicliteraturereview (cid:1)2017ElsevierB.V.Allrightsreserved.
+Contents
+1. Introduction......................................................................................................... 284
+2. Planning ............................................................................................................ 284
+3. Conduction.......................................................................................................... 285
+4. Results.............................................................................................................. 286
+4.1. Answertothefirstresearchquestion ............................................................................... 286
+4.2. Answertothesecondresearchquestion............................................................................. 289
+5. Recentworks ........................................................................................................ 292
+5.1. Communications................................................................................................ 292
+5.2. Energymanagement............................................................................................. 292
+5.3. Monitoring..................................................................................................... 293
+5.4. Logistics....................................................................................................... 293
+6. Discussion........................................................................................................... 293
+6.1. Limitationsandopenchallenges ................................................................................... 293
+6.2. Proposedarchitecture............................................................................................ 295
+7. Conclusions.......................................................................................................... 295
+Acknowledgements................................................................................................... 295
+References .......................................................................................................... 295
+⇑
+Correspondingauthorat:CenterofExcellenceandAppropriationonInternetofThings,PontificiaUniversidadJaveriana,Calle18No.118-250,Cali,Colombia.
+E-mailaddresses:jtalavera@unab.edu.co(J.M.Talavera),letobon@javerianacali.edu.co(L.E.Tobón),jairoalejandro.gomez@javerianacali.edu.co(J.A.Gómez),mculman@
+unab.edu.co (M.A. Culman), juan-aranda@javeriana.edu.co (J.M. Aranda), dparra486@unab.edu.co (D.T. Parra), laquiroz@javerianacali.edu.co (L.A. Quiroz), adolfo.
+hoyos@javerianacali.edu.co(A.Hoyos),luis.garreta@javerianacali.edu.co(L.E.Garreta).
+http://dx.doi.org/10.1016/j.compag.2017.09.015
+0168-1699/(cid:1)2017ElsevierB.V.Allrightsreserved.284 J.M.Talaveraetal./ComputersandElectronicsinAgriculture142(2017)283–297
+1.Introduction dataminingandsynthesismethodologies.Forthisstudy,thetwo
+researchquestionsconsideredwere:
+The widespread of Internet in the last two decades brought
+countlessbenefitstocitizensandorganizationsaroundtheworld. 1. What are the main technological solutions of the Internet of
+Arguably the most important benefit was the ability to consume Thingsinagro-industrialandenvironmentalfields?
+andproducedataandservicesinrealtime.Recently,theInternet 2. Whichinfrastructureandtechnologyareusingthemainsolu-
+of Things is promising to bring the same benefits to everyday tionsofIoTinagro-industrialandenvironmentalfields?
+objects,givingus a waytoextendour perceptionandour ability
+tomodifytheenvironmentaroundus. To collect information, authors performed an Internet search
+In this context, agro-industrial and environmental fields are using various academic digital libraries and search engines.
+idealcandidatesforthedeploymentofIoTsolutionsbecausethey Obtained results were manually compiled in order to select the
+occur in wide areas that need to be continuously monitored and best information sources to answer the two research questions.
+controlled.Atthesametime,IoTopensnewopportunitiesbeyond After analyzing the results, digital libraries and search engines
+groundfloorautomationwhenthecollecteddataareusedtofeed describedinTable1werechosenbasedontheirscientificandtech-
+machinelearningalgorithmstoprovidepredictions(Savilleetal., nicalcontent,aswellastheircloserelationshiptoareasofknowl-
+2015), easing decision planning and decision making for owners, edgeassociatedwiththeobjectiveofthispaper.
+managers,andpolicymakers. Thenextstepwastodefinesearchtermsandaconsistentpro-
+IoTcanbeusedatdifferentlevelsintheagro-industrialproduc- ceduretoseekscientificandtechnicaldocumentationinthedigital
+tionchain(Medelaetal.,2013).Itcanhelptoevaluatefieldvari- libraries and search engines. To define the search terms, a set of
+ables such as soil state, atmospheric conditions, and biomass of keywordswasselectedfromtheresearchquestionstocreatetwo
+plantsoranimals.Itcanalsobeusedtoassessandcontrolvariables groupsofwordswhichareshowninTable2.Eachgroupcontained
+such as temperature, humidity, vibration, and shock during the consolidated expressions with synonyms or terms with related
+product transport (Pang et al., 2015). It can be used to monitor meaning.Group1includedwordsassociatedwiththeInternetof
+andpredicttheproductstateanditsdemandonshelvesorinside Things, while Group 2 contained a set of terms related to the
+refrigerators. In addition, it can provide information to the final agro-industry and environment. Logical operators supported by
+user/consumer about the origin and properties of the product. the advanced search of digital libraries were used to construct
+The IoT applied to the agro-industry can contribute to create an search strings, based on the two research questions, combining
+informed, connected, developed and adaptable rural community. terms from Groups 1 and 2 of Table 2. The general structure of
+UndertheIoTparadigm,low-costelectronicdevicescanimprove the search queries that were applied to the information sources
+human interaction with the physical world, and the computing ispresentedinTable3.
+powerandsoftwareavailableontheInternetcanprovidevaluable Inordertoensurethequalityofpapers,onlythosethatpassed
+analytics.Insummary,IoTcanbeanimportanttoolintheyearsto thefollowingcriteriawereconsideredinthereviewingprocess.
+comeforpeopleinteractingwithinanagro-industrialsystem:sup-
+pliers,farmers,technicians,distributors,businessmen,consumers, (cid:1) Documents published in peer-reviewed conferences, peer-
+andgovernmentrepresentatives. reviewedjournals,papersfromcomputerscienceorengineer-
+IoTcanbeincorporatedintoenvironmentalapplicationstopro- ingorganizations,patents,ortechnicalreports.
+duce dense and real-time maps of air and water pollution, noise (cid:1) DocumentspublishedinEnglish.
+level(Torres-Ruizetal.,2016;Hachemetal.,2015),temperature, (cid:1) Documents published between 2006 and 2016 (both years
+andharmfulradiationamongothers.Itcanbeusedtocollectand inclusive).
+storeenvironmentalrecords,checkthecomplianceofenvironmen-
+talvariableswithlocalpolicies,triggeralerts,orsendrecommen- Ifthemaintopicofagivenpaperwasirrelevantorifitwasout-
+dation messages to citizens and authorities (Liu et al., 2013). sidethescopeofthisstudy,itwasdeleted.Then,aselectioncrite-
+Once the data reach the cloud, governments can feed predictive rion was applied in order to reduce the number of papers found
+modelstoforecastenvironmentalvariables,andidentifyandtrack during the search and to get a small number of high-quality
+pollutionsourcesovertimeandspace,ultimatelyleadingtofaster sourcesthatcouldbeusedtoanswertheresearchquestions.This
+andbetterdecisionstoensureasafeandhealthyenvironmentfor
+allcitizens.
+BasedonthepotentialofIoTapplicationsinagro-industrialand Table1
+environmental fields described in the previous paragraphs, this Informationsourcesusedforthesearchphase.
+paperaimstoidentifythecurrentstateofsolutionsinthesefields,
+Source Type URL
+as well as the trends, architectures, technologies and open chal-
+IEEEXplore Digital http://ieeexplore.ieee.org/Xplore/
+lenges.ThispaperusesaSystematicLiteratureReview(SLR)based
+Library home.jsp
+onamethodologyproposedbyKitchenhamandCharters(2007),in ScienceDirect Digital http://www.sciencedirect.com/
+ordertomakeitunbiasedintermsofinformationselection,pro- Library
+cessing,andpresentationofresults. ACMDigitalLibrary Digital http://dl.acm.org/dl.cfm
+Library
+The paper is structured as follows. Sections 2–4 describe the
+Citeseerlibrary Digital http://citeseer.ist.psu.edu/
+stages of planning, conduction, and results of the SLR. Section 5 Library advanced_search
+outlines some recent works that were published online after the Sensors Digital http://www.mdpi.com/journal/
+SLRwasconcluded.Section6includesadiscussionoftheobtained Library sensors
+Scopus Search http://www.scopus.com/
+results,andSection7presentstheconclusionsfromthisstudy.
+Engine
+MicrosoftAcademic Search http://academic.research.
+Search Engine microsoft.com/
+2.Planning MicrosoftAcademic Search https://academic.microsoft.com/
+Engine
+GoogleScholar Search https://scholar.google.com/
+During this stage of the SLR, the protocol was defined. This
+Engine
+included: research questions, search strategies, selection criteria,J.M.Talaveraetal./ComputersandElectronicsinAgriculture142(2017)283–297 285
+Table2
+Wordsusedforthesearchquery.
+Group1:
+InternetofThings,WebofThings.
+Group2:
+Agriculturalindustry,Agriculturalproducts,Agriculture,Agribusiness,Agroindustry,Airpollution,Apiculture,Aquaculture,ProductTraceability,SmartAgriculture,
+Greenhouses,Harvesting,Horticulture,Husbandry,Irrigation,Livestock,Climate,Feeding,Fertilizers,Forestry,Weather,Animalproduction,Animalsensing,Animal
+tracking,Animaltradecontrol,Avalanche,Bio-fuel,Biologicalproduction,Bio-monitoring,Breeding,Cereals,Crop,Dairy,Drones,Drought,Earthquakesensor,
+Environmentalmonitoring,Equipmentstatus,Farm,Farming,Feedproduction,Fish,Fishery,Flooding,Foodchain,Foodproduction,Forecast,Forestfire,Freeze,
+Fruit,Fruitstorage,Grassland,Heating,Landslide,Meat,Pest,Plant,Poultry,Seed,Vegetable,Waste,Water.
+Table3
+Algorithm:searchquery-(Group1)AND(Group2).
+TITLE-ABS-KEY(‘‘InternetofThings”OR‘‘WebofThings”)AND(‘‘Agriculturalindustry”OR‘‘Agriculturalproducts”ORagricultureORagribusinessORagroindustryOR
+‘‘Airpollution”OR‘‘Apiculture”ORaquacultureOR‘‘ProductTraceability”ORgreenhousesORharvestingORhorticultureORhusbandryORirrigationORlivestock
+ORclimateORfeedingORfertilizersORforestryORweatherOR‘‘Animalproduction”OR‘‘Animalsensing”OR‘‘Animaltracking”OR‘‘Animaltradecontrol”OR
+avalancheORbiofuelOR‘‘Biologicalproduction”ORbiomonitoringORbreedingORcerealsORcropORdairyORdronesORdroughtOR‘‘Earthquakesensor”OR
+‘‘Environmentalmonitoring”OR‘‘Equipmentstatus”ORfarmORfarmingOR‘‘Feedproduction”ORfishORfisheryORfloodingOR‘‘Foodchain”OR‘‘Food
+production”ORforecastOR‘‘Forestfire”ORfreezeORfruitOR‘‘Fruitstorage”ORgrasslandORheatingORlandslideORmeatORpestORplantORpoultryORseedOR
+vegetableORwasteORwater)
+Table4 (cid:1) IC based on quality analysis: in this phase, a quality analysis
+Formusedtoextractdataforeachstudy.
+wasappliedtoremainingpapersandthosethatdidnotcomply
+Dataretrieved Description anyofthefollowingfourqualitycriteria(QC)werediscarded:
+Title Titleofthemainstudy – QC1:DoesthestudypresentacomprehensivesolutionofIoT
+Year Publicationyearofthestudy foragro-industryorenvironment?
+Institution Nameofinstitution(s)leadingtheresearch – QC2:Doesthepapershowdetailsoftheinfrastructureand/
+Country Countrythatdevelopedtheresearch
+ortechnologiesusedtoimplementtheproposedsolution?
+Source Conference,journal,orbookcontainingthemain
+study – QC3: Does the paper present a state of the art or related
+Solution NameoftheIoTsolutiondescribed work?
+Domainand Areaofagro-industryorenvironmentwhereIoTwas – QC4:Doesthepaperpresentananalysisoftheresults?
+subdomain applied
+Architecturemodel Descriptionofthearchitectureused,itsscopeand
+The nextstage of theSLR was dataminingand synthesis.The
+limitation
+Sensors Informationaboutsensortypeandsensorcountper goal here was to extract the information needed to answer the
+nodeinthesolution researchquestionsinanobjectivemanner.Theinformationfields
+Powersource MechanismsusedtopowerIoTdevices extractedforeachstudyarepresentedinTable4.
+Edgecomputing Informationaboutcomputingplatforms,hardware
+architecture,thenumberofnodes,topology
+(homogeneousvs.heterogeneous).
+3.Conduction
+Connectivityand Technologiesusedfortransmittingdata
+communication
+Datastorage Techniquesusedforstoringdata(locally,distributed, The protocol described in the previous section was used to
+andcloud-based),aswellasdataaccess search,selectandevaluatepreliminarypapers.Forthesearchpro-
+methodologies cess, the query defined in Table 3 was passed to information
+Dataprocessingand Algorithmsandmethodologiesforprocessingand
+sourcesgiveninTable1.Thesearchwaslimitedtotitle,abstract
+visualization analyzingdata(dataaggregation,datafusion,
+machinelearning,patternrecognition,bigdata),and andkeywords.
+modelstovisualizethem Fig. 1 illustrates the conduction process discriminated by the
+Deploymentscenario CharacteristicsofthedeploymentsitefortheIoT academic database and search engine used, highlighting the key
+solution
+steps followed to select relevant studies for this review. Initially,
+3578 studies were recovered from electronic databases. Firstly,
+involved using inclusion criteria (IC) and quality criteria (QC), duplicates were excluded, i.e. studies available in more than one
+whichweredefinedinathree-phaseprocess. database,eliminating849copies.Outofthe2729remainingstud-
+ies,2652wereinitiallyscreenedbasedoninclusionandexclusion
+(cid:1) IC based on abstracts: in this phase, authors discarded papers criteriaappliedto thetitle, abstract,and keywords.These papers
+found in the search stage based on the information provided weremarkedtobedownloaded,andreferencesthatcouldnotbe
+intheirabstracts.Papersthatsatisfiedthefirstinclusioncrite- retrievedwerediscarded.Afterward,thesestudieswereevaluated
+rionwerekeptforfurtherprocessing,i.e.papersthatdiscussed using quality criteria obtaining 720 studies. These studies were
+IoTsolutionsappliedtoagro-industryandenvironment.Papers usedtoextractthedatadefinedinTable4.Finally,only72main
+withlittlerelevantinformationintheirabstractweretemporar- studieswereselectedbasedontheirqualityforthefinalconduc-
+ily kept in the list and were processed in the next stage. It is tion phase and used to extract results presented in the next
+importanttohighlightthatqualitycriteriawerenotconsidered section.
+inthisphase. Itisworthtonotethatmorethan90%ofincludedpaperswere
+(cid:1) IC based on full reading: in this phase, papers that did not retrievedfromtwosources:IEEExplore(76.4%)andScopus(13.9%).
+addressthesearchtermsshowninTable2wereremoved.This Incontrast,theleasteffectivesourcesofinformationwereMicro-
+means that even though those papers contained the search soft Academic Search and Microsoft Academic. They retrieved
+termsintheirabstract,theyonlyrepresentedminoraspectsof 668papersduringthefirststageoftheconductionphase(repre-
+them. senting25.2%ofallretrieved papers,and onlybehind IEEExplore286 J.M.Talaveraetal./ComputersandElectronicsinAgriculture142(2017)283–297
+Fig.1. ProcessfollowedintheSLRtoselectmainstudies.
+Fig.2. Distributionofpapersselectedbypublicationyear.
+with45%).However,only3.1%ofthemwereincludedforthenext 4.Results
+reviewing phase, a number well below the 39.8% of papers
+included from IEEExplore. These facts can be explained because This phase presents results of the SLR in order to answer the
+IEEExploreandScopushavecompleteandusableadvancedsearch two research questions based on the information extracted from
+systemsandtheyhavebeenoperatingcontinuouslyunlikeMicro- mainstudiesselected.
+soft’scounterpart(Sinhaetal.,2015a).
+Fig.2enumeratesthenumberofprimarystudiesclassifiedby
+publication year. It can be seen that most of the selected papers
+werepublishedbetween2012and2016.Itshouldbehighlighted 4.1.Answertothefirstresearchquestion
+thatthesmallnumberofpapersshownin2016canbeexplained
+becausetheinitialsearchwasmadeinAprilofthatyear. To identify the main technological solutions of IoT in agro-
+Fig. 3 summarizes the country of origin of selected papers. industryandenvironmentalfields,studiesweregroupedintofour
+Everycontinentoftheworldisrepresentedbyatleastoneresearch technologicaldomains,correspondingto:(1)monitoring,(2)con-
+work.Chinaisthecountrythatcontributedwiththelargestnum- trol, (3) prediction and (4) logistics. Results are summarized in
+berofpapers.AsiahasmorethanhalfofcontributionsandAmerica Table5andillustratedinFig.4.Fromthisfigure,itcanbeseenthat
+haslessthantenpercentofthem,showingahugepotentialforthis mostoftheselectedstudieswerefocusedonmonitoring(62%),fol-
+continent. lowedbycontrol(25%),logistics(7%),andprediction(6%).J.M.Talaveraetal./ComputersandElectronicsinAgriculture142(2017)283–297 287
+Fig.3. Distributionofpapersselectedbycountry.
+Table5
+Clusteringofmainstudiesbyapplicationdomain.
+Domain Mainstudy
+Monitoring (Hussainetal.,2006;Luetal.,2010;Pokric´etal.,2014;
+Postolacheetal.,2014;Sawantetal.,2014;Ehsanetal.,2012;
+Langendoenetal.,2006;Chenetal.,2014;Liuetal.,2013;Islam
+etal.,2014;Kurodaetal.,2015;Fouratietal.,2014;KarandKar,
+2015;Chenetal.,2015;Medelaetal.,2013;Zou,2014;
+Diedrichsetal.,2014;Mittaletal.,2012;DeLaConcepcion
+etal.,2014;Jardaketal.,2009;Voetal.,2013;Tarangeetal.,
+2015;Kodalietal.,2014;Sinhaetal.,2015b;Eometal.,2014;
+Sunetal.,2012;Hakalaetal.,2008;Jainetal.,2008;
+Watthanawisuthetal.,2009;Nguyenetal.,2015;Leeetal.,
+2013;Maetal.,2012;Jayaramanetal.,2015a;Jayaramanetal.,
+2015b;Soontranonetal.,2014;Hashimetal.,2015;Zhaoand
+Zhu,2015;Mathurkaretal.,2014;Kiyoshietal.,2008;
+Postolacheetal.,2013;Mafutaetal.,2012;Fengetal.,2012;
+Xijunetal.,2009;Gutiérrezetal.,2014;Sarangietal.,2016;
+Fangetal.,2014)
+Control (Yooetal.,2007;Kanounetal.,2014;Salesetal.,2015;Chavez-
+Burbanoetal.,2014;Ryuetal.,2015;Pahujaetal.,2013;Xu
+etal.,2015;Yeetal.,2013;Jiaoetal.,2014;Jiberetal.,2011; Fig.4. Distributionofpapersselectedbyapplicationdomain.
+ShuwenandChangli,2015;CulibrinaandDadios,2015;
+KaewmardandSaiyod,2014;Lietal.,2014;Taoetal.,2014;
+ofinformationwithoutanoperatoranditstransmissiontoaserver
+Smarsly,2013;Royetal.,2015)
+ordatacenterforprocessingandvisualization.Integratedmonitor-
+Logistics (Pangetal.,2015;Lietal.,2013;JiangandZhang,2013;
+ing tools made it possible to maintain a continuous communica-
+Charoenpanyasaketal.,2011;Marinoetal.,2010)
+tionwith the deployedWSN, and access stored data through the
+Prediction (KhandaniandKalantari,2009;Savilleetal.,2015;Leeetal.,
+Internet.Hence,smartagriculturebasedonIoTaddsvaluetofarm-
+2012;Luanetal.,2015)
+ersbyhelpingthemtocollectrelevantdatafromcropsandfarms
+using sensor devices. Some IoT setups could display, process and
+Selected papers grouped in the monitoringdomain dealt with analyze remote data applying cloud services in order to provide
+remote sensing of physical and environmental parameters gath- newinsightsandrecommendationsforbetterdecision-making.
+eredinscenariossuchascropsandfarmsusingaWirelessSensor IoTsolutionscategorizedinmonitoringdomaincanbedivided
+Network(WSN).Themaingoalofthisdomainwastheacquisition into three architectural layers (Zou, 2014): (i) a perception layer288 J.M.Talaveraetal./ComputersandElectronicsinAgriculture142(2017)283–297
+supportedbyaWSN;(ii)anetworklayerwherethesensorinfor- (cid:1) Animalmonitoring:Thissubdomainreferredtoanimaltrack-
+mationtravelsalongdistanceusingdifferentprotocolsandGate- ingforbothwildlifeandanimalhusbandryactivities.Aresearch
+ways,and(iii)anapplicationlayerthatincludesawebserveranda belongingtothissubdomainwasadelay-tolerantWSNforthe
+database.Moreover,IoTsolutionsgroupedinthisdomainareinter- monitoringandtrackingofsixhorsespresentedinEhsanetal.
+estedinmonitoringseveraltypesofphysicalvariablesdepending (2012). For this purpose, authors developed necklaces that
+onthesubdomaintowhichtheybelong.Specifically,thefollowing acquired information about horses’ position and speed at a
+subdomainswereidentified:airmonitoring(34.5%),soilmonitor- giventime,andtransmittedsuchlogstofixednodeswhenthey
+ing (27.3%), water monitoring (16.4%), plant monitoring (10.9%), were close to its coverage area. Another example of animal
+and others (10.9%) which include areas such as aquaculture and monitoringwasgivenbyJainetal.(2008),whereanIoTsolu-
+animal monitoring. It is worth to highlight that most of the tionwasresponsibleformonitoringthebehaviorandmigration
+selected studies retrieved in this SLR can be categorized in more patternsofSwampDeers,obtaininginformationoftheanimal
+than one subdomain. For instance, the system proposed in Zou positionandtheclimateatthesametime.
+(2014)isusedforonlinecropgrowthmonitoringanditcaptures
+different types of variables such as: temperature, humidity, soil Papers selected and grouped under the domain of control use
+moisture,CO2,luminosity,pHofwater,andimages.Somerepre- remote actuator devices deployed on-site. Unlike monitoring
+sentativeexamplesofIoTapplicationscategorizedinthemonitor- domainapplications,whichhandleinformationinone-way,appli-
+ingdomainaredescribedbelow. cationscategorizedincontroluseatwo-wayinformationchannel.
+This means that a new level of communication was added, and
+(cid:1) Air monitoring: this subdomain aimed to provide periodic or commandscouldbesentbacktothefield.Inthiscase,information
+continuous measurements, evaluating and determining envi- from the server or data center traveled to a Wireless Sensor and
+ronmental parameters or pollution levels in order to prevent Actuator Network (WSAN) in order to control a set of actuator
+negativeanddamagingeffects.Italsoincludedtheforecasting devices to modify the state of the process or environment. Com-
+of possible changes in the ecosystem or the biosphere as a mands were sent through a human–computer interface or as a
+whole. For instance, in Watthanawisuth et al. (2009) authors resultofadecisionalgorithmsupportedbyanalyticmodules.Actu-
+describedanagriculturalIoTsolutionwhichcanbecategorized ator devices included valves, pumps, humidifiers, and alarms
+intheairmonitoringsubdomain.Inthissolution,authorspro- amongothers.Manyofthesesystemsaimedtooptimizetheusage
+posed a real-time monitoring system of micro climate based ofwater,fertilizers,andpesticidesbasedoninformationprovided
+on a WSN. The solution included temperature and relative byweatherpredictionsystemsandon-siteWSN.Solutionsinthis
+humidity sensors (SHT15) powered by solar panels and sup- domain could help farmers to reduce water consumption and
+portedbyZigBeecommunicationtechnology.Anotherairmon- waste by scheduling irrigation times and quantities according to
+itoringIoTsolutionisGEMS(Luetal.,2010),whichproposedan the state of the crop and its growth cycle. Control systems were
+environmental monitoring system based on GPRS technology programmed to be adaptive, for instance, switching off sprinkler
+for monitoringapple orchards.This system was testedon five ifrainwasdetected.Overall,solutionswithcontrolsystemscould
+different regions of China over a 2-year period by monitoring savemoneytothefarmerandprovideatthesametimevaluable
+variablessuchasrelativehumidity,temperature,andradiation. insights about the consumption of water, fertilizers, pesticides,
+(cid:1) Soil monitoring: papers classified in this subdomain such as andelectricity.
+(Chen et al., 2014 and Mafuta et al., 2012) proposed systems Actuator devices used by IoT solutions grouped in the control
+formonitoringmulti-layersoil temperatureand moistureina domain depended heavily on the subdomain to which they
+farmland fields using WSN. These systems are supported by belonged. In this paper, the following subdomains were consid-
+communicationtechnologiessuchasZigBee,GPRSandInternet, ered:irrigation(72.22%),fertilizers(5.56%),pesticides(5.56%),illu-
+where user interaction with the system is handled by a web mination(5.56%),andaccesscontrol(5.56%).Duringthereview,it
+application. wasfoundthatsomestudiesusedactuatorsinthedomainoflogis-
+(cid:1) Watermonitoring:primarystudiescategorizedinthissubdo- tics (5.56%). Representative examples of IoT applications catego-
+main intend to monitor water pollution or water quality by rizedinthecontroldomainaredescribednext.
+sensing chemicals, pH, and temperature, which can alter the
+natural state of water. An example of this subdomain is pre- (cid:1) Irrigation control: A precision irrigation solution based on
+sented in Postolache et al. (2013), where authors proposed wireless sensor network was proposed by Kanoun et al.
+anIoTsolutionforwaterqualityassessmentthroughthemea- (2014).Themainchallengeofthatstudywastocreateanauto-
+surement of conductivity, temperature, and turbidity. The matedirrigationsystemwhichcouldreducewaterwaste,sav-
+solution is based on a WSN architecture that combines low- ing energy, time, and money. This system was built using
+cost sensing devices and monitoring of multiple parameters threenodesbasedontheTelosBmote:(i)anodetomeasuresoil
+of water quality of shallow waters (lakes, estuaries, rivers) in moistureandsoiltemperature;(ii)anodetomeasureenviron-
+urban areas. Similarly, (Xijun et al., 2009) proposed a WSN mentalparameterssuchasairtemperature,airhumidity,wind
+system for monitoring water level and rainfall in irrigation speedandbrightness;and(iii)anodethatwasconnectedtoa
+systems. valveforirrigationcontrol.Dataweretransmittedtoabasesta-
+(cid:1) Plantmonitoring:TheLOFAR-agroProject(Langendoenetal., tionforstorageandweresenttothefarmer’sPCtoallowhimto
+2006) is an example of plant or crop monitoring. This project take action. Another precision irrigation IoT system was pro-
+aimed to protect a potato crop against phytophthora (a genus posed by Jiao et al. (2014). This included an environmental
+ofwatermold)bymonitoringthemicroclimate(humidityand monitoring system for agricultural management, as well as
+temperature)usingalarge-scaleWSN.Thesystemintendedto the implementation of precision dripping. The system consid-
+generateapolicytoprotectthecropagainstthefungaldisease eredanIoTecosystemdividedintothreelayerscorresponding
+basedonthecollecteddata.InFouratietal.(2014),authorspro- to sensing, transmission, and application. A WSN was used to
+pose a Web-based decision support system communicating perceive environmental information in real time within a
+withaWSNforirrigationschedulinginolivefields.Forthispur- tomatogreenhouse,tolatertransmitthedatatoaremoteserver
+pose,authorsusesensorstomeasurehumidity,solarradiation, managementsystem.InShuwenandChangli(2015)research-
+temperature,andrain. ersdescribedaremotefarmlandirrigationmonitoringsolutionJ.M.Talaveraetal./ComputersandElectronicsinAgriculture142(2017)283–297 289
+based on ZigBee. The system included a solar-powered irriga- inagricultureinclude:addingvaluetoagriculturalproducts,sav-
+tion control system that also monitored air temperature, ing money in distribution costs, improving shipping efficiency,
+humidityandsoiltemperature. reducing unnecessary losses, and to some extent, avoiding risks
+(cid:1) Fertilizer and pesticide control: IoT solutions categorized in (Liping, 2012). Primary studies in logistics were further divided
+this subdomain applied conservation practices to improve in: production (55.6%), commerce (22.2%) and transport(22.2%).
+nutrient usage, efficiency, crop quality, overall yield, and eco- The next paragraphs include representative studies of each
+nomic return while reducing off-site transport of nutrients. In subdomain.
+Pahuja et al. (2013), authors developed an online micro-
+climate monitoring and control system for greenhouses. The (cid:1) Production:inFengetal.(2012)researchersproposedanintel-
+systemwassupportedbyaWSNtogatherandanalyzeplant- ligent system for monitoring an apple orchard that imple-
+related sensor data to produce actions to control the climate, mented suggestions based on data. The system aimed to
+fertilization,irrigation,andpests. reduce management costs of apple orchards, improve apple
+(cid:1) Illuminationcontrol:authorsinYooetal.(2007)describedan quality,andprovidedetailed,comprehensiveandaccurateelec-
+automated agriculture system based on WSN for monitoring tronic information for planting works, pest warnings, and
+greenhouses used to grow melons and cabbages. The system production-quality tracking of apples. The system included
+monitored the growing process of crops and controlled the WSNusingZigbee,GPRS,andIoTprovidingdetailedmonitoring
+greenhouse’s environment. Some of the variables measured data of apple growth for agricultural cooperatives, to support
+included ambient light, temperature, and humidity. For the fordecisionmakinginfarming.
+greenhousewithmelons,thesystemcouldcontroltheillumina- (cid:1) Commerce: (Li et al., 2013) presented an information system
+tionbychangingthelightstatethrougharelay. foragriculturebasedonIoTwhichusedadistributedarchitec-
+(cid:1) Accesscontrol:Anagriculturalintrusiondetectionsystemwas ture. In that study, tracking and tracing of the whole agricul-
+presentedinRoyetal.(2015).Theproposedsystemgenerated tural production process were made with distributed IoT
+alarms in the farmers house and sent a text message to the servers. Moreover, an information-discovery system was
+farmer’smobilephonewhenanintruderenteredthecropfield. designed to implement, capture, standardize, manage, locate,
+andquerybusinessdatafromagriculturalproduction.Thesys-
+Selected papers categorized in the prediction domain were tem also allowed consumers to query information of agricul-
+focused on providing knowledge and tools to farmers to support turalproductstoverifytheirauthenticityandquality.
+decisionmaking.Theyhadspecificmodulesforthesetasksintheir (cid:1) Transport: A representative example of this subdomain is
+architecture, and their predicted variables were grouped as fol- presented in Pang et al. (2015), where an IoT architecture
+lows: environmental conditions (42.86%), production estimation was proposed for the food-production and commercialization
+(42.86%),andcropgrowth(14.29%). chain. This paper dealt with logistics involved in the trans-
+portation of melons from Brazil to Sweden in a journey that
+(cid:1) Environmentalconditions:Arepresentativeexampleofenvi- takes 46days. Sensor nodes measured conditions in the envi-
+ronmental condition prediction is proposed in Khandani and ronment including oxygen, carbon dioxide, ethylene, temper-
+Kalantari(2009), whereauthorsdescribeda designmethodol- ature, humidity, and mechanical stress, such as vibrations,
+ogytodeterminethespatialsamplingofhumiditysensorsfor tilts, and shocks.
+thesoilwithinaWSN.Theyusedahistoricaldatabaseofdense
+soil-humidity measurements todeterminethebehaviorofthe Fig.5summarizesthedistributionofeachapplicationdomain
+2Dcorrelationthatexistsbetweenthemeasurementsofnearby into its corresponding subdomains described in the previous
+sensors.Thiswasusedlatertofindthelargestspatialsampling paragraphs.
+thatensuredauser-definedvariancefortheestimationonany
+givenpointofinterestinthespace.Authorsfoundthatthespa- 4.2.Answertothesecondresearchquestion
+tialcorrelationfunctiondecaysexponentiallywiththedistance
+betweensensors.Anotherexampleofthepredictionofenviron- InfrastructureandtechnologyusedbyselectedIoTsolutionsin
+mental conditions was presented in Luan et al. (2015), which agro-industrialandenvironmentalfieldswereorganizedinseven
+described a system that integrates drought monitoring and groups, corresponding to: (i) sensing variables, (ii) actuator
+forecastingaswellasirrigationpredictionusingIoT. devices, (iii) power sources, (iv) communication technologies, (v)
+(cid:1) Productionestimation:AuthorsinLeeetal.(2013)presented edgecomputingtechnologies(Shietal.,2016),(vi)storagestrate-
+anIoT-basedagriculturalproductionsystemforstabilizingsup- gies,and(vii)visualizationstrategies.
+ply and demand of agricultural products. They achieved this
+goal by sensing environmental variables and by developing a (cid:1) Sensingvariables:about26%ofanalyzedstudiessensetemper-
+predictionsystemforthegrowthandyieldofcrops.Inadiffer- ature, followed by humidity, physicochemical properties, and
+entapplication,(Savilleetal.,2015)introducedareal-timeesti- radiation with 16%, 11%, and 10%, respectively. Particularly,
+mationsystemforfixed-netfisheryusingultrasonicsensorsand temperature and physicochemical sensors are distributed in
+supervisedlearning. allsubdomainsasitcanbeseeninFig.6.Similarly,55%ofsen-
+(cid:1) Crop growth: a dynamic analysis of farmlands using mobile sors are used for air monitoring. Thus, air temperature and
+sensorswaspresentedinLeeetal.(2012).Thedevelopedsys- humidity, soil moistureand solar radiation,can beconsidered
+tem aimed to establish growth-control plans for grapes, and universalvariablesinagriculturalapplications.
+viticultureactivities. (cid:1) Actuatordevices:thedistributionofactuatorsusedinselected
+studies is shown in Fig. 7. It can be stated that there are far
+Thelastdomainusedtocategorizeselectedstudieswaslogis- fewer actuator devices than sensors currently being used in
+tics. Logistics in agriculturerefers to thephysical flowofentities thesestudiesandthatmostofthemareconcentratedinappli-
+andrelatedinformationfromproducertoconsumertosatisfycon- cationsofcontrolandlogistics.Infact,morethan60%ofactua-
+sumer demand. It includes: agricultural production, acquisition, torsreportedwerefoundinirrigationprocesses.
+transportation, storage, loading and unloading, handling, packag-
+ing,distribution,andrelatedactivities.Someobjectivesoflogistics290 J.M.Talaveraetal./ComputersandElectronicsinAgriculture142(2017)283–297
+Fig.5. Distributionofpapersselectedbyapplicationsubdomain.
+Fig.6. Typesofsensingvariablescollectedinthemonitoringdomain.
+(cid:1) Powersources:currently,mostmonitoringapplicationsprefer vibrationharvesterswerenotfoundinselectedstudiesshowing
+rechargeablebatteriesconnectedtosolarpanels,whichoffera that these approaches must mature and gain popularity for
+simplebutsustainableenergysupply.Incontrast,controlappli- agriculturalandenvironmentalapplications.
+cations that typically have demanding energy requirements (cid:1) Communicationtechnologies:Fig.9showsthatmoststudies
+prefer the electrical grid. These trends can be appreciated in (40%)usedWirelessPersonalAreaNetwork(WPAN)protocols
+Fig. 8. Recent power sources, such as electromagnetic or such as Bluetooth and ZigBee, followed by WirelessJ.M.Talaveraetal./ComputersandElectronicsinAgriculture142(2017)283–297 291
+Fig.7. Typeofactuatordeviceused.
+Fig.8. Powersources.
+Metropolitan Area Network (WMAN) with 36% of the studies can be stated that web-based solutions were the preferred
+mainlysupportedbycellulartechnologies(GPRS/GSM/3G/4G). strategytovisualizereportsinallsubdomainsofapplications.
+Meanwhile, the near-field communication, which is relatively
+new,hasstartedtoemergeinsomefieldapplications. Most of the selected works do not address security issues
+(cid:1) Edgecomputingtechnologies:microcontrollerplatformswere explicitlyandleavethemonaside.However,someeffortsinthis
+choseninmorethanhalfoftheapplicationsreviewed.Interest- domain were found. For instance, (Jardak et al., 2009) described
+ingly,SingleBoardComputers(SBC)arenotyetappropriatefor thedesignofaWSNthatimplementedaRANdomSAmpleConsen-
+edge computing in IoT agricultural applications. The complete sus(RANSAC)filtertoeliminateinconsistentsensor-nodedatadue
+distributionofedgecomputingtechnologiesisshowninFig.10. to the presence of faulty or malicious nodes in the network. Sun
+(cid:1) Storage strategies: reviewing Fig. 11, it is clear that even et al. (2012) presented a dam monitoring system where users
+thoughCloudstoragerepresentsakeyserviceforIoTsystems, neededtosigninthroughthemaininterfaceinordertovalidate
+only 7.32% of selected studies used it. This shows that most theircredentials.Taoetal.(2014)selectedAppWebastheembed-
+researcherspreferredtheirowndata-storageimplementation. dedWebserverfortheIoTGatewayofanintelligentgranaryman-
+(cid:1) Visualizationstrategies:Fig.12showsthedistributionofthree agement system because it could add the Secure Sockets Layer
+differentvisualizationstrategies:web,mobileandlocal,infour (SSL)protocoltoenableencrypteddataconnection.Thiswasvalu-
+subdomains: monitoring, control, prediction, and logistics. It able because the network information was vulnerable as it came292 J.M.Talaveraetal./ComputersandElectronicsinAgriculture142(2017)283–297
+Fig.9. Communicationtechnologies.
+Fig.11. Storagestrategy.
+fromawirelesschannel.Kurodaetal.(2015)proposedaWSNwith
+inarecentsurveybySinhaetal.(2017),authorsfoundthatLoRais
+easy-to-use secure communication that was implemented using
+the best option for smart agriculture applications. In Lukas et al.
+Zero-admin encrypt/decrypt functions at the MAC level with the
+(2015),authorsdesignedalong-rangewaterlevelmonitoringsys-
+Advanced Encryption Standard (AES-128), which enabled auto-
+temfortroughsusingaWSNbasedonLoRatransceivers,allowing
+matic encryption/decryption of messages between each sensor
+thecattlemantoobservewateravailabilityforlivestockevenwhen
+nodeandthecoordinatornode.
+the barn was 1 or 3km away. In a different application, (Pham
+et al., 2016) proposed an IoT framework to contribute to rural
+5.Recentworks development implementing agricultural applications supported
+byopen-sourcehardwareandlong-rangecommunicationdevices.
+The following paragraphs are devoted to introducing some ThefirstdeploymentofthissolutionusedLoRatransceiverssince
+recent and representative works that were available online ruralvillageswerelocatedinremoteareasanditwasconvenient
+betweenMay2016andJuly2017,beyondtheinitialscopeofthe tohavealow-costandnon-proprietaryinfrastructure.
+SLRprocessdescribedsofar.Theycoverareassuchascommunica-
+tions, energy management, monitoring and logistics for agro-
+5.2.Energymanagement
+industrialandenvironmentalapplications.
+OneofthemainrequirementsfordevicesusedinIoTprojectsis
+5.1.Communications thattheymustbeenergy-efficientaccordingtoBorgia(2014).This
+isparticularlyimportantforpervasivesolutionsdeployedoutdoors
+Low-power WAN (LPWAN) technologies such as SigFox, LoRa, thatcannotbepoweredfromtheelectricgridnorregularlymain-
+narrowbandIoTandothersarebecomingpopularwithinIoTappli- tained because they are installed in difficult or remote environ-
+cations due to its reduced energy requirements, wide coverage ments. In WSN scenarios, the current challenge is to develop
+range,and low-costwhen comparedtootherlong-distancetech- multi-source energyharvesters and ultra-efficientsensors tocre-
+nologiesaccordingtoBarrachina-Muñozetal.(2017).Forexample, atebattery-freesolutions,(ShaikhandZeadally,2016).Thesecon-
+Fig.10. Edgecomputingtechnologies.J.M.Talaveraetal./ComputersandElectronicsinAgriculture142(2017)283–297 293
+Fig.12. Visualizationstrategies.
+siderationsareveryimportantforIoTsolutionsforagro-industrial Asanadditionalresult,authorsfoundastrongcorrelationbetween
+andenvironmentalproblemsasrechargingbatteriesisnotpracti- the beehive status and the short-term rain forecast. Overall, this
+calandambientenergysourcesareusuallyavailable. studyisrelevantforagriculturebecausecroppollinationdepends
+IntermsofsmartenergycontrolforIoTprojects,(Wangetal., on honey bees. Sarangi et al. (2016) presented a framework for
+2016) proposed a novel energy management strategy for solar an automated crop-disease advisory service that integrates the
+powered devices that intend to power the load directly from the interoperabilityofanIoTwebrepositorywithanagriculturaladvi-
+solarcell,avoidingpowerconvertersandenergystorageelements sorycallcenter.Theimplementedsystemprocessesimagesofthe
+thatcontributetoenergylosses,greaterweight/volumeratio,and diseasedplant sent by the farmer,and then it providesthe plant
+higherprice.Anothertrendthatislikelytocontinueisthedevelop- diagnosis and the corresponding management recommendation
+mentofself-powerdevices,suchasthesoilwatercontentsensor forthedisease.
+for an autonomous landslide surveillance system designed by Lu
+et al. (2016). In this case, the sensor used the soil moisture to 5.4.Logistics
+power itself making it suitable for large scale deployments.
+Marjanovic´ etal.(2016)describedacloud-baseddecision-making FoodsafetyandqualitycontrolinlogisticsareemergingasIoT
+mechanismformanagingsensordataacquisitionthatisapplicable agribusinessareasinresponsetothedemandfrombusinessesand
+to collaborative sensing solutions using distributed sensors, like endconsumerstoobtainreal-timeinformationaboutfoodsupply
+mobile devices, to efficiently monitor large geographical areas. chainand‘‘farm-to-fork”traceability.Forinstance,(RuanandShi,
+Thesystemselectedwhichsensorshadtouploadtheinformation 2016) presented an IoT framework to assess the fruit freshness
+to the cloud to prevent the acquisition of redundant information one-commercedeliveries,whichisanon-traditionalretailservice
+fromothernearbysensorsforaspecificcoveragearea,maintaining thatfacesuniquechallengesintransportationduetotheproduct
+a spatial sampling quality and reducing in this way the battery perishability and expensive logistics. Similarly, (Liu et al., 2016)
+depletionofthedevices. introducedapilotprojectusingIoTtomonitorfoodsafetythrough-
+out the product life cycle, helping authorities and consumers to
+5.3.Monitoring trace the food and make better decisions before buying it. In a
+related work, (Wang and Yue, 2017) proposed an early-warning
+Recent environmental monitoring solutions are now offering system for food safety that automatically warns about product
+additional capabilities in terms of decision making and manage- qualityrisksandincidentsbysharingandcentralizinginformation
+ment. For example, (Giorgetti et al., 2016) proposed a custom- among supply chains. Lastly, (Capello et al., 2016) developed a
+madelandslideriskmonitoringsystembasedonaWSNthatallows business-to-business monitoring service based on IoT that pro-
+fast deployments in hostile environments without human inter- vides geo-located information (humidity and temperature) about
+ventionbecause the system isable to dealwith node failureand food storage and transportation without a vendor lock-in
+poor-quality communication links reorganizing the network by infrastructure.
+itself. Wong and Kerkez (2016) presented a Web service and
+real-time data architecture that includes an adaptive controller 6.Discussion
+that updates the parameters of each sensing node within a WSN
+basedonapreviouslydefinedpolicy.Zhengetal.(2016)proposed 6.1.Limitationsandopenchallenges
+anIoTmanagementsystemtoprotecttheecologicalandenviron-
+mentalqualitywhilebuildinganartificialriverwherenatureand After analyzing the difficulties and limitations described in
+cityconverge.Thesystemmonitoredkeyelementslikesoil,water, selected papers from the SLR, the following list summarizes a
+atmosphere,andwindatahighspatialresolutionoveralargearea. few insights that aim to contribute to the mass adoption of IoT
+Edwards-Murphy et al. (2016) introduced a beehive monitoring solutionsinagriculturalandenvironmentalfields.
+systemthatcollectsinternalandexternaldatatodescribethesta-
+tusofthebeecolonyfromasetofpossiblestatesusingaclassifi- (cid:1) Strongerstandardization:itwillhelptoimprovecompatibility
+cation algorithm based on decision trees. This information was amongdifferentvendorsandtoensurestrongersecuritymea-
+used to determine if a visit to the beehive was required or not. suresacrosstheentireIoTstack,startingfromfielddevicesallthe way up to cloud providers and end-user interfaces (Pang not true for high-quality sensors and actuators. In order to
+etal.,2015). deploy IoT solutions with hundreds and possibly thousands
+(cid:1) Better power management: it will increase the endurance of of nodes, the overall hardware, Internet access and interna-
+IoT solutions because nowadays the main factor limiting the tional data roaming costs have to be reduced even further
+lifespan of IoT deployments is energy depletion (Jain et al., (Pang et al., 2015).
+2008; Chen et al., 2014; Islam et al., 2014; Diedrichs et al., (cid:1) Aimforagoodcompatibilitywithlegacyinfrastructure:sim-
+2014). The lifespan can be improved by lowering the power ilarly to what has happened in industrial automation, it is
+consumptionofeachelectronicmodule,includingenergyhar- importantto deliver IoT solutions that can be integrated with
+vesters, and using alternative power storage mechanisms as thecustomer’sexistinginfrastructuresuchasspecializedequip-
+replacementsofrechargeablebatteries,whichaffecttheexpira- ment,fieldmachines,andsoftware.
+tiondateofdeployeddevices. (cid:1) Consider scalability early on: with an increasing number of
+(cid:1) Security:amajorchallengeintherealizationoftheIoTinagri- devices in large deployments, data synchronization and data
+cultureisthesecurityproblem(JiangandZhang,2013),andthe reliabilitybecomecritical(Diedrichsetal.,2014).
+fewworksthatconsideritonlyincorporatefragmentedstrate- (cid:1) Adopt good practices of software engineering: as the scale
+giestomitigateit.Therefore,itisevidentthatthereisaneedfor and endurance of deployed IoT solutions grow, the time and
+agro-industrial and environmental IoT solutions that address effort devoted to analyzing generated data, refining the code,
+end-to-endinformationsecurityandphysicalintegrityoffield and adding new features will explode unless the software is
+devices. well designed and documented (Hussain et al., 2006;
+(cid:1) Designusingmodularhardwareandsoftware:itwillenablea Jayaramanetal.,2015a).
+greater degree of reuse and customization for the end user (cid:1) Improve robustness for field deployments: commercial IoT
+(Pangetal.,2015). solution should be able to handle strong changes in tempera-
+(cid:1) Improve unit cost: even though the cost of embedded com- ture,humidity,andilluminationtodealwithseasonalchanges
+puting platforms have been decreasing sharply, the same is andworldwideclimatevariability.
+Monitoring Control Prediction Logistics
+Application
+Layer
+Service
+Communication
+Storage Analytics Visualization Security
+Services Layer
+GPRS 3G 4G 5G
+NB-IoT
+IoT Field
+Gateway Gateway
+Communication
+Internet
+Layer
+Ethernet
+NFC
+Field
+WSN Gateway
+Weather
+Station Illumination Irrigation
+Solar Panel RFID Pesticide Harvesting Fertilization Physical
+Layer
+Soil Moisture TemperatureHumidity Electrical Grid
+gnisneS
+lortnoC
+294 J.M.Talaveraetal./ComputersandElectronicsinAgriculture142(2017)283–297
+Robot
+Perception Layer Control Layer
+Fig.13. ProposedIoTarchitectureforagro-industrialandenvironmentalapplications.J.M.Talaveraetal./ComputersandElectronicsinAgriculture142(2017)283–297 295
+(cid:1) User-centereddesign:theinstallationandmanagementofcor- The temperature and humidity of the air, as well as the soil
+respondingIoTnodesshouldbestraightforwardfornon-expert moistureand solarradiationcan berecognizedas universalvari-
+users. Additionally, the hardware must require very little or ablesmeasuredinagriculturalapplicationsbasedonselectedstud-
+nonehumanmaintenanceduringitslifespan,andtheunderly- ies.Similarly,actuatorssuchasvalves,pumps,motors,sprinklers,
+ing communication network should be intelligent enough to humidifiers,andlampswerewidelyusedinirrigation,fertilization,
+reconfigureorhealitselfinthecaseofanodefailure. pesticide management, and illumination control. It was also
+(cid:1) ContributetotheIoTtheecosystem:thereisanoticeablevoid observedthatnewenergysourcesandCloudstoragehavenotbeen
+intheliteratureonhowtoimproveandadaptIoTsolutionsfor widelyadopted,showingthatthereareopportunitiesforresearch
+real-worldapplicationsbeyondsimpleprototypes(Chenetal., anddevelopmentintheseareas.
+2015). Studiesincludedinthispaperprovideacompactviewofsolu-
+(cid:1) Sustainable practices: even if the most humble predictions tions proposed for agro-industrial and environmental problems
+abouttheworldwideadoptionofIoTdevicesbecomeareality, duringthelastdecade.Itwasfoundthatmostofthemreliedheav-
+recyclingstrategieswillhavetobetakenintoaccountfornew ily on heterogeneous components and wireless sensor networks.
+solutionsdeployedonthefield,asanintegralpartofthepro- However,itseemsreasonabletoassumethatfuturesolutionswill
+ductlifecycletoreducetheenvironmentalimpact. needtofullyembraceCloudservicesandnewwaysofconnectivity
+in order to get the benefits of a truly connected and smart IoT
+ecosystem.
+6.2.Proposedarchitecture
+Tosummarizethefindingsofthisstudy,authorsproposedthe Acknowledgements
+IoTarchitectureforagro-industrialandenvironmentalapplications
+thatisillustratedinFig.13.Thisencapsulatesmostofthestudies Authorswouldliketoacknowledgethesupportofallpartners
+analyzedinthispaper.Thearchitecturehasfourmainlayers:phys- withintheCenterofExcellenceandAppropriationontheInternet
+ical, communication, service, and application. The physical layer ofThings(CEA-IoT),aswelltheColombianMinistryfortheInfor-
+includesperceptionandcontrol.Inperception,themainobjective mation and Communication Technologies (MinTIC), and the
+is to produce valuable data sensing field variables using a WSN. Colombian Administrative Department of Science, Technology
+Dataproducedaresenttothecommunicationlayerthroughfield and Innovation (Colciencias) through the project ID: FP44842-
+gateways.Devicesintheperceptionlayercanbepoweredbybat- 502-2015fromtheNationalTrustforFundingScience,Technology
+teries for short-term deployments or by solar panels because of andInnovationFranciscoJosédeCaldas.
+their low-power consumption. In contrast, the control layer acts
+asadatasink,receivinginformationfromacommunicationlayer
+References
+or a perception layer in the simplest case. Information received
+in the control layer alters the state of field actuators frequently
+Barrachina-Muñoz, S., Bellalta, B., Adame, T., Bel, A., 2017. Multi-hop
+requiringpowerfromtheelectricalgrid.Inthemiddleoftheper- communication in the uplink for LPWANs. Comput. Netw. 123, 153–168.
+ceptionandcontrollayersthereisamobilerobotthatcanbeused http://dx.doi.org/10.1016/j.comnet.2017.05.020.
+whenfixeddevicesarenotthebestoption.Inthecommunication Borgia,E.,2014.Theinternetofthingsvision:keyfeatures,applicationsandopen
+issues. Comput. Commun. 54, 1–31. http://dx.doi.org/10.1016/
+layer, the objectiveis to move the informationfrom the physical j.comcom.2014.09.008.
+layer to the Internet, collecting data from IoT gateways based Capello,F., Toja,M.,Trapani,N.,2016.A real-timemonitoring servicebasedon
+either on Ethernet or mobile networks (e.g: GPRS/3G/4G/NB-IoT industrialinternetofthingstomanageagrifoodlogistics.In:6thInternational
+ConferenceonInformationSystems,LogisticsandSupplyChain,pp.1–8.
+and eventually 5G). This layer includes field gateways acting as
+Charoenpanyasak,S.,Suntiamorntut,W.,Phatthanatraiwat,T.,Ruksachum,J.,2011.
+interfaces between IoT gateways and transceivers using ZigBee, Smartshrimphatcheryusingmikrosplatform.In:4thJointIFIPWirelessand
+Bluetooth, NFC, WiFi, LoRA, or Sigfox. The service layer handles MobileNetworkingConference(WMNC).IEEE,pp.1–5.
+Chavez-Burbano,P.,Marin-Garcia,I.,Muñoz-Arcentales,A.,2014.Ad-hocnetwork
+dataingestionfromthecommunicationlayer,aswellastheirstor-
+implementation and experimental testing using low cost and COTS
+age, analytics, visualization, and security. Finally, the application components:anecuatoriancasestudy.In:InternationalWorkConferenceon
+layerconsumesservicesfromthepreviouslayerinthearchitecture Bio-inspiredIntelligence(IWOBI).IEEE,pp.133–137.
+Chen, K.T., Zhang, H.H., Wu, T.T., Hu, J., Zhai, C.Y., Wang, D., 2014. Design of
+andallowstheusertohandlemonitoring,control,prediction,and
+monitoringsystemformultilayersoiltemperatureandmoisturebasedonWSN.
+logistics. In:InternationalConferenceonWirelessCommunicationandSensorNetwork
+(WCSN).IEEE,Wuhan,pp.425–430.http://dx.doi.org/10.1109/WCSN.2014.9.
+Chen,Y.,Chanet,J.-P.,Hou,K.-M.,Shi,H.,deSousa,G.,2015.Ascalablecontext-
+aware objective function (SCAOF) of routing protocol for agricultural low-
+7.Conclusions powerandlossynetworks(RPAL).Sensors15,19507–19540.http://dx.doi.org/
+10.3390/s150819507.
+Culibrina,F.B.,Dadios,E.P.,2015.Smartfarmusingwirelesssensornetworkfordata
+ThispaperpresentedanupdatedreviewofIoTapplicationsfor
+acquisition and power control distribution. International Conference on
+agro-industrial and environmental fields. It was guided by a sys- Humanoid, Nanotechnology, Information Technology, Communication and
+tematic literature review, and therefore the methodology and Control,EnvironmentandManagement(HNICEM).IEEE,pp.1–6.
+DeLaConcepcion,A.R.,Stefanelli,R.,Trinchero,D.,2014.Awirelesssensornetwork
+intermediateresultsobtainedduringthestages ofplanning, con-
+platform optimized for assisted sustainable agriculture. In: Global
+duction,andresultswerereportedingreatdetail.From3578initial Humanitarian Technology Conference (GHTC). IEEE, pp. 159–165. http://dx.
+studies extracted from electronic sources, 72 main studies were doi.org/10.1109/GHTC.2014.697027.
+selected based on their relevance to answer two research Diedrichs,A.L.,Tabacchi,G.,Grünwaldt,G.,Pecchia,M.,Mercado,G.,Antivilo,F.G.,
+2014.Low-powerwirelesssensornetworkforfrostmonitoringinagriculture
+questions. research.In:BiennialCongressofArgentina(ARGENCON).IEEE,pp.525–530.
+Selectedstudiescamefromfivecontinents,andAsiancountries http://dx.doi.org/10.1109/ARGENCON.2014.686854.
+contributed to more than half of them. During this study, it was Edwards-Murphy,F.,Magno,M.,Whelan,P.M.,O’Halloran,J.,Popovici,E.M.,2016.b
++WSN:smartbeehivewithpreliminarydecisiontreeanalysisforagriculture
+discovered that most of the research still focuses on monitoring
+and honey bee health monitoring. Comput. Electron. Agric. 124, 211–219.
+applications(62%);howeverthereisagrowinginterestinclosing http://dx.doi.org/10.1016/j.compag.2016.04.008.
+the loop by doing control (25%), and there are some preliminary Ehsan, S., Bradford, K., Brugger, M., Hamdaoui, B., Kovchegov, Y., Johnson, D.,
+Louhaichi,M.,2012.Designandanalysisofdelay-tolerantsensornetworksfor
+solutionsinlogisticsand prediction(13%)for agro-industrial and
+monitoringandtrackingfree-roaminganimals.IEEETrans.WirelessCommun.
+environmentalapplicationsusingIoT. 11,1220–1227.http://dx.doi.org/10.1109/TWC.2012.012412.111405.296 J.M.Talaveraetal./ComputersandElectronicsinAgriculture142(2017)283–297
+Eom,K.-H.,Hyun,K.-H.,Lin,S.,Kim,J.-W.,2014.Themeatfreshnessmonitoring japaneseconsumerundersensorAsia.In:SICEAnnualConference,pp.2582–
+systemusingthesmartRFIDtag.Int.J.Distrib.SensorNetworks2014,1–10. 2585.http://dx.doi.org/10.1109/SICE.2008.4655101.
+Fang,S.,DaXu,L.,Zhu,Y.,Ahati,J.,Pei,H.,Yan,J.,Liu,Z.,2014.Anintegratedsystem Kodali,R.K.,Rawat,N.,Boppana,L.,2014.WSNsensorsforprecisionagriculture.In:
+forregionalenvironmentalmonitoringandmanagementbasedoninternetof Region 10 Symposium. IEEE, pp. 651–656. http://dx.doi.org/10.1109/
+things.IEEETrans.Ind.Inform.10,1596–1605. TENCONSpring.2014.686311.
+Feng, C., Wu, H.R., Zhu, H.J., Sun, X., 2012. The design and realization of apple Kuroda,M.,Ibayashi,H.,Mineno,H.,2015.Affordable400MHzlong-haulsensor
+orchardintelligentmonitoringsystembasedoninternetofthingstechnology. network for greenhouse horticulture. In: International Conference on
+AdvancedMaterialsResearch,vol.546.TransTechPubl,pp.898–902. InformationNetworking(ICOIN).IEEE,Cambodia,pp.19–24.http://dx.doi.org/
+Fourati,M.A.,Chebbi,W.,Kamoun,A.,2014.Developmentofaweb-basedweather 10.1109/ICOIN.2015.705785.
+station for irrigation scheduling. In: 3rd International Colloquium in Langendoen,K.,Baggio,A.,Visser,O.,2006.Murphylovespotatoesexperiencesfrom
+InformationScienceandTechnology(CIST).IEEE,pp.37–42.http://dx.doi.org/ apilotsensornetworkdeploymentinprecisionagriculture.20thInternational
+10.1109/CIST.2014.701659. ParallelandDistributedProcessingSymposium(IPDPS),vol.2006.IEEE,Rhodes
+Giorgetti,A.,Lucchi,M.,Tavelli,E.,Barla,M.,Gigli,G.,Casagli,N.,Chiani,M.,Dardari, Island,pp.1530–2075.http://dx.doi.org/10.1109/IPDPS.2006.163941.
+D.,2016.Arobustwirelesssensornetworkforlandslideriskanalysis:system Lee,J.,Kang,H.,Bang,H.,2012.Dynamiccropfieldanalysisusingmobilesensor
+design,deployment,andfieldtesting.IEEESens.J.16,6374–6386.http://dx.doi. node.In:InternationalConferenceonICTConvergence(ICTC),pp.7-11.http://
+org/10.1109/JSEN.2016.2579263. dx.doi.org/10.1109/ICTC.2012.6386766.
+Gutiérrez, J., Villa-Medina, J.F., Nieto-Garibay, A., Porta-Gándara, M.Á., 2014. Lee,M.,Hwang,J.,Yoe,H.,2013.AgriculturalproductionsystembasedonIoT.In:
+automated irrigation system using a wireless sensor network and GPRS 16thInternationalConferenceonComputationalScienceandEngineering(CSE).
+module.IEEETrans.Instrum.Meas.63,166–176. IEEE,pp.833–837.
+Hachem,S.,Mallet,V.,Ventura,R.,Pathak,A.,Issarny,V.,Raverdy,P.-G.,Bhatia,R., Li, M., Chen, G., Zhu, Z., 2013. Information service system of agriculture IoT.
+2015.Monitoringnoisepollutionusingtheurbancivicsmiddleware.In:First Automatika-J.Control,Meas.Electron.Comput.Commun.54,415–426.
+InternationalConferenceonBigDataComputingServiceandApplications.IEEE, Li,R.-A.,Sha,X.,Lin,K.,2014.Smartgreenhouse:areal-timemobileintelligent
+pp.52–61. monitoringsystembasedonWSN.In:InternationalWirelessCommunications
+Hakala,I.,Tikkakoski,M.,Kivel,I.,2008.Wirelesssensornetworkinenvironmental andMobileComputingConference(IWCMC).IEEE,pp.1152–1156.
+monitoring - case foxhouse. In: 2nd International Conference on Sensor Liping,W.,2012.StudyonagriculturalproductslogisticsmodeinHenanProvinceof
+Technologies and Applications (SENSORCOMM), pp. 202–208. http://dx.doi. China.In:SoftwareEng.KnowledgeEng.:TheoryPractice.Springer,pp.635–
+org/10.1109/SENSORCOMM.2008.27. 640.
+Hashim, N., Mazlan, S., Aziz, M.A., Salleh, A., Ja’afar, A., Mohamad, N., 2015. Liu,Y.,Han,W.,Zhang,Y.,Li,L.,Wang,J.,Zheng,L.,2016.Aninternet-of-things
+Agriculturemonitoringsystem:astudy.J.Teknologi77,53–59.http://dx.doi. solution for food safety and quality control: a pilot project in China. J. Ind.
+org/10.11113/jt.v77.4099. Inform.Integrat.3,1–7.http://dx.doi.org/10.1016/j.jii.2016.06.001.
+Hussain,S.,Schofield,N.,Matin,A.W.2006.Designofaweb-basedapplicationfor Liu,Z.,Huang,J.,Wang,Q.,Wang,Y.,Fu,J.,2013.Real-timebarrierlakesmonitoring
+wirelesssensornetworks.In:17thInternationalWorkshoponDatabaseand and warning system based on wireless sensor network. In: International
+ExpertSystemsApplications(DEXA),pp.319–326.http://dx.doi.org/10.1109/ Conference on Intelligent Control and Information Processing (ICICIP). IEEE,
+DEXA.2006.50. Beijing,pp.551–554.http://dx.doi.org/10.1109/ICICIP.2013.656813.
+Islam,A., Islam,T., Syrus,M.A., Ahmed,N.,2014. Implementationof flashflood Lu, S., Duan, M., Zhao, P., Lang, Y., Huang, X., 2010. GPRS-based environment
+monitoring system based on wireless sensor network in Bangladesh. 3rd monitoring system and its application in apple production. International
+InternationalConferenceonInformatics,Electronics&Vision.IEEE,Dhaka,pp. ConferenceonProgressinInformaticsandComputing(PIC),vol.1.IEEE,pp.
+1–6.http://dx.doi.org/10.1109/ICIEV.2014.685075. 486–490.http://dx.doi.org/10.1109/PIC.2010.568757.
+Jain,V.R., Bagree, R., Kumar,A., Ranjan, P., 2008.wildCENSE: GPS basedanimal Lu,T.-C.,Huang,L.-R.,Lee,Y.,Tsai,K.-J.,Liao,Y.-T.,Cheng,N.-C.,Chu,Y.-H.,Tsai,Y.-
+tracking system. In: International Conference on Intelligent Sensors, Sensor H., Chen, F.-C., Chiueh, T.-C., 2016. Invited – wireless sensor nodes for
+NetworksandInformationProcessing(ISSNIP),pp.617–622.http://dx.doi.org/ environmentalmonitoringininternetofthings.In:53rdDesignAutomation
+10.1109/ISSNIP.2008.4762058. Conference(DAC).ACM,pp.1–5.http://dx.doi.org/10.1145/2897937.289860.
+Jardak,C.,Rerkrai,K.,Kovacevic,A.,Riihijarvi,J.,Mahonen,P.,2009.Emailfromthe Luan,Q.,Fang,X.,Ye,C.,Liu,Y.,2015.Anintegratedservicesystemforagricultural
+vineyard. In: 5th International Conference on Testbeds and Research droughtmonitoringandforecastingandirrigationamountforecasting.In:23rd
+Infrastructures for the Development of Networks & Communities and InternationalConferenceonGeoinformatics.IEEE,pp.1–7.
+Workshops (TridentCom). IEEE, pp. 1–6. http://dx.doi.org/10.1109/ Lukas, Tanumihardja, W.A., Gunawan, E., 2015. On the application of IoT:
+TRIDENTCOM.2009.497624. monitoring of troughs water level using WSN. In: Conference on Wireless
+Jayaraman,P.P.,Palmer,D.,Zaslavsky,A.,Georgakopoulos,D.,2015a.Do-it-yourself Sensors (ICWiSe). IEEE, pp. 58–62. http://dx.doi.org/10.1109/
+digitalagricultureapplicationswithsemanticallyenhancedIoTplatform.10th ICWISE.2015.738035.
+International Conference on Intelligent Sensors, Sensor Networks and Ma,D.,Ding,Q.,Li,Z.,Li,D.,Wei,Y.,2012.Prototypeofanaquaculturalinformation
+InformationProcessing(ISSNIP).IEEE,pp.1–6. systembasedoninternetofthingsE-Nose.Intell.Automat.SoftComput.18,
+Jayaraman, P.P., Palmer, D., Zaslavsky, A., Salehi, A., Georgakopoulos, D., 2015b. 569–579.
+AddressinginformationprocessingneedsofdigitalagriculturewithOpenIoT Mafuta, M., Zennaro, M., Bagula, A., Ault, G., Gombachika, H., Chadza, T., 2012.
+platform. In: Interoperability and Open-Source Solutions for the Internet of SuccessfulDeploymentofaWirelessSensorNetworkforPrecisionAgriculture
+Things.Springer,pp.137–152. inMalawi.In:3rdInternationalConferenceonNetworkedEmbeddedSystems
+Jiang, R., Zhang, Y., 2013. Research of agricultural information service platform forEveryApplication(NESEA).IEEE,pp.1–7.
+basedoninternetofthings.In:12thInternationalSymposiumonDistributed Marino,P.,Fontán,F.P.,Domínguez,M.Á.,Otero,S.,2010.AnexperimentalAd-hoc
+Computing and Applications to Business, Engineering Science (DCABES), pp. WSNfortheinstrumentationofbiologicalmodels.IEEETrans.Instrum.Meas.
+176–180.http://dx.doi.org/10.1109/DCABES.2013.39. 59,2936–2948.
+Jiao,J.,Ma,H.,Qiao,Y.,Du,Y.,Kong,W.,Wu,Z.,2014.Designoffarmenvironmental Marjanovic´,M.,Skorin-Kapov,L.,Pripuzˇic´,K.,Antonic´,A.,PodnarZˇarko,I.,2016.
+monitoringsystembasedontheinternetofthings.Adv.J.FoodSci.Technol.6, Energy-awareandquality-drivensensormanagementforgreenmobilecrowd
+368–373. sensing. J. Network Comput. Appl. 59, 95–108. http://dx.doi.org/10.1016/j.
+Jiber, Y., Harroud, H., Karmouch, A., 2011. Precision agriculture monitoring jnca.2015.06.023.
+framework based on WSN. In: 7th International Wireless Communications Mathurkar, S.S., Patel, N.R., Lanjewar, R.B., Somkuwar, R.S., 2014. Smart sensors
+andMobileComputingConference,pp.2015–2020.http://dx.doi.org/10.1109/ basedmonitoringsystemforagricultureusingfieldprogrammablegatearray.
+IWCMC.2011.5982844. In: International Conference on Circuit, Power and Computing Technologies
+Kaewmard,N., Saiyod,S.,2014. Sensordata collectionandirrigation control on (ICCPCT).IEEE,pp.339–344.
+vegetablecropusingsmartphoneandwirelesssensornetworksforsmartfarm. Medela,A.,Cendón,B.,González,L.,Crespo,R.,Nevares,I.,2013.IoTMultiplatform
+In:ConferenceonWirelessSensors(ICWiSE).IEEE,pp.106–112. networkingtomonitorandcontrolwineriesandvineyards.In:FutureNetwork
+Kanoun,O.,Khriji,S.,ElHoussaini,D.,Viehweger,C.,Jmal,M.W.,Abid,M.,2014. andMobileSummit.IEEE,pp.1–10.
+Precisionirrigationbasedonwirelesssensornetwork.IETSci.Meas.Technol.8, Mittal,A.,Chetan,K.P.,Jayaraman,S.,Jagyasi,B.G.,Pande,A.,Balamuralidhar,P.,
+98–106.http://dx.doi.org/10.1049/iet-smt.2013.0137. 2012.mKRISHIwirelesssensornetworkplatformforprecisionagriculture.In:
+Kar, A., Kar, A., 2015. A novel design of a portable double beam-in-time 6thInternationalConferenceonSensingTechnology(ICST).IEEE,pp.623–629.
+spectrometric sensor platform with cloud connectivity for environmental http://dx.doi.org/10.1109/ICSensT.2012.646175.
+monitoring applications. In: 3rd International Conference on Computer, Nguyen,T.-D.,Thanh,T.T.,Nguyen,L.-L.,Huynh,H.-T.,2015.Onthedesignofenergy
+Communication,ControlandInformationTechnology(C3IT),pp.1–6.http:// efficientenvironmentmonitoringstationanddatacollectionnetworkbasedon
+dx.doi.org/10.1109/C3IT.2015.7060228. ubiquitous wireless sensor networks. In: International Conference on
+Khandani,S.K.,Kalantari,M.,2009.Usingfielddatatodesignasensornetwork.In: Computing & CommunicationTechnologies-Research, Innovation,and Vision
+43rdAnnualConferenceonInformationSciencesandSystems(CISS),pp.219– fortheFuture(RIVF).IEEE,pp.163–168.
+223.http://dx.doi.org/10.1109/CISS.2009.5054720. Pahuja,R.,Verma,H.,Uddin,M.,2013.Awirelesssensornetworkforgreenhouse
+Kitchenham,B.,Charters,S.,2007.Guidelinesforperformingsystematicliterature climatecontrol.IEEEPervasiveComput.12,49–58.
+reviewsinsoftwareengineering.In:EBSETechnicalReport.EBSE-2007-01.pp. Pang,Z.,Chen,Q.,Han,W.,Zheng,L.,2015.Value-centricdesignoftheinternet-of-
+1–50. things solution for food supply Chain: value creation, sensor portfolio and
+Kiyoshi,H.,Shrestha,A.,Chinnachodteeranun,R.,Mizoguchi,M.,Shimamura,H., informationfusion.Inform.Syst.Front.17,289–319.http://dx.doi.org/10.1007/
+Kameoka, T., 2008. Spinach field monitoring for bridging thai producer and s10796-012-9374-9.J.M.Talaveraetal./ComputersandElectronicsinAgriculture142(2017)283–297 297
+Pham,C.,Rahim,A.,Cousin,P.,2016.Low-cost,long-rangeopenIoTforsmarter Sun,E.,Zhang,X.,Li,Z.,2012.Theinternetofthings(IOT)andcloudcomputing(CC)
+RuralAfricanvillages.In:InternationalSmartCitiesConference(ISC2).IEEE,pp. basedtailingsdammonitoringandpre-alarmsysteminmines.SafetySci.50,
+1–6.http://dx.doi.org/10.1109/ISC2.2016.758082. 811–815.http://dx.doi.org/10.1016/j.ssci.2011.08.028.
+Pokric´,B.,Krcˇo,S.,Drajic´,D.,Pokric´,M.,Jokic´,I.,Stojanovic´,M.J.,2014.ekoNET- Tao,R.,Yang,S.,Tan,W.,Zhang,C.,2014.Securegatewayofinternetofthingsbased
+environmental monitoring using low-cost sensors for detecting gases, on AppWeb and secure sockets layer for intelligent granary management
+particulate matter, and meteorological parameters. In: Eighth International system.In:InternationalConferenceonComputerandComputingTechnologies
+Conference on Innovative Mobile and Internet Services in Ubiquitous inAgriculture.Springer,pp.78–89.
+Computing(IMIS),pp.421–426.http://dx.doi.org/10.1109/IMIS.2014.57. Tarange,P.H.,Mevekari,R.G.,Shinde,P.A.,2015.Webbasedautomaticirrigation
+Postolache, O., Pereira, J.D., Girão, P.S., 2014. Wireless sensor network-based system using wireless sensor network and embedded linux board. In:
+solutionforenvironmentalmonitoring:waterqualityassessmentcasestudy. International Conference on Circuit, Power and Computing Technologies
+IET Sci., Meas. Technol. 8, 610–616. http://dx.doi.org/10.1049/iet- (ICCPCT),pp.1–5.http://dx.doi.org/10.1109/ICCPCT.2015.7159327.
+smt.2013.0136. Torres-Ruiz, M., Juárez-Hipólito, J.H., Lytras, M.D., Moreno-Ibarra, M., 2016.
+Postolache, O., Pereira, M., Girao, P., 2013. Sensor network for environment Environmental noise sensing approach based on volunteered geographic
+monitoring:waterqualitycasestudy.In:4thSymposiumonEnvironmental information and spatio-temporal analysis with machine learning. In:
+InstrumentationandMeasurements,pp.30–34. International Conference on Computational Science and Its Applications.
+Roy,S.K.,Roy,A.,Misra,S.,Raghuwanshi,N.S.,Obaidat,M.S.,2015.AID:Aprototype Springer,pp.95–110.
+for agricultural intrusion detection using wireless sensor network. In: Vo,T.T.,Nguyen,T.D.,Vo,M.T.,2013.Ubiquitoussensornetworkfordevelopmentof
+InternationalConferenceonCommunications(ICC).IEEE,pp.7059–7064. climate change monitoring system based on solar power supply. In:
+Ruan, J., Shi, Y., 2016. Monitoring and assessing fruit freshness in IoT-Based E- InternationalConferenceonAdvancedTechnologiesforCommunications,pp.
+commercedeliveryusingscenarioanalysisandintervalnumberapproaches. 121–124.http://dx.doi.org/10.1109/ATC.2013.6698090.
+Inf.Sci.373,557–570.http://dx.doi.org/10.1016/j.ins.2016.07.014. Wang,J.,Yue,H.,2017.Foodsafetypre-warningsystembasedondataminingfora
+Ryu, M., Yun, J., Miao, T., Ahn, I.-Y., Choi, S.-C., Kim, J., 2015. Design and sustainable food supply Chain. Food Control 73, 223–229. http://dx.doi.org/
+implementationofaconnectedfarmforsmartfarmingsystem.In:InSensors. 10.1016/j.foodcont.2016.09.048.
+IEE,pp.1–4. Wang,Y.,Liu,Y.,Wang,C.,Li,Z.,Sheng,X.,Lee,H.G.,Chang,N.,Yang,H.,2016.
+Sales,N.,Remédios,O.,Arsenio,A.,2015.Wirelesssensorandactuatorsystemfor Storage-lessandconverter-lessphotovoltaicenergyharvestingwithmaximum
+smartirrigationonthecloud.In:2ndWorldForumonInternetofThings(WF- power point trackingfor internet of things. IEEE Trans. Comput. Aided Des.
+IoT).IEEE,pp.693–698. Integr. Circuits Syst. 35, 173–186. http://dx.doi.org/10.1109/
+Sarangi,S.,Umadikar,J.,Kar,S.,2016.Automationofagriculturesupportsystems TCAD.2015.2446937.
+usingWisekar:casestudyofacrop-diseaseadvisoryservice.Comput.Electron. Watthanawisuth,N.,Tuantranont,A.,Kerdcharoen,T.,2009.Microclimatereal-time
+Agric.122,200–210.http://dx.doi.org/10.1016/j.compag.2016.01.009. monitoringbasedonzigbeesensornetwork.In:Sensors.IEEE,pp.1814–1818.
+Saville,R.,Hatanaka,K.,Wada,M.,2015.ICTapplicationofreal-timemonitoring Wong,B.P.,Kerkez,B.,2016.Real-timeenvironmentalsensordata:anapplicationto
+andestimationsystemforset-netfishery.In:OCEANS,pp.1–5. water quality using web services. Environ. Modell. Software 84, 505–517.
+Sawant,S.A.,Adinarayana,J.,Durbha,S.S.,2014.KrishiSense:asemanticallyaware http://dx.doi.org/10.1016/j.envsoft.2016.07.020.
+web enabled wireless sensor network system for precision agriculture Xijun,Y.,Limei,L.,Lizhong,X.,2009.Theapplicationofwirelesssensornetworkin
+applications.In:GeoscienceandRemoteSensingSymposium.IEEE,pp.4090– theirrigationareaautomaticsystem.In:InternationalConferenceonNetworks
+4093.http://dx.doi.org/10.1109/IGARSS.2014.694738. Security,WirelessCommunicationsandTrustedComputing(NSWCTC),vol.1.
+Shaikh,F.K.,Zeadally,S.,2016.Energyharvestinginwirelesssensornetworks:a IEEE,pp.21–24.
+comprehensivereview.Renew.Sustain.EnergyRev.55,1041–1054.http://dx. Xu, J., Zhang, J., Zheng, X., Wei, X., Han, J., 2015. Wireless sensors in farmland
+doi.org/10.1016/j.rser.2015.11.010. environmental monitoring. In:International Conference on Cyber-Enabled
+Shi,W.,Cao,J.,Zhang,Q.,Li,Y.,Xu,L.,2016.Edgecomputing:visionandchallenges. DistributedComputingandKnowledgeDiscovery,pp.372–379.http://dx.doi.
+IEEE Internet Things J. 3, 637–646. http://dx.doi.org/10.1109/ org/10.1109/CyberC.2015.17.
+JIOT.2016.2579198. Ye,J.,Chen,B.,Liu,Q.,Fang,Y.,2013.Aprecisionagriculturemanagementsystem
+Shuwen, W., Changli, Z., 2015. Study on farmland irrigation remote monitoring basedoninternetofthingsandWebGIS.In:21stInternationalConferenceon
+system based on ZigBee. In: International Conference on Computer and Geoinformatics, pp. 1–5. http://dx.doi.org/10.1109/Geoinformatics.2013.
+ComputationalSciences(ICCCS).IEEE,pp.193–197. 6626173.
+Sinha, A., Shen, Z., Song, Y., Ma, H., Darrin Eide, B.-J.P.H., Wang, K., 2015a. An Yoo, S.E., Kim, J.E., Kim, T., Ahn, S., Sung, J., Kim, D., (2007). A2S automated
+overview of microsoft academic service (MAS) and applications. In: 24th agriculture system based on WSN. In: IEEE International Symposium on
+InternationalConferenceonWorldWideWeb.ACM,pp.243–246. ConsumerElectronics,pp.1–5.http://dx.doi.org/10.1109/ISCE.2007.4382216.
+Sinha, N., Pujitha, K.E., Alex, J.S.R., 2015b. Xively Based sensing and monitoring Zhao, L., Zhu, X., 2015. The development of remote monitoring system for
+systemforIoT.In:InternationalConferenceonComputerCommunicationand cultivationenvironmentofpleurotuseryngii.In:InternationalConferenceon
+Informatics(ICCCI),pp.1–6.http://dx.doi.org/10.1109/ICCCI.2015.7218144. InformationandAutomation.IEEE,pp.2643–2648.
+Sinha,R.S.,Wei,Y.,Hwang,S.-H.,2017.ASurveyonLPWAtechnology:LoRaandNB- Zheng,R.,Zhang,T.,Liu,Z.,Wang,H.,2016.AnEIoTsystemdesignedforecological
+IoT.ICTExpress3,14–21.http://dx.doi.org/10.1016/j.icte.2017.03.004. andenvironmentalmanagementoftheXianghesegmentofchina’sgrandcanal.
+Smarsly,K.,2013.Agriculturalecosystemmonitoringbasedonautonomoussensor Int. J. Sustain. Dev. World Ecol. 23, 372–380. http://dx.doi.org/10.1080/
+systems. In: 2nd International Conference on Agro-Geoinformatics (Agro- 13504509.2015.1124470.
+Geoinformatics).IEEE,pp.402-407. Zou, C.-J., 2014. Research and implementation of agricultural environment
+Soontranon, N., Tangpattanakul, P., Srestasathiern, P., Rakwatin, P., 2014. An monitoring based on internet of things. In: 5thInternational Conference on
+agricultural monitoring system: field server data collection and analysis on IntelligentSystemsDesignandEngineeringApplications(ISDEA).IEEE,pp.748–
+paddy field. In: 14th International Symposium on Communications and 752.http://dx.doi.org/10.1109/ISDEA.2014.17.
+InformationTechnologies(ISCIT).IEEE,pp.597–601.

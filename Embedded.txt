@@ -1,0 +1,78 @@
+ALIMUL HAQUE KHAN
+Saskatoon, SK, Canada +1-639-470-2886, alimul.khan@usask.ca, www.linkedin.com/in/ah-khan
+EXPERTISE
+• Embedded System Design • IoT, IIoT, IoMT • Analog Circiut Design • Schematic and PCB • Design,
+develop, debug, troubleshooting • Sensor • Hardware, Firmware and Software
+SKILLS
+• Programming and scripting tools: C, C++, Python, MATLAB, MS Excel
+• Web: HTML, CSS, SQL, PHP, NodeJS
+• Embedded Platform: Arduino, ESP, Raspberry Pi, STM32
+• Document Processing: MS Word, LaTeX, Mendeley
+• OS: Linux, Windows, MacOS
+• Version Control: Git, Github
+RELEVANT PROFESSIONAL EXPERIENCE
+Intern: Mitacs- Thermonalysis, University of Saskatchewan: July 2024 – December 2024
+Project: Automatic Temperature Monitoring System
+• Developing an automatic temperature monitoring system for restaurant kitchens using IoT and thermal
+cameras for non-invasive, contactless temperature measurement.
+• Integrating data transmission to a database via NestJS API for real-time monitoring.
+• Conducting testbed setup, experimental runs, and raw data collection.
+• Applying machine learning techniques for sensor calibration to enhance accuracy
+Research Assistant: University of Saskatchewan, SK, Canada January 2023 –
+• Conduct research and assist in the preparation and revision of scientific manuscripts for publication in
+reputable journals and conferences.
+• Utilize statistical software to analyze and interpret collected data, providing valuable insights and
+contributing to the research findings.
+• Collaborate with a multidisciplinary team to facilitate research projects, fostering effective
+communication and teamwork.
+Research and Development Associate: WIoT Inc. SK, Canada Oct 2020—December 2022
+• Designed and developed Hardware for a Level Tracker sensor for hazardous environments in the mining
+and energy industry.
+• Successfully developed and deployed firmware for microcontrollers such as STM32, NodeMCU, and
+Arduino, resulting in improved product performance and reduced debugging time.
+• Created and tested multiple sensor test beds, conducting rigorous testing and validation of firmware
+and PCB designs to achieve compliance with industry standards and ensure high reliability.
+• Implemented remote sensor deployment strategies, resulting in efficient data collection and analysis.
+• Actively engaged with external vendors and suppliers for technical evaluations and recommendations.
+Research Assistant: University of Saskatchewan, SK, Canada May 2016 – Apr 2018
+• Developed iSensor for capsule endoscopy using Arduino, Raspberry Pi, MATLAB, and Python.
+• Collaborated with 3rDi Inc. to design a game controller for individuals with disabilities, controlled by
+head movement and eye blinking.
+Page 1 of 2• Prepared technical documents, journal articles, and funding applications.
+• Demonstrated a solid understanding of analog and digital circuit design principles, ensuring reliable and
+efficient hardware functionality.
+• Published articles in conferences and journals, showcasing research findings and contributions
+Lecturer: Bangladesh University, Dhaka, Bangladesh Jun 2010 - Apr 2016
+• Coordinated training courses on PCB design, MATLAB, and microcontroller programming, ensuring a
+strong focus on deliverables and the ability to plan work.
+• Supervised students' embedded system projects and provided technical support, further showcasing my
+understanding of interdisciplinary dependencies related to the discipline.
+• Fostered teamwork, critical thinking, and problem-solving skills among students.
+Technical Consultant: Advanced Micro Energy Inc., Dhaka, Bangladesh Oct 2012 - Aug 2013
+• Developed and installed rooftop solar systems, solar irrigation pumps, and smart building solutions,
+underlining my ability to review technical deliverables (specifications, datasheets, drawings, etc.).
+• Provided technical support to sales teams, vendors, and customers through email, phone, and on-site
+visits, demonstrating my excellent interpersonal and communication skills.
+• Conducted troubleshooting and resolved customer issues.
+• Developed project-specific engineering procedures to enhance the efficiency of project execution.
+Design Engineer: Pulser Semiconductor Device, Dhaka, Bangladesh Feb 2010 - Jun 2010
+• Designed circuits for various applications, including IPS, USP, solar charge controllers, and industrial
+status meters.
+• Provided application and design support for protection relays, leveraging knowledge of industrial power
+distribution and control systems.
+• Conducted product training presentations, created technical materials, and performed competitor
+analysis.
+• Gathered customer feedback and contributed to new product specifications.
+EDUCATION
+• MSc in Electrical Engineering, University of Saskatchewan, Saskatoon, SK, Canada, May 2018.
+• BSc in Electrical and Electronic Engineering, Bangladesh University of Engineering and Technology,
+Dhaka, Bangladesh, Mar 2009.
+MEMBERSHIP and TRAINING
+• APEGS • IEEE • IEB
+• Mental Health First Aid (MHFA) certificate • Safety Resource course • Laboratory Safety Course
+• Programming of PLC for Industrial Automation, Maintenance, and Troubleshooting
+• Embedded system design by FPGA and microcontroller • VFD Drives
+VOLUNTEERING and COMMUNITY INVOLVEMENT
+• Currently serving as General Secretary of Bangladeshi Community Association Saskatchewan
+Eprmobgeradmdemdi nSgy,s ctleomuds Esenrgviniceeesr, ,E pnhgointoeneircisn,g la, Cseorm spyustteemr Ssc, ineenxcte-,g teencehrnaitciaoln f iperldo,d iuncdtus,s stroyft ewxapreer,i feinrmcew, fairrme, wdeasrieg nd,e dveevloeplompemnet,n ut,s eerle icnttreornfaicc ceo snotfrtowllaerres, ,i tnosutrcuhmscerneetantsi,o sne,n sspoercst,r aocmtueatetorsr,s a, nenalgyinzeeresr,i nmge tdeiacaml, d eelvecicterisc, aalu, stoomftwatairoen,, orpotboomticec shyasnteicmals,. C++, Python, object-oriented principles, STM32 micro-controllers, timers, I2C/UART/SPI, DMA, ADC, peripherals, user interface design, desktop applications, embedded touchscreen applications, readable code, well-structured code, documentation, low-level coding tasks, whole-system abstraction, C#, .NET, desktop development, TCP socket
+Page 2 of 2

@@ -31,8 +31,8 @@ def convert_pdf_to_txt(pdf_path, txt_path):
 
 # Provide the input PDF file path and output TXT file path
 # pdf_file = "Article.pdf"
-pdf_file = "IoT.pdf"
-txt_file = "Article.txt"
+pdf_file = "Battery_Review_MDPI_Compact_Nov.pdf"
+txt_file = "Battery_Review_MDPI_Compact_Nov.txt"
 
 # Call the conversion function
 convert_pdf_to_txt(pdf_file, txt_file)
@@ -43,7 +43,7 @@ convert_pdf_to_txt(pdf_file, txt_file)
 current_dir = os.getcwd()
 
 
-Article_file = os.path.join(current_dir, 'Article.txt')
+Article_file = os.path.join(current_dir, txt_file)
 
 with open(Article_file, 'r') as file:    Article = file.read()
 
@@ -59,7 +59,7 @@ Article_wc = WordCloud(background_color='white', max_words=100, stopwords=stopwo
 Article_wc.generate(Article)
 
 # Saving the word clouds as .png files
-Article_output_file = os.path.join(current_dir, 'Article_WC.png')
+Article_output_file = os.path.join(current_dir, f'{Article_file}_WC.png')
 
 
 Article_wc.to_file(Article_output_file)
